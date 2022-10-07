@@ -13,3 +13,19 @@
     height: 65vh;
     background-color: red;
 }
+
+.mobile-header {
+    height: 7%;
+    background-color: blue;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.mobile-app-name {
+    margin-left: 0.5rem;
+}

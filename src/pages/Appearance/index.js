@@ -10,6 +10,7 @@ import Card from '@mui/material/Card';
 
 const Appearance = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [appName, setAppName] = useState("Q-Play");
 
   const onTabClick = (event, newValue) => {
     setActiveTab(newValue);
@@ -24,11 +25,16 @@ const Appearance = () => {
       <div className="appearance-content">
       <Card className="appearance-card">
       { activeTab === 0 && 
-      <Brand />}
+      <Brand
+      appName={appName}
+      setAppName={setAppName}
+      />}
             { activeTab === 1 && 
       <Palette/>}
       </Card>
-      <AppearancePreview />
+      <AppearancePreview
+      appName={appName}
+      />
       </div>
     </>
   );
