@@ -1,0 +1,15 @@
+.preview-card {
+    width: 30%;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-device {
+    width: 18vw;
+    height: 65vh;
+    background-color: red;
+}
