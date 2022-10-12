@@ -1,5 +1,9 @@
 @import '../../../theme.css';
 
+.menu-logo {
+	width: 60%;
+}
+
 .sidebar {
 	background-color: var(--tertiary-color);
 	border: 0;

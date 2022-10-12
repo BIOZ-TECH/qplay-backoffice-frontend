@@ -1,15 +1,13 @@
 import React from 'react'
 import { MuiColorInput } from 'mui-color-input'
 
-const ColorPicker = () => {
-  const [color, setColor] = React.useState('#ffffff')
-
+const ColorPicker = ({ color, setColor }) => {
   const onColorChange = (color) => {
     setColor(color)
   }
 
   return (
-    <MuiColorInput value={color} onChange={onColorChange} />
+    <MuiColorInput value={color} onChange={onColorChange} format="hex" />
   )
 }
 

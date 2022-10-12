@@ -13,7 +13,7 @@ const Navbar = ({setIsSidebarOpen}) => (
         >
           <FontAwesomeIcon className="icon" icon={faBars} />
         </button>
-        <p className="app-name px-4">Q-Play</p>
+        <img className="app-name px-4" src="logo.png" />
         <button
           className="absolute right-0 py-1 px-3 mr-3"
           type="button"

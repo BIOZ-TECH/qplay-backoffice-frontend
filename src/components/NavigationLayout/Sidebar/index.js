@@ -14,9 +14,7 @@ const Sidebar = ({isSidebarOpen, setIsSidebarOpen}) => {
       >
         {/* Sidebar title*/}
         <div className="sidebar-title flex items-center justify-center text-center py-6">
-          <span className="mx-2 text-2xl">
-            Q-Play
-          </span>
+          <img className="menu-logo mx-2 text-2xl" src="logo.png"/>
         </div>
 
         <TopSidebarOptions

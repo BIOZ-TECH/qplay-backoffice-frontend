@@ -11,9 +11,11 @@
 }
 
 .app-name {
+    height: inherit;
     font-weight: bold;
     font-size: 1.5em;
-    padding-bottom: 0.1em;
+    padding-bottom: 0.6em;
+    padding-top: 0.8rem;
     color: var(--primary-color);
 }
 
