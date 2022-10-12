@@ -1,0 +1,31 @@
+.-container-accordion {
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+#header-palette {
+    background-color: #E9E9E9;
+}
+
+#header-palette > .MuiAccordionSummary-content {
+    display: flex;
+    align-items: center;
+    
+}
+
+.accordion-body {
+    background-color: white;
+    display: flex;
+    padding: 2rem !important;
+}
+
+.color-square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    margin-left: 0.5rem;
+}
+
+.letters-input {
+    margin-left: 1.5rem;
+}

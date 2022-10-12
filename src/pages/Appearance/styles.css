@@ -1,0 +1,48 @@
+@import '../../theme.css';
+
+.appearance-card {
+    padding: 2rem;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    height: 100%;
+    width: 70%;
+}
+
+.appearance-content {
+    display: flex;
+    height: 100%;
+}
+
+.image-uploader {
+    padding-right: 1rem;
+}
+
+.brand.first-row {
+    display: flex;
+}
+
+.save-appearance {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    width: fit-content;
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    color: white;
+    border-radius: 0.3rem;
+}
+
+.save-appearance:hover, .save-appearance:focus {
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.app-name-input {
+    width: 100%;
+}

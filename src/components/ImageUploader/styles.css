@@ -1,0 +1,33 @@
+@import '../../theme.css';
+
+.image-input {
+    display: none;
+}
+
+.image-container {
+    border-radius: 0.5rem;
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+    background-color: var(--tertiary-color);
+}
+
+.image-uploader {
+    width: fit-content;
+    height: fit-content;
+}
+
+.upload-icon {
+    float: right;
+    margin-right: 7px;
+    margin-top: 7px;
+}
+
+.uploaded-container {
+    position: relative;
+}
+
+.uploaded-container > .upload-icon {
+    position: absolute;
+    right: 0;
+}
