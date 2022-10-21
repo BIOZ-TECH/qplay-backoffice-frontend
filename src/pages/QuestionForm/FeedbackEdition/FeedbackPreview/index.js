@@ -32,6 +32,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
         default:
           setFeedbackStyle({
             backgroundColor: 'gray',
+            title: 'Feedback para todas las respuestas',
           });
       }
     }, [feedbackResultType]);

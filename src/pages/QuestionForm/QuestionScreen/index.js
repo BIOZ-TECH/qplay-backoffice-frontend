@@ -35,7 +35,6 @@ const QuestionScreen = ({ question }) => {
 
 
   return (
-<Card className="preview-card-question">
 <div className="mobile-device">
   <div className="app-body">
   <div className="mobile-question-card">
@@ -100,7 +99,6 @@ const QuestionScreen = ({ question }) => {
   </div>
   </div>
 </div>
-</Card>
   );
 }
 

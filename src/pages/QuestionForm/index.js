@@ -8,6 +8,7 @@ import FeedbackEdition from "./FeedbackEdition";
 import Question from "../../entities/Question";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import QuestionDetailTabs from "../QuestionDetail/QuestionDetailTabs";
 
 const QuestionForm = ({ setBreadcrumb, setAction}) => {
   const { id: questionId, categoryId } = useParams();
@@ -15,6 +16,11 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
   const [question, setQuestion] = useState(new Question({}));
   const [statementType, setStatementType] = useState("only-text");
   const [statementImage, setStatementImage] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
+
+  const onTabClick = (event, newValue) => {
+    setActiveTab(newValue);
+  };
 
   useEffect(() => {
     setBreadcrumb([
@@ -63,24 +69,28 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
 
   return (
     <>
-    <Card className="row new-question-header">
-    <div>NUEVA PREGUNTA</div>
-    <button className="save-question" type="button" onClick={onSaveQuestionClick}>
-      <FontAwesomeIcon className="mr-2" icon={faFloppyDisk} />
-        Guardar
-      </button>
-    </Card>
         <div className="question-container">
+        <QuestionDetailTabs
+              activeTab={activeTab}
+              onTabClick={onTabClick}
+    />
+    { activeTab === 0 && <Card className="statement-section">
+    <div className="statement-container">
     <QuestionScreen question={question} />
-    <Card className="question-card">
-    <div className="question">
+    
+    <div className='image-input-container'>
     <TextField id="statement-image-input" label="Imágen de enunciado (opcional)" variant="outlined"
           type="url"
           onInput={onStatementImageBlur}
           className="image-statement-input"/>
-    <FeedbackEdition />
     </div>
+          </div>
     </Card>
+    }
+    { activeTab === 1 && <div className="question-card">
+
+    <FeedbackEdition />
+    </div>}
     
     </div>
     </>

@@ -30,14 +30,7 @@ useEffect(() => {
   }
 
   return (
-<Accordion className="accordion-container mt-5">
-<AccordionSummary
-  expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
-  id="feedback-accordion-header"
->
-  <Typography>Feedback</Typography>
-</AccordionSummary>
-<AccordionDetails className="feedback-accordion-body">
+    <>
     <Card className="feedback-data-container">
     <FormControl fullWidth>
         <InputLabel id="feedback-type-label">¿Cuántos feedback tiene la pregunta?</InputLabel>
@@ -84,8 +77,7 @@ useEffect(() => {
         )
     }
     </Card>
-</AccordionDetails>
-</Accordion>
+    </>
   );
 }
 

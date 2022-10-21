@@ -2,12 +2,33 @@
 
 .question-container {
     display: flex;
+    flex-flow: column;
     height: 100%;
 }
 
+.question-container > .statement-section {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 3rem;
+}
+
+.question-container > .statement-section > .statement-container {
+    display: flex;
+    width: 100%;
+}
+
+.question-container > .statement-section > .statement-container > .image-input-container {
+    width: 100%;
+}
+
+.image-statement-input {
+    margin-left: 3rem !important;
+    width: -webkit-fill-available;
+}
+
 .question-card {
-    padding: 2rem;
-    border-top-right-radius: 0 !important;
+    display: flex;
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
     height: 100%;
