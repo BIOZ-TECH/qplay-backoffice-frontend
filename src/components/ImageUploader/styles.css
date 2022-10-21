@@ -31,3 +31,7 @@
     position: absolute;
     right: 0;
 }
+
+.image-uploader-dialog > .MuiDialog-container > .MuiDialog-paper {
+    width: 50%;
+}
