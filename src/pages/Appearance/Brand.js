@@ -2,6 +2,7 @@ import React from "react";
 
 import TextField from '@mui/material/TextField';
 import ImageUploader from "../../components/ImageUploader";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const Brand = ({appearance, setAppearance}) => {
   const { appName, logo } = appearance;
@@ -23,7 +24,6 @@ const Brand = ({appearance, setAppearance}) => {
           className="app-name-input"
          value={appName} onChange={onAppNameChange}/>
     </div>
-
          
     </>
   );

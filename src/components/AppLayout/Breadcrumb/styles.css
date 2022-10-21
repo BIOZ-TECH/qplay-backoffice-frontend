@@ -1,0 +1,24 @@
+@import "../../../theme.css";
+
+.breadcrumb {
+    display: flex;
+    color: var(--primary-color);
+    align-items: center;
+    font-weight: bold;
+}
+
+.breadcrumb > a {
+    cursor: pointer;
+}
+
+.breadcrumb > a:hover, .breadcrumb > a:focus {
+    color: var(--secondary-color);
+}
+
+.breadcrumb > a.current {
+    cursor: auto;
+}
+
+.breadcrumb > a.current:hover, .breadcrumb > a.current:focus {
+    color: var(--primary-color);
+}

@@ -1,8 +1,8 @@
-.preview-card {
-    width: 30%;
+.preview-card-question {
+    border-top-right-radius: 0 !important;
     border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    padding: 1.5rem;
+    border-bottom-right-radius: 0 !important;
+    padding: 1rem 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
     position: relative;
     width: 400px;
     height: 65vh;
-    background-color: red;
+    background-color: #e9e1fd;
     display: flex;
     flex-direction: column;
 }
@@ -57,8 +57,27 @@
 .mobile-answer {
     border-radius: 0.5rem;
     padding: 0.5rem;
-    text-align: center;
     margin-top: 0.5rem;
+    width: 100%;
+    color: white;
+}
+
+.mobile-answer.correct > textarea::placeholder, .edit-adornment.correct {
+    color: #105f10;
+    opacity: 1;
+}
+
+.mobile-answer.incorrect > textarea::placeholder, .edit-adornment.incorrect {
+    color: #970a0a;
+    opacity: 1;
+}
+
+.mobile-answer.correct {
+    background-color: #21bd21;
+}
+
+.mobile-answer.incorrect {
+    background-color: #ed3535;
 }
 
 .mobile-progress-bar {
@@ -84,4 +103,39 @@
 .mobile-progress-bar > .progress-bar > .remaining-progress {
     height: 100%;
     width: 40%;
+}
+
+.edit-adornment {
+    color: black;
+}
+
+textarea {
+    box-shadow: none !important;
+}
+
+.mobile-statement > fieldset {
+    border: 0;
+}
+
+input {
+    box-shadow: none !important;
+}
+
+.mobile-answer > textarea, .mobile-statement > textarea {
+    text-align: center;
+    border-radius: 5rem;
+}
+
+.mobile-answer {
+    border-radius: 1rem !important;
+}
+
+.mobile-question-card > .question-statement-image {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    max-height: 6rem;
+    border-radius: 0.5rem;
 }

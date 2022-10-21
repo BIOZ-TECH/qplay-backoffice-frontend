@@ -1,0 +1,33 @@
+#feedback-accordion-header {
+    background-color: #7164e3;
+    color: white;
+}
+
+.feedback-accordion-body {
+    display: flex;
+    padding: 0 !important;
+}
+
+.feedback-data-container, .feedback-preview-container{
+    padding: 1.5rem;
+}
+
+.feedback-data-container {
+    width: 60%;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.feedback-preview-container {
+    width: 40%;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.only-one-feedback {
+    margin-top: 2rem;
+}
+

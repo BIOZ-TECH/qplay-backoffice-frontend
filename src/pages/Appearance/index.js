@@ -13,11 +13,22 @@ import './styles.css';
 import Card from '@mui/material/Card';
 import Appearance from '../../entities/Appearance';
 
-const AppearancePage = () => {
+const AppearancePage = ({ setBreadcrumb, setAction }) => {
   const [appearance, setAppearance] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
+    setBreadcrumb([
+      {
+        name: 'Apariencia',
+        route: '/appearance',
+      },
+    ]);
+    setAction({
+      name: 'Guardar cambios',
+      icon: faFloppyDisk,
+      onActionClick: onSaveAppearanceChangesClick,
+    });
     async function fetchAppearance() {
       const response = await appearanceService.getApplicationAppearance(0);
 
@@ -44,10 +55,6 @@ const AppearancePage = () => {
 
   return (
     <>
-      <button className="save-appearance" type="button" onClick={onSaveAppearanceChangesClick}>
-      <FontAwesomeIcon className="mr-2" icon={faFloppyDisk} />
-        Guardar cambios
-      </button>
       <AppearanceTabs
       activeTab={activeTab}
       onTabClick={onTabClick}
