@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faClose, faCross, faUpload } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 
-const ImageUploader = ({ selectedFile, setSelectedFile }) => {
+const ImageUploader = ({ selectedFile, setSelectedFile, dialogType }) => {
 
     //const [imageUploaded, setImageUploaded] = useState(false);
     const [imageInput, setImageInput] = useState(null)
     const [open, setOpen] = React.useState(false);
 
+    useEffect(() => {
+      setImageInput(selectedFile);
+    }, []);
+
     const onDialogOpen = () => {
-      console.log("entre 12")
       setOpen(true);
     };
   
@@ -65,7 +68,6 @@ const onCategoryImageChange = (e) => {
       <>
         <div className="image-uploader">
       <div htmlFor="contained-button-file">
-        {console.log("hi", selectedFile)}
       { !selectedFile
                 && renderUploadImageButton()}
             { !!selectedFile
@@ -74,7 +76,7 @@ const onCategoryImageChange = (e) => {
 
         </div>
         <Dialog className="image-uploader-dialog" open={open} onClose={onDialogClose}>
-        <DialogTitle>Enlace de imagen de categoría</DialogTitle>
+        <DialogTitle>Enlace de imagen {dialogType}</DialogTitle>
         <DialogContent>
         <TextField id="category-image-input" label="" variant="outlined" fullWidth
         value={imageInput}
@@ -82,8 +84,14 @@ const onCategoryImageChange = (e) => {
         />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onDialogClose}>Cancelar</Button>
-          <Button onClick={onDialogConfirm}>Confirmar</Button>
+          <button className="cancel-dialog-btn dialog-btn" type="button" onClick={onDialogClose}>
+              <FontAwesomeIcon className="mr-2" icon={faClose} />
+                Cancelar
+            </button>
+            <button className="confirm-dialog-btn dialog-btn" type="button" onClick={onDialogConfirm}>
+              <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                Confirmar
+            </button>
         </DialogActions>
       </Dialog>
         </>

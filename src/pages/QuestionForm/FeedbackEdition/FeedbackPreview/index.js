@@ -8,12 +8,18 @@ import InflatedFeedback from "../../../../entities/InflatedFeedback";
 import "./styles.css";
 
 const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeedback }) => {
+
     const statementInput = createRef();
     const [feedbackStyle, setFeedbackStyle] = useState({});
+    const [videoLink, setVideoLink] = useState(null);
     
     useEffect(() => {
-      if(!!inflatedFeedback) setInflatedFeedback(new InflatedFeedback({}));
+      if(!inflatedFeedback) setInflatedFeedback(new InflatedFeedback({}));
     }, []);
+
+    useEffect(() => {
+      if (!!inflatedFeedback?.videoPermalink) setVideoLink(getVideoId());
+    }, [inflatedFeedback]);
 
     useEffect(() => {
       switch(feedbackResultType) {
@@ -44,16 +50,18 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
    const getVideoId = () => {
     const youtubeLinkIdRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]+).*/;
     const youtubeId = inflatedFeedback.videoPermalink.match(youtubeLinkIdRegex);
+    console.log(`https://www.youtube.com/embed/${youtubeId[1]}`);
 
-    return youtubeId[1];
+    return `https://www.youtube.com/embed/${youtubeId[1]}`;
    }
 
    const onFeedbackStatementChange = (e) => {
-    setInflatedFeedback(new inflatedFeedback({ ...inflatedFeedback, statement: e.target.value}));
+    setInflatedFeedback(new InflatedFeedback({ ...inflatedFeedback, statement: e.target.value}));
    }
 
   return (
     <div className='inflated-feedback-preview-container'>
+
       { feedbackStyle.title && <p className="feedback-title">{feedbackStyle.title}</p>}
           <div className="inflated-feedback-preview" style={{ backgroundColor: feedbackStyle.backgroundColor }}>
           <FormControl fullWidth>
@@ -65,6 +73,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
             multiline
             ref={statementInput}
             onChange={onFeedbackStatementChange}
+            value={inflatedFeedback?.statement}
           />
         </FormControl>
         {
@@ -74,9 +83,9 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
             )
         }
                 {
-            inflatedFeedback?.videoPermalink
+            videoLink
             && (
-                <YoutubeEmbed youtubeLink={`https://www.youtube.com/embed/${getVideoId()}`} />
+                <YoutubeEmbed youtubeLink={videoLink} />
             )
         }
     </div>

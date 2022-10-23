@@ -19,7 +19,7 @@ const Brand = ({appearance, setAppearance}) => {
   return (
     <>
     <div className="brand first-row">
-      <ImageUploader selectedFile={logo} setSelectedFile={onNewLogoSelected} />
+      <ImageUploader selectedFile={logo} setSelectedFile={onNewLogoSelected} dialogType='del logo' />
       <TextField id="outlined-basic" label="Nombre de aplicación" variant="outlined"
           className="app-name-input"
          value={appName} onChange={onAppNameChange}/>

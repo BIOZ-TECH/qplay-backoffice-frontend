@@ -1,11 +1,11 @@
 import Api from './api';
 
-const getApplicationAppearance = (userId) => {
-    return Api.get(`appearance?caller.id=${userId}`);
+const getApplicationAppearance = (userId, holderId) => {
+    return Api.get(`appearance?caller.id=${userId}&holder.id=${holderId}`);
 } 
 
-const updateApplicationAppearance = (appearance, userId) => {
-    Api.put(`appearance?caller.id=${userId}`, JSON.parse(JSON.stringify(appearance)));
+const updateApplicationAppearance = (appearance, userId, holderId) => {
+    Api.put(`appearance?caller.id=${userId}&holder.id=${holderId}`, JSON.parse(JSON.stringify(appearance)));
 }
 
 const appearanceServices = {

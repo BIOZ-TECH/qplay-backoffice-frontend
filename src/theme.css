@@ -6,4 +6,8 @@
     --back-color: #FFFEFEFE;
     --primary-button-color: #FF6200EE;
     --secondary-button-color: #FFDD00;
+    --primary-correct-color: #21bd21;
+    --secondary-correct-color: #126b12;
+    --primary-incorrect-color: #ed3535;
+    --secondary-incorrect-color: #811f1f;
   }

@@ -31,7 +31,7 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
       onActionClick: onEditCategoryClick,
     });
     async function fetchCategory() {
-      const response = await categoryServices.getCategory(0, categoryId);
+      const response = await categoryServices.getCategory(0, 3, categoryId);
 
       setCategory(new Category(response.data));
     };
@@ -50,7 +50,7 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
         <>
               <div className="primary-info">
       <div className="category-img" style={{ backgroundImage: `url(${category.permalink})` }}></div>
-      <h1 className="category-name">{`Categoría ${category.order}: ${category.name}`}</h1>
+      <h1 className="category-name">{`Categoría ${category.position}: ${category.name}`}</h1>
 
       </div>
       <p>{category.description}</p>

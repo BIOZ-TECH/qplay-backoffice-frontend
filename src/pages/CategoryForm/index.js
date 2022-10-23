@@ -3,7 +3,7 @@ import categoryServices from "../../services/category";
 import Category from "../../entities/Category";
 
 import "./styles.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card, TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
   const { id: categoryId } = useParams();
   const [category, setCategory] = useState(null);
   const [oldCategory, setOldCategory] = useState(null);
+  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
     imageInput: '',
     nameInput: '',
@@ -52,7 +53,7 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
       let categoryData = {};
 
       if (categoryId) {
-        const response = await categoryServices.getCategory(0, categoryId);
+        const response = await categoryServices.getCategory(0, 3, categoryId);
         categoryData = response.data;
 
         setOldCategory(categoryData);
@@ -65,12 +66,16 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
     fetchCategory();
   }, []);
 
+  useEffect(() => {
+    updateAction();
+  }, [inputValues]);
+
   const initializeView = (data) => {
     setInputValues({
       imageInput: data.permalink,
       nameInput: data.name,
       descriptionInput: data.description,
-      orderInput: parseInt(data.order),
+      orderInput: parseInt(data.position),
     });
   }
 
@@ -98,8 +103,39 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
     setInputValues({ ...inputValues, orderInput: e.target.value });
   }
 
-  const onSaveCategoryClick = () => {
+  const updateAction = () => {
+    setAction({
+      name: `Guardar ${ categoryId? ' cambios' : '' }`,
+      icon: faFloppyDisk,
+      onActionClick: onSaveCategoryClick,
+    });
+  }
 
+  const onSaveCategoryClick = async() => {
+    const newCategory = new Category({
+      id: categoryId || null,
+      permalink: category?.permalink || null,
+      name: nameInput,
+      description: descriptionInput,
+      position: orderInput,
+    });
+
+
+    if (categoryId) {
+      await categoryServices.updateCategory(0, 3, newCategory)
+      .then((res) => {
+        if(res.status === 200) {
+          navigate('/categories');
+        }
+      });
+    } else {
+      await categoryServices.createCategory(0, 3, newCategory)
+      .then((res) => {
+        if(res.status === 200) {
+          navigate('/categories');
+        }
+      });
+    }
   }
 
   return (

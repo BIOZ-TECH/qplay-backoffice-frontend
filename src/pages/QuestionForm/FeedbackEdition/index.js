@@ -10,23 +10,32 @@ import OnePerResultFeedback from "./OnePerResultFeedback";
 import FeedbackPreview from "./FeedbackPreview";
 import InflatedFeedback from "../../../entities/InflatedFeedback";
 
-const QuestionDetail = ({ feedbackDetail }) => {
-  const [feedback, setFeedback] = useState(new Feedback({}));
+const FeedbackEdition = ({ inputValues, setInputValues }) => {
+  //const [feedback, setFeedback] = useState(new Feedback({}));
 
-useEffect(() => {
+/*useEffect(() => {
     if(feedbackDetail) setFeedback(new Feedback(feedbackDetail));
-  }, [feedbackDetail]);
+  }, [feedbackDetail]);*/
 
   const handleFeedbackTypeChange = (e) => {
-    setFeedback(new Feedback({ ...feedback, inflatedFeedback: null, inflatedIncorrectFeedback: null, type: e.target.value }));
+    setInputValues({
+      ...inputValues,
+      feedbackInput: new Feedback({ ...inputValues.feedbackInput, type: e.target.value }),
+    });
   }
 
   const setInflatedFeedback = (inflatedFeedback) => {
-    setFeedback(new Feedback({ ...feedback, inflatedFeedback: new InflatedFeedback(inflatedFeedback) }));
+    setInputValues({
+      ...inputValues,
+      feedbackInput: new Feedback({ ...inputValues.feedbackInput, inflatedFeedback: new InflatedFeedback(inflatedFeedback) }),
+    });
   }
 
   const setInflatedIncorrectFeedback = (inflatedIncorrectFeedback) => {
-    setFeedback(new Feedback({ ...feedback, inflatedIncorrectFeedback: new InflatedFeedback(inflatedIncorrectFeedback) }));
+    setInputValues({
+      ...inputValues,
+      feedbackInput: new Feedback({ ...inputValues.feedbackInput, inflatedIncorrectFeedback: new InflatedFeedback(inflatedIncorrectFeedback) }),
+    });
   }
 
   return (
@@ -37,40 +46,42 @@ useEffect(() => {
         <Select
     labelId="feedback-type-label"
     id="feedback-type-select"
-    value={feedback.type}
+    value={inputValues.feedbackInput.type || ''}
     label="Enunciado con"
     onChange={handleFeedbackTypeChange}
         >
-    <MenuItem value="none">Ninguno</MenuItem>
-    <MenuItem value="only-one">Uno solo para todas las respuestas</MenuItem>
-    <MenuItem value="one-per-result">Uno para la respuesta correcta y otro para las respuestas incorrectas</MenuItem>
+    <MenuItem value="no-feedback">Ninguno</MenuItem>
+    <MenuItem value="unique-feedback">Uno solo para todas las respuestas</MenuItem>
+    <MenuItem value="variable-feedback">Uno para la respuesta correcta y otro para las respuestas incorrectas</MenuItem>
         </Select>
       </FormControl>
+
     {
-        feedback.type === 'only-one'
+        inputValues.feedbackInput?.type === 'unique-feedback'
         && (
-            <OneFeedback inflatedFeedback={feedback.inflatedFeedback} setInflatedFeedback={setInflatedFeedback} />
+            <OneFeedback inflatedFeedback={inputValues.feedbackInput.inflatedFeedback} setInflatedFeedback={setInflatedFeedback} />
         )
     }
         {
-        feedback.type === 'one-per-result'
+        inputValues.feedbackInput?.type === 'variable-feedback'
         && (
             <OnePerResultFeedback 
-            correctInflatedFeedback={feedback.inflatedFeedback} setCorrectInflatedFeedback={setInflatedFeedback}
-            inflatedIncorrectFeedback={feedback.inflatedIncorrectFeedback} setInflatedIncorrectFeedback={setInflatedIncorrectFeedback}/>
+            correctInflatedFeedback={inputValues.feedbackInput.inflatedFeedback} setCorrectInflatedFeedback={setInflatedFeedback}
+            inflatedIncorrectFeedback={inputValues.feedbackInput.inflatedIncorrectFeedback} setInflatedIncorrectFeedback={setInflatedIncorrectFeedback}/>
         )
     }
     </Card>
     <Card className="feedback-preview-container">
+
     {
-        feedback?.type !== 'none'
+        inputValues.feedbackInput.type !== 'no-feedback'
         && (
           <>
-            <FeedbackPreview inflatedFeedback={feedback.inflatedFeedback} feedbackResultType={feedback.type === 'one-per-result' ? 'correct': 'any'} setInflatedFeedback={setInflatedFeedback}/>
+            <FeedbackPreview inflatedFeedback={inputValues.feedbackInput.inflatedFeedback} feedbackResultType={inputValues.feedbackInput.type === 'variable-feedback' ? 'correct': 'any'} setInflatedFeedback={setInflatedFeedback}/>
             {
-              feedback.type === 'one-per-result' && feedback.inflatedIncorrectFeedback
+              inputValues.feedbackInput.type === 'variable-feedback'
               && (
-                <FeedbackPreview inflatedFeedback={feedback.inflatedIncorrectFeedback} feedbackResultType="incorrect" setInflatedFeedback={setInflatedIncorrectFeedback}/>
+                <FeedbackPreview inflatedFeedback={inputValues.feedbackInput.inflatedIncorrectFeedback} feedbackResultType="incorrect" setInflatedFeedback={setInflatedIncorrectFeedback}/>
               )
             }
           </>
@@ -81,4 +92,4 @@ useEffect(() => {
   );
 }
 
-export default QuestionDetail;
+export default FeedbackEdition;

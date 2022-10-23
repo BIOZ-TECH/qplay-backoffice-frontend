@@ -11,37 +11,13 @@ import InflatedFeedback from "../../entities/InflatedFeedback";
 import QuestionDetailTabs from "./QuestionDetailTabs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import questionServices from "../../services/question";
 
 const QuestionDetail = ({ setBreadcrumb, setAction }) => {
   const { id: questionId, categoryId } = useParams();
+  const navigate = useNavigate();
 
-  const [question, setQuestion] = useState(new Question({
-    id: questionId,
-    statement: '¿Esta es la pregunta?',
-    answers: [
-        'Si',
-        'No',
-        'No sé',
-        'Quizás',
-    ],
-    feedback: new Feedback({
-        id: 1,
-        type: "variable-feedback",
-        inflatedFeedback: new InflatedFeedback({
-            id: 1,
-            statement: "Este es el feedback correcto",
-            videoPermalink: null,
-            imagePermalink: "https://c.tenor.com/o4YZm_o1fRwAAAAC/hiii.gif",
-        }),
-        inflatedIncorrectFeedback: new InflatedFeedback({
-            id: 2,
-            statement: "Este es el feedback incorrecto",
-            videoPermalink: "https://www.youtube.com/watch?v=W-TE_Ys4iwM&list=RDW-TE_Ys4iwM&index=2",
-            imagePermalink: null,
-        }),
-    }),
-    image: null
-  }));
+  const [question, setQuestion] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
@@ -64,6 +40,13 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
       icon: faPencil,
       onActionClick: onEditQuestionClick,
     });
+    async function fetchQuestion() {
+      const response = await questionServices.getQuestion(0, 3, questionId);
+
+      setQuestion(new Question(response.data));
+    };
+
+    fetchQuestion();
   }, []);
 
   /*useEffect(() => {
@@ -80,12 +63,8 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
     setActiveTab(newValue);
   };
 
-  const onSaveQuestionClick = () => {
-    
-  };
-
   const onEditQuestionClick = () => {
-
+    navigate(`/category/${categoryId}/question/edit/${questionId}`)
   }
 
   return (
@@ -100,7 +79,12 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           onTabClick={onTabClick}
     />
     <Card className="question-detail-card">
+      <>
       {
+        question
+        && (
+          <>
+                {
         activeTab === 0
         && (
           <QuestionScreen question={question}/>
@@ -126,6 +110,10 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           </div>
         )
       }
+          </>
+        )
+      }
+      </>
     </Card>
     
     </div>

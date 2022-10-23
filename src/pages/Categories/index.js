@@ -34,7 +34,7 @@ const Categories = ({ setBreadcrumb, setAction }) => {
       onActionClick: onNewCategoryClick,
     });
     async function fetchCategories() {
-      const response = await categoryServices.getCategories(0);
+      const response = await categoryServices.getCategories(0, 3);
   
       setCategories(response.data);
     };
@@ -63,7 +63,7 @@ const renderRow = (props) => {
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography variant="h5" className='category-item-title' component="div">
-      Categoría {category.order}: {category.name}
+      Categoría {category.position}: {category.name}
       </Typography>
       <Typography color="text.secondary">
         0/x

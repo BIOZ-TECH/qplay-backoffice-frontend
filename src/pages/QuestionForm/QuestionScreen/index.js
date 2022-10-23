@@ -4,8 +4,9 @@ import "./styles.css";
 import { Card, FormControl, InputAdornment, OutlinedInput, TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faUpload } from "@fortawesome/free-solid-svg-icons";
+import Answer from "../../../entities/Answer";
 
-const QuestionScreen = ({ question }) => {
+const QuestionScreen = ({ question, inputValues, setInputValues }) => {
 
   const statementInput = createRef();
   const correctAnswerInput = createRef();
@@ -33,6 +34,68 @@ const QuestionScreen = ({ question }) => {
     thirdIncorrectAnswerInput.current.children[0].focus();
   }
 
+  const onStatementChange = (e) => {
+    setInputValues({
+      ...inputValues,
+      statementInput: e.target.value,
+    });
+  }
+
+  const onCorrectAnswerChange = (e) => {
+    const newAnswers = [...inputValues.answersInput];
+    newAnswers[0] = new Answer({
+      id: newAnswers[0]?.id || null,
+      description: e.target.value,
+      isCorrect: true,
+    });
+
+    setInputValues({
+      ...inputValues,
+      answersInput: newAnswers,
+    });
+  }
+
+  const onFirstIncorrectAnswerChange = (e) => {
+    const newAnswers = [...inputValues.answersInput];
+    newAnswers[1] = new Answer({
+      id: newAnswers[1]?.id || null,
+      description: e.target.value,
+      isCorrect: false,
+    });
+
+    setInputValues({
+      ...inputValues,
+      answersInput: newAnswers,
+    });
+  }
+
+  const onSecondIncorrectAnswerChange = (e) => {
+    const newAnswers = [...inputValues.answersInput];
+    newAnswers[2] = new Answer({
+      id: newAnswers[2]?.id || null,
+      description: e.target.value,
+      isCorrect: false,
+    });
+
+    setInputValues({
+      ...inputValues,
+      answersInput: newAnswers,
+    });
+  }
+
+  const onThirdIncorrectAnswerChange = (e) => {
+    const newAnswers = [...inputValues.answersInput];
+    newAnswers[3] = new Answer({
+      id: newAnswers[3]?.id || null,
+      description: e.target.value,
+      isCorrect: false,
+    });
+
+    setInputValues({
+      ...inputValues,
+      answersInput: newAnswers,
+    });
+  }
 
   return (
 <div className="mobile-device">
@@ -46,12 +109,14 @@ const QuestionScreen = ({ question }) => {
             placeholder="Enunciado de la pregunta"
             multiline
             ref={statementInput}
+            value={inputValues.statementInput}
+            onChange={onStatementChange}
           />
         </FormControl>
     {
-      question.image
+      question?.permalink
       && (
-        <img className="question-statement-image" src={question.image || ''} />
+        <img className="question-statement-image" src={question.permalink || ''} />
       )
     }
   </div>
@@ -64,6 +129,8 @@ const QuestionScreen = ({ question }) => {
             placeholder="Respuesta correcta"
             multiline
             ref={correctAnswerInput}
+            value={inputValues.answersInput[0]?.description || null}
+            onChange={onCorrectAnswerChange}
           />
         </FormControl>
         <FormControl fullWidth>
@@ -74,6 +141,8 @@ const QuestionScreen = ({ question }) => {
             placeholder="Respuesta incorrecta"
             multiline
             ref={firstIncorrectAnswerInput}
+            value={inputValues.answersInput[1]?.description || null}
+            onChange={onFirstIncorrectAnswerChange}
           />
         </FormControl>
         <FormControl fullWidth>
@@ -84,6 +153,8 @@ const QuestionScreen = ({ question }) => {
             placeholder="Respuesta incorrecta"
             multiline
             ref={secondIncorrectAnswerInput}
+            value={inputValues.answersInput[2]?.description || null}
+            onChange={onSecondIncorrectAnswerChange}
           />
         </FormControl>
         <FormControl fullWidth>
@@ -94,6 +165,8 @@ const QuestionScreen = ({ question }) => {
             placeholder="Respuesta incorrecta"
             multiline
             ref={thirdIncorrectAnswerInput}
+            value={inputValues.answersInput[3]?.description || null}
+            onChange={onThirdIncorrectAnswerChange}
           />
         </FormControl>
   </div>

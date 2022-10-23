@@ -35,3 +35,39 @@
 .image-uploader-dialog > .MuiDialog-container > .MuiDialog-paper {
     width: 50%;
 }
+
+.dialog-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    width: fit-content;
+    color: white;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 5px black;
+    float: right;
+    align-self: center;
+    margin-left: auto;
+}
+
+.cancel-dialog-btn {
+    background-color: var(--primary-incorrect-color);
+    border: 2px solid var(--primary-incorrect-color);
+}
+
+.confirm-dialog-btn {
+    background-color: var(--primary-correct-color);
+    border: 2px solid var(--primary-correct-color);
+}
+
+.cancel-dialog-btn:hover, .cancel-dialog-btn:focus {
+    background-color: var(--secondary-incorrect-color);
+    color: var(--primary-incorrect-color);
+    border: 0px solid var(--secondary-incorrect-color);
+}
+
+.confirm-dialog-btn:hover, .cnfirm-dialog-btn:focus {
+    background-color: var(--secondary-correct-color);
+    color: var(--primary-correct-color);
+    border: 0px solid var(--secondary-correct-color);
+}

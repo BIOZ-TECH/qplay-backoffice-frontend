@@ -30,10 +30,7 @@ const AppearancePage = ({ setBreadcrumb, setAction }) => {
       onActionClick: onSaveAppearanceChangesClick,
     });
     async function fetchAppearance() {
-      const response = await appearanceService.getApplicationAppearance(0);
-
-      console.log("entre");
-      console.log(response.data);
+      const response = await appearanceService.getApplicationAppearance(0, 3);
 
       setAppearance(new Appearance(response.data));
     };
@@ -46,10 +43,8 @@ const AppearancePage = ({ setBreadcrumb, setAction }) => {
   };
 
   const onSaveAppearanceChangesClick = (e) => {
-    appearanceService.updateApplicationAppearance(appearance, 0)
+    appearanceService.updateApplicationAppearance(appearance, 0, 3)
     .then( res => {
-      console.log("resultado es ", res.status);
-      console.log(res.data);
     });
   };
 
