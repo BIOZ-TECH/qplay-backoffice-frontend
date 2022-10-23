@@ -61,13 +61,20 @@ const renderRow = (props) => {
     <ListItem style={style} className={`category ${getItemClass(index)}`} key={index} component="div" disablePadding>
     <Card className="category-item cursor-pointer" onClick={() => navigate(`/category/${category.id}`)}>
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-        <Typography variant="h5" className='category-item-title' component="div">
+        <CardContent sx={{ flex: '1 0 auto', padding: '0 !important' }}>
+          <div className="detail">
+          <div className="category-img" style={{ backgroundImage: `url(${category.permalink})` }}></div>
+          <div className="main-detail">
+          <Typography variant="h5" className='category-item-title' component="div">
       Categoría {category.position}: {category.name}
       </Typography>
       <Typography color="text.secondary">
-        0/x
+        {category.questions.length} preguntas
       </Typography>
+          </div>
+
+          </div>
+
           </CardContent>
           </Box>
 

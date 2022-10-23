@@ -13,26 +13,44 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import questionServices from "../../services/question";
 
+import categoryService from "../../services/category";
+import Category from "../../entities/Category";
+
 const QuestionDetail = ({ setBreadcrumb, setAction }) => {
   const { id: questionId, categoryId } = useParams();
   const navigate = useNavigate();
 
   const [question, setQuestion] = useState(null);
+  const [category, setCategory] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
+    async function fetchData() {
+      const categoryResponse = await categoryService.getCategory(0, 3, categoryId);
+
+      setCategory(new Category(categoryResponse.data));
+
+      const response = await questionServices.getQuestion(0, 3, questionId);
+
+      setQuestion(new Question(response.data));
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!category) return;
     setBreadcrumb([
       {
         name: 'Categorías',
         route: '/',
       },
       {
-        name: 'Categoría 1: Categoria nombre',
+        name: `Categoría ${category.position}: ${category.name}`,
         route: `/category/${categoryId}`,
       },
       {
         name: 'Pregunta',
-        route: '',
       },
     ]);
     setAction({
@@ -40,14 +58,7 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
       icon: faPencil,
       onActionClick: onEditQuestionClick,
     });
-    async function fetchQuestion() {
-      const response = await questionServices.getQuestion(0, 3, questionId);
-
-      setQuestion(new Question(response.data));
-    };
-
-    fetchQuestion();
-  }, []);
+  }, [category]);
 
   /*useEffect(() => {
     async function fetchCategory() {

@@ -18,10 +18,17 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
   }, [feedbackDetail]);*/
 
   const handleFeedbackTypeChange = (e) => {
-    setInputValues({
-      ...inputValues,
-      feedbackInput: new Feedback({ ...inputValues.feedbackInput, type: e.target.value }),
-    });
+    const newFeedbackType = e.target.value;
+
+    if (newFeedbackType) {
+        setInputValues({
+          ...inputValues,
+          feedbackInput: new Feedback({ ...inputValues.feedbackInput,
+            inflatedFeedback: new InflatedFeedback({ statement: ''}),
+            inflatedIncorrectFeedback: new InflatedFeedback({ statement: ''}),
+            type: e.target.value }),
+        });
+    }
   }
 
   const setInflatedFeedback = (inflatedFeedback) => {
@@ -29,6 +36,7 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
       ...inputValues,
       feedbackInput: new Feedback({ ...inputValues.feedbackInput, inflatedFeedback: new InflatedFeedback(inflatedFeedback) }),
     });
+    console.log(inputValues);
   }
 
   const setInflatedIncorrectFeedback = (inflatedIncorrectFeedback) => {

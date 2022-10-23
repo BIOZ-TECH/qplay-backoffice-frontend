@@ -2,15 +2,18 @@
     height: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-flow: row;
     padding: 2rem;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius:  0 !important;
 }
 
 .edit-category-container > .primary-info {
     display: flex;
-    align-items: center;
+    
+}
+
+.category-image-uploader {
+    position: relative;
+    height: fit-content;
 }
 
 .category-input {
@@ -61,4 +64,9 @@
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
     border: 2px solid var(--secondary-color);
+}
+
+.category-data-container {
+    width: 100%;
+    margin-left: 2rem;
 }

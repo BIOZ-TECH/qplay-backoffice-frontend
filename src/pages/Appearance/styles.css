@@ -46,3 +46,7 @@
 .app-name-input {
     width: 100%;
 }
+
+.appearance-tabs > div > span {
+    background-color: #6356e0
+}

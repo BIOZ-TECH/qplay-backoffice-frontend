@@ -5,15 +5,22 @@
 }
 
 .image-container {
-    border-radius: 0.5rem;
-    object-fit: cover;
-    height: 100px;
-    width: 100px;
+    position: relative;
+    max-width: 120px;
+    max-height: 120px;
+    min-height: 120px;
+    min-width: 120px;
+    border-radius: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: 0px 0px 5px rgb(66 66 66);
     background-color: var(--tertiary-color);
+    cursor: pointer;
 }
 
 .image-uploader {
-    width: fit-content;
+    min-width: fit-content;
     height: fit-content;
 }
 
@@ -21,15 +28,28 @@
     float: right;
     margin-right: 7px;
     margin-top: 7px;
+    z-index: 10;
 }
 
 .uploaded-container {
     position: relative;
 }
 
-.uploaded-container > .upload-icon {
+.upload-icon {
     position: absolute;
     right: 0;
+    bottom: 0;
+    background: #4f469e;
+    padding: 0.5rem;
+    border-radius: 5rem;
+    color: #ebe3ff;
+    box-shadow: 1px 1px 5px black;
+    cursor: pointer;
+}
+
+.upload-icon:hover {
+    background: #7164e3;
+    color: white;
 }
 
 .image-uploader-dialog > .MuiDialog-container > .MuiDialog-paper {

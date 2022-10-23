@@ -9,6 +9,9 @@ import "./styles.css";
 
 const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeedback }) => {
 
+  console.log("veamos");
+  console.log(inflatedFeedback);
+
     const statementInput = createRef();
     const [feedbackStyle, setFeedbackStyle] = useState({});
     const [videoLink, setVideoLink] = useState(null);

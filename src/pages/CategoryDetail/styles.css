@@ -16,8 +16,10 @@
 }
 
 .category-img {
-    height: 120px;
-    width: 120px;
+    max-width: 120px;
+    max-height: 120px;
+    min-height: 120px;
+    min-width: 120px;
     border-radius: 5rem;
     background-size: cover;
     background-repeat: no-repeat;
@@ -59,4 +61,10 @@
     background-color: var(--tertiary-color);
     color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
+}
+
+.category-description {
+    padding-left: 2rem;
+    padding-top: 1.5rem;
+    padding-right: 1.5rem;
 }

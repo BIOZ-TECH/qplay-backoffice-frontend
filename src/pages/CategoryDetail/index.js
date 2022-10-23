@@ -16,16 +16,23 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
   const [category, setCategory] = useState(null);
 
   useEffect(() => {
-    setAction({
-      name: 'Editar categoría',
-      icon: faPencil,
-      onActionClick: onEditCategoryClick,
-    });
     async function fetchCategory() {
       const response = await categoryServices.getCategory(0, 3, categoryId);
+      console.log("hi");
 
       setCategory(new Category(response.data));
+    };
 
+    fetchCategory();
+  }, []);
+
+  useEffect(() => {
+    if (category) {
+      setAction({
+        name: 'Editar categoría',
+        icon: faPencil,
+        onActionClick: onEditCategoryClick,
+      });
       setBreadcrumb([
         {
           name: 'Categorías',
@@ -35,10 +42,8 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
           name: `Categoría ${category.position}: ${category.name}`,
         }
       ]);
-    };
-
-    fetchCategory();
-  }, []);
+    }
+  }, [category]);
 
   const onEditCategoryClick = () => {
     navigate(`/category/edit/${categoryId}`)
@@ -54,7 +59,7 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
       <h1 className="category-name">{`Categoría ${category.position}: ${category.name}`}</h1>
 
       </div>
-      <p>{category.description}</p>
+      {category.description && <p className="category-description">{category.description}</p>}
       <div className="divider"></div>
         <Questions questions={category.questions} categoryId={category.id}/>
         </>

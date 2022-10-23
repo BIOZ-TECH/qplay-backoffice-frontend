@@ -13,6 +13,8 @@ const AppearancePreview = (props) => {
   const { primaryColor: buttonBackgroundColor, secondaryColor: buttonFontColor } = button;
   const { primaryColor: inputTextFontColor, secondaryColor: inputTextHintColor, tertiaryColor: inputTextFocusColor } = inputText;
 
+  console.log(props);
+
   return (
     <Card className="preview-card">
         <div className="mobile-device" style={{ backgroundColor: appBackground }}>
@@ -24,11 +26,11 @@ const AppearancePreview = (props) => {
             <p  style={{ color: primaryComplementaryLettersColor }}>¿Este es el logo de la aplicación?</p>
             <img className="mx-auto" src={logo} />
           </div>
-          <div className="mobile-answers" style={{ color: buttonFontColor }}>
-          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor }}>No</div>
-          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor }}>Puede ser</div>
-          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor }}>Si</div>
-          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor }}>No sé</div>
+          <div className="mobile-answers">
+          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor, color: buttonFontColor }}>No</div>
+          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor, color: buttonFontColor }}>Puede ser</div>
+          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor, color: buttonFontColor }}>Si</div>
+          <div className="mobile-answer" style={{ backgroundColor: buttonBackgroundColor, color: buttonFontColor }}>No sé</div>
           </div>
           <div className="mobile-progress-bar">
             <div className="progress-bar">

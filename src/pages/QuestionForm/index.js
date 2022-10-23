@@ -12,6 +12,8 @@ import QuestionDetailTabs from "../QuestionDetail/QuestionDetailTabs";
 import questionServices from "../../services/question";
 import Feedback from "../../entities/Feedback";
 import InflatedFeedback from "../../entities/InflatedFeedback";
+import categoryServices from "../../services/category";
+import Category from "../../entities/Category";
 
 const QuestionForm = ({ setBreadcrumb, setAction}) => {
   const { id: questionId, categoryId } = useParams();
@@ -20,6 +22,7 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
   const [question, setQuestion] = useState(null);
   const [statementType, setStatementType] = useState("only-text");
   const [statementImage, setStatementImage] = useState(null);
+  const [category, setCategory] = useState(null)
   const [oldQuestion, setOldQuestion] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [inputValues, setInputValues] = useState({
@@ -40,26 +43,13 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
   };
 
   useEffect(() => {
-    setBreadcrumb([
-      {
-        name: 'Categorías',
-        route: '/',
-      },
-      {
-        name: 'Categoría 1: Categoria nombre',
-        route: `/category/${categoryId}`
-      },
-      {
-        name: ( questionId ? 'Editar pregunta' : 'Nueva pregunta' ),
-      }
-    ]);
-    setAction({
-      name: `Guardar ${ questionId ? ' cambios' : '' }`,
-      icon: faFloppyDisk,
-      onActionClick: onSaveQuestionClick,
-    });
     async function fetchQuestion() {
       let questionData = {};
+
+      const responseCategory = await categoryServices.getCategory(0, 3, categoryId);
+
+      setCategory(new Category(responseCategory.data));
+
       if (questionId) {
         const response = await questionServices.getQuestion(0, 3, questionId);
         questionData = response.data;
@@ -73,6 +63,30 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
 
     fetchQuestion();
   }, []);
+
+
+  useEffect(() => {
+    if (category) {
+      setBreadcrumb([
+        {
+          name: 'Categorías',
+          route: '/',
+        },
+        {
+          name: `Categoría ${category.position}: ${category.name}`,
+          route: `/category/${categoryId}`
+        },
+        {
+          name: ( questionId ? 'Editar pregunta' : 'Nueva pregunta' ),
+        }
+      ]);
+      setAction({
+        name: `Guardar ${ questionId ? ' cambios' : '' }`,
+        icon: faFloppyDisk,
+        onActionClick: onSaveQuestionClick,
+      });
+    }
+  }, [category]);
 
   useEffect(() => {
     updateAction();
@@ -101,7 +115,7 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
     const urlImageRegex = new RegExp('http(s)?://.*\.(jpg|jpeg|png|gif)');
     const inputValue = e.target.value;
 
-    if (urlImageRegex.test(inputValue)) {
+    if (urlImageRegex.test(inputValue) || !inputValue) {
       const newQuestion = new Question({ ...question, permalink: inputValue });
       setQuestion(newQuestion);
     }

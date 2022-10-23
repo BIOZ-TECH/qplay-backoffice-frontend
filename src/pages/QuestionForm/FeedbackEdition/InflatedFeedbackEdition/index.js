@@ -17,6 +17,7 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
       }
     }, []);
 
+
     const initializeView = () => {
       const newInflatedFeedbackType = inflatedFeedback.videoPermalink ? 'text-and-video'
       : (
@@ -43,9 +44,29 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
     }, [inflatedFeedbackType]);
   
     const handleInflatedFeedbackTypeChange = (e) => {
-      const inflatedFeedbackType = e.target.value;
-      if (inflatedFeedbackType)
-      setInflatedFeedbackType(e.target.value);
+      const newInflatedFeedbackType = e.target.value;
+      if (newInflatedFeedbackType) {
+        switch (newInflatedFeedbackType) {
+          case "only-text":
+            const newnflatedFeedback = new InflatedFeedback({ ...inflatedFeedback, imagePermalink: '', videoPermalink: '' });
+            setInflatedFeedback(newnflatedFeedback);
+            setImageInput('');
+            setVideoInput('');
+            break;
+          case "text-and-image":
+            const newIflatedFeedback = new InflatedFeedback({ ...inflatedFeedback, videoPermalink: '' });
+            setInflatedFeedback(newIflatedFeedback);
+            setVideoInput('');
+            break;
+          case "text-and-video":
+            const newInfatedFeedback = new InflatedFeedback({ ...inflatedFeedback, imagePermalink: '' });
+            setInflatedFeedback(newInfatedFeedback);
+            setImageInput('');
+            break;
+        }
+
+        setInflatedFeedbackType(e.target.value);
+      }
     }
 
     const onInflatedFeedbackDescriptionImageChange = (e) => {

@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Card, TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import ImageUploader from "../../components/ImageUploader";
 
 const CategoryForm = ({ setBreadcrumb, setAction}) => {
   const { id: categoryId } = useParams();
@@ -27,28 +28,7 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
   } = inputValues;
 
   useEffect(() => {
-    const breadcrumb = [
-      {
-        name: 'Categorías',
-        route: '/',
-      },
-    ];
 
-    if (categoryId) {
-      breadcrumb.push({
-        name: 'Categoría 1: Nombre',
-        route: `/category/${categoryId}`,
-      });
-    }
-    breadcrumb.push(      {
-      name: ( categoryId ? 'Editar categoría' : 'Nueva categoría' ),
-    });
-    setBreadcrumb(breadcrumb);
-    setAction({
-      name: `Guardar ${ categoryId? ' cambios' : '' }`,
-      icon: faFloppyDisk,
-      onActionClick: onSaveCategoryClick,
-    });
     async function fetchCategory() {
       let categoryData = {};
 
@@ -67,6 +47,41 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
   }, []);
 
   useEffect(() => {
+    const breadcrumb = [
+      {
+        name: 'Categorías',
+        route: '/',
+      },
+    ];
+
+    if (categoryId && oldCategory) {
+      breadcrumb.push({
+        name: `Categoría ${oldCategory.position}: ${oldCategory.name}`,
+        route: `/category/${categoryId}`,
+      });
+      breadcrumb.push(      {
+        name: ( categoryId ? 'Editar categoría' : 'Nueva categoría' ),
+      });
+      setBreadcrumb(breadcrumb);
+      setAction({
+        name: `Guardar ${ categoryId? ' cambios' : '' }`,
+        icon: faFloppyDisk,
+        onActionClick: onSaveCategoryClick,
+      });
+    } else if (!categoryId) {
+      breadcrumb.push(      {
+        name: ( categoryId ? 'Editar categoría' : 'Nueva categoría' ),
+      });
+      setBreadcrumb(breadcrumb);
+      setAction({
+        name: `Guardar ${ categoryId? ' cambios' : '' }`,
+        icon: faFloppyDisk,
+        onActionClick: onSaveCategoryClick,
+      });
+    }
+  }, [category]);
+
+  useEffect(() => {
     updateAction();
   }, [inputValues]);
 
@@ -79,14 +94,11 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
     });
   }
 
-  const onCategoryImageChange = (e) => {
-    const urlImageRegex = new RegExp('http(s)?://.*\.(jpg|jpeg|png|gif)');
-    const inputValue = e.target.value;
+  const onCategoryImageChange = (inputValue) => {
 
-    if (urlImageRegex.test(inputValue)) {
       const newCategory = new Category({ ...category, permalink: inputValue });
       setCategory(newCategory);
-    }
+  
 
     setInputValues({ ...inputValues, imageInput: inputValue });
   }
@@ -140,29 +152,24 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
 
   return (
     <>
-        <Card className="edit-category-header">
-    <div>{categoryId ? 'EDITAR' : 'NUEVA' } CATEGORÍA</div>
-
-    </Card>
-    <Card className="edit-category-container p-0">
+    <Card className="edit-category-container">
       { category
       && (
         <>
               <div className="primary-info">
-      <div className="category-img" style={{ backgroundImage: `url(${category?.permalink})` }}></div>
-      <div className="category-input image">
-        <TextField id="category-image-input" label="Enlace de imagen" variant="outlined" fullWidth
-        value={imageInput}
-        onChange={onCategoryImageChange}
-        />
-        </div>
+                <div className="category-image-uploader">
+                <ImageUploader  selectedFile={category?.permalink} setSelectedFile={onCategoryImageChange} dialogType='de la categoría'/>
+                </div>
       </div>
+
+      <div className="category-data-container">
       <div className="category-input">
         <TextField id="category-name-input" label="Nombre de la categoría" variant="outlined" fullWidth
           onChange={onNameCategoryChange}
           value={nameInput}
           />
       </div>
+
       <div className="category-input">
       <TextField id="category-order-input" label="Orden en la lista de categoría" variant="outlined" fullWidth
             type='number'
@@ -171,12 +178,13 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
           />
       </div>
       <div className="category-input">
-      <TextField id="category-description-input" label="Descripción (opcional)s" variant="outlined" fullWidth
+      <TextField id="category-description-input" label="Descripción (opcional)" variant="outlined" fullWidth
           onChange={onDescriptionCategoryChange}
           multiline
           value={descriptionInput}
           />
           </div>
+      </div>
         </>
       )
       }

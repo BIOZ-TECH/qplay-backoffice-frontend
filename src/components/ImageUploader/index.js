@@ -27,7 +27,7 @@ const ImageUploader = ({ selectedFile, setSelectedFile, dialogType }) => {
     const onDialogConfirm = () => {
       const urlImageRegex = new RegExp('http(s)?://.*\.(jpg|jpeg|png|gif)');
     
-      if (urlImageRegex.test(imageInput)) {
+      if (urlImageRegex.test(imageInput) || !imageInput) {
         setSelectedFile(imageInput);
       }
     
