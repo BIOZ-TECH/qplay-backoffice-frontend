@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import ImageUploader from "../../components/ImageUploader";
 
-const CategoryForm = ({ setBreadcrumb, setAction}) => {
+const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
   const { id: categoryId } = useParams();
   const [category, setCategory] = useState(null);
   const [oldCategory, setOldCategory] = useState(null);
@@ -137,6 +137,10 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
       await categoryServices.updateCategory(0, 3, newCategory)
       .then((res) => {
         if(res.status === 200) {
+          setMessage({
+            severity: 'success',
+            text: 'La categoría ha sido actualizado correctamente'
+          });
           navigate('/categories');
         }
       });
@@ -144,6 +148,10 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
       await categoryServices.createCategory(0, 3, newCategory)
       .then((res) => {
         if(res.status === 200) {
+          setMessage({
+            severity: 'success',
+            text: 'La categoría ha sido creada correctamente'
+          });
           navigate('/categories');
         }
       });
