@@ -16,15 +16,6 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
   const [category, setCategory] = useState(null);
 
   useEffect(() => {
-    setBreadcrumb([
-      {
-        name: 'Categorías',
-        route: '/',
-      },
-      {
-        name: 'Categoría 1: Categoria nombre',
-      }
-    ]);
     setAction({
       name: 'Editar categoría',
       icon: faPencil,
@@ -34,6 +25,16 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
       const response = await categoryServices.getCategory(0, 3, categoryId);
 
       setCategory(new Category(response.data));
+
+      setBreadcrumb([
+        {
+          name: 'Categorías',
+          route: '/',
+        },
+        {
+          name: `Categoría ${category.position}: ${category.name}`,
+        }
+      ]);
     };
 
     fetchCategory();

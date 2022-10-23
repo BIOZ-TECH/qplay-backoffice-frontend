@@ -160,7 +160,6 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
       <div className="category-input">
         <TextField id="category-name-input" label="Nombre de la categoría" variant="outlined" fullWidth
           onChange={onNameCategoryChange}
-          className="image-statement-input"
           value={nameInput}
           />
       </div>
@@ -168,14 +167,12 @@ const CategoryForm = ({ setBreadcrumb, setAction}) => {
       <TextField id="category-order-input" label="Orden en la lista de categoría" variant="outlined" fullWidth
             type='number'
           onChange={onOrderCategoryChange}
-          className="image-statement-input"
           value={orderInput}
           />
       </div>
       <div className="category-input">
       <TextField id="category-description-input" label="Descripción (opcional)s" variant="outlined" fullWidth
           onChange={onDescriptionCategoryChange}
-          className="image-statement-input"
           multiline
           value={descriptionInput}
           />

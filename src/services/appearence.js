@@ -5,7 +5,7 @@ const getApplicationAppearance = (userId, holderId) => {
 } 
 
 const updateApplicationAppearance = (appearance, userId, holderId) => {
-    Api.put(`appearance?caller.id=${userId}&holder.id=${holderId}`, JSON.parse(JSON.stringify(appearance)));
+    return Api.put(`appearance?caller.id=${userId}&holder.id=${holderId}`, JSON.parse(JSON.stringify(appearance)));
 }
 
 const appearanceServices = {

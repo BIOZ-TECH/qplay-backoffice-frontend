@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import appearanceService from '../../services/appearence';
 import AppearanceTabs from "./AppearanceTabs";
@@ -16,6 +16,8 @@ import Appearance from '../../entities/Appearance';
 const AppearancePage = ({ setBreadcrumb, setAction }) => {
   const [appearance, setAppearance] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  /*const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);*/
 
   useEffect(() => {
     setBreadcrumb([
@@ -38,13 +40,28 @@ const AppearancePage = ({ setBreadcrumb, setAction }) => {
     fetchAppearance();
   }, []);
 
+  useEffect(() => {
+    updateAction();
+  }, [appearance]);
+
   const onTabClick = (event, newValue) => {
     setActiveTab(newValue);
   };
 
-  const onSaveAppearanceChangesClick = (e) => {
-    appearanceService.updateApplicationAppearance(appearance, 0, 3)
-    .then( res => {
+  const updateAction = () => {
+    setAction({
+      name: 'Guardar cambios',
+      icon: faFloppyDisk,
+      onActionClick: onSaveAppearanceChangesClick,
+    });
+  }
+
+  const onSaveAppearanceChangesClick = async() => {
+    await appearanceService.updateApplicationAppearance(appearance, 0, 3)
+    .then((res) => {
+      if (res.status = 200) {
+        window.location.reload();
+      }
     });
   };
 
