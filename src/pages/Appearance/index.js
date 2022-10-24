@@ -13,7 +13,7 @@ import './styles.css';
 import Card from '@mui/material/Card';
 import Appearance from '../../entities/Appearance';
 
-const AppearancePage = ({ setBreadcrumb, setAction }) => {
+const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   /*const [, updateState] = useState();
@@ -60,6 +60,10 @@ const AppearancePage = ({ setBreadcrumb, setAction }) => {
     await appearanceService.updateApplicationAppearance(appearance, 0, 3)
     .then((res) => {
       if (res.status = 200) {
+        setMessage({
+          severity: 'success',
+          text: 'La apariencia ha sido actualizada correctamente'
+        });
         window.location.reload();
       }
     });

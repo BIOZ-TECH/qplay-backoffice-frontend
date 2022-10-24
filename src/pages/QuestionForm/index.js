@@ -15,7 +15,7 @@ import InflatedFeedback from "../../entities/InflatedFeedback";
 import categoryServices from "../../services/category";
 import Category from "../../entities/Category";
 
-const QuestionForm = ({ setBreadcrumb, setAction}) => {
+const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
   const { id: questionId, categoryId } = useParams();
   const navigate = useNavigate();
 
@@ -155,13 +155,14 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
       categoryId,
     });
 
-    console.log("pregunta");
-    console.log(newQuestion);
-
     if(questionId) {
       await questionServices.updateQuestion(0, 3, newQuestion)
       .then((res) => {
         if (res.status === 200) {
+          setMessage({
+            severity: 'success',
+            text: 'La pregunta ha sido actualizada correctamente'
+          });
           navigate(`/category/${categoryId}`);
         }
       });
@@ -169,6 +170,10 @@ const QuestionForm = ({ setBreadcrumb, setAction}) => {
       await questionServices.createQuestion(0, 3, newQuestion)
     .then((res) => {
       if (res.status === 200) {
+        setMessage({
+          severity: 'success',
+          text: 'La pregunta ha sido creada correctamente'
+        });
         navigate(`/category/${categoryId}`);
       }
     });

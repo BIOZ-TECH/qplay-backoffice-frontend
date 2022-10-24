@@ -18,12 +18,12 @@ const Router = () => {
     <BrowserRouter>
     <AppLayout breadcrumb={breadcrumb} action={action} message={message}>
     <Routes>
-        <Route exact path="/appearance" element={<Appearance setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
-        <Route exact path="/category/new" element={<CategoryForm setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/appearance" element={<Appearance setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage} />}/>
+        <Route exact path="/category/new" element={<CategoryForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage} />}/>
         <Route exact path="/category/edit/:id" element={<CategoryForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
         <Route exact path="/category/:id" element={<CategoryDetail setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
-        <Route exact path="/category/:categoryId/question/new" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
-        <Route exact path="/category/:categoryId/question/edit/:id" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/category/:categoryId/question/new" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
+        <Route exact path="/category/:categoryId/question/edit/:id" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
         <Route exact path="/category/:categoryId/question/:id" element={<QuestionDetail setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
         <Route exact path="*" element={<Categories setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
       </Routes>
