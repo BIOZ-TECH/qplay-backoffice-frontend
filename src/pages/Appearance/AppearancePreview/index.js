@@ -13,7 +13,6 @@ const AppearancePreview = (props) => {
   const { primaryColor: buttonBackgroundColor, secondaryColor: buttonFontColor } = button;
   const { primaryColor: inputTextFontColor, secondaryColor: inputTextHintColor, tertiaryColor: inputTextFocusColor } = inputText;
 
-  console.log(props);
 
   return (
     <Card className="preview-card">

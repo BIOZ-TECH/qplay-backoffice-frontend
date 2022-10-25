@@ -32,8 +32,7 @@ export default class AppearanceValidator {
             invalidPropertyMessages.logo = 'Por favor, especifique el enlace de su logo de aplicación en formato jpg, jpeg o png';
         }
 
-        console.log(this.appName, this.logo);
-        console.log(invalidPropertyMessages);
+
 
         return invalidPropertyMessages;
     }

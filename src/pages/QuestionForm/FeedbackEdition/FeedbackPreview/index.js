@@ -9,8 +9,7 @@ import "./styles.css";
 
 const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages }) => {
 
-  console.log("veamos");
-  console.log(inflatedFeedback);
+
 
     const statementInput = createRef();
     const [feedbackStyle, setFeedbackStyle] = useState({});
@@ -57,7 +56,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
    const getVideoId = () => {
     const youtubeLinkIdRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]+).*/;
     const youtubeId = inflatedFeedback.videoPermalink.match(youtubeLinkIdRegex);
-    console.log(`https://www.youtube.com/embed/${youtubeId[1]}`);
+
 
     return `https://www.youtube.com/embed/${youtubeId[1]}`;
    }

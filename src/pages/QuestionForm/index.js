@@ -208,7 +208,6 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
 
     setErrorMessages(newMessages);
 
-    console.log(newMessages);
 
     if (Object.keys(newMessages).length === 0) {
       if(questionId) {

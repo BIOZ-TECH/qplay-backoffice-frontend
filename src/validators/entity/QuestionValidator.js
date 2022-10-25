@@ -33,8 +33,6 @@ export default class QuestionValidator {
             invalidPropertyMessages.permalink = 'Por favor, especifique un enlace de imagen en formato jpg, jpeg o png';
         }
 
-        console.log(this.answers);
-
         if(!this.answers || !Array.isArray(this.answers)  || this.answers.length < 2) {
             invalidPropertyMessages.answers = 'Por favor, especifique al menos dos respuestas, debiendo ser una sola de ellas la respuesta correcta';
         }
