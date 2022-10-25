@@ -17,10 +17,29 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
 
   useEffect(() => {
     async function fetchCategory() {
-      const response = await categoryServices.getCategory(0, 3, categoryId);
-      console.log("hi");
-
-      setCategory(new Category(response.data));
+      try {
+        const response = await categoryServices.getCategory(0, 3, categoryId);
+  
+        switch(response.status) {
+          case 200:
+            setCategory(new Category(response.data));
+            break;
+          default:
+            navigate('/error-500');
+        }
+      } catch (e) {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
+        }
+      }
     };
 
     fetchCategory();

@@ -14,9 +14,9 @@ const BottomSidebarOptions = ({ setIsSidebarOpen }) =>{
       <div className="absolute bottom-0 w-full my-8">
           <Navigation
             activeItemId={location.pathname}
-            onSelect={({itemId}) => {
-              navigate(itemId);
-              setIsSidebarOpen(false);
+            onSelect={() => {
+              localStorage.removeItem('ACCESS_TOKEN');
+              navigate('/login');
             }}
             items={[
               {

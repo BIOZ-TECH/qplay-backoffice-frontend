@@ -20,6 +20,7 @@ const AppSnackBar = ({message}) => {
     <>
     { message &&
     <Snackbar open={open} onClose={handleClose} 
+    autoHideDuration={6000}
     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
     <Alert className="snackbar-alert" onClose={handleClose} severity={message.severity} sx={{ width: '100%' }}>
       {message.text}

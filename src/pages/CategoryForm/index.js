@@ -34,11 +34,32 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
       let categoryData = {};
 
       if (categoryId) {
-        const response = await categoryServices.getCategory(0, 3, categoryId);
-        categoryData = response.data;
+        try {
+          const response = await categoryServices.getCategory(0, 3, categoryId);
+    
+          switch(response.status) {
+            case 200:
+              categoryData = response.data;
 
-        setOldCategory(categoryData);
-        initializeView(categoryData);
+              setOldCategory(categoryData);
+              initializeView(categoryData);
+              break;
+            default:
+              navigate('/error-500');
+          }
+        } catch (e) {
+          switch(e.response.status) {
+            case 400:
+            case 401:
+              navigate('/error-401');
+              break;
+            case 404:
+              navigate('/error-404');
+              break;
+            default:
+              navigate('/error-500');
+          }
+        }
       }
 
       setCategory(new Category(categoryData));
@@ -146,24 +167,59 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
       if (categoryId) {
         await categoryServices.updateCategory(0, 3, newCategory)
         .then((res) => {
-          if(res.status === 200) {
-            setMessage({
-              severity: 'success',
-              text: 'La categoría ha sido actualizado correctamente'
-            });
-            navigate('/categories');
+          switch(res.status) {
+            case 200:
+              setMessage({
+                severity: 'success',
+                text: 'La categoría ha sido actualizado correctamente'
+              });
+              navigate('/categories');    
+              break;
+            default:
+              navigate('/error-500');
           }
+        })
+        .catch((e) => {
+            switch(e.response.status) {
+              case 400:
+              case 401:
+                navigate('/error-401');
+                break;
+              case 404:
+                navigate('/error-404');
+                break;
+              default:
+                navigate('/error-500');
+            }
         });
       } else {
         await categoryServices.createCategory(0, 3, newCategory)
         .then((res) => {
-          if(res.status === 200) {
-            setMessage({
-              severity: 'success',
-              text: 'La categoría ha sido creada correctamente'
-            });
-            navigate('/categories');
+          switch(res.status) {
+            case 200:
+              setMessage({
+                severity: 'success',
+                text: 'La categoría ha sido creada correctamente'
+              });
+              navigate('/categories');
+    
+              break;
+            default:
+              navigate('/error-500');
           }
+        })
+        .catch((e) => {
+            switch(e.response.status) {
+              case 400:
+              case 401:
+                navigate('/error-401');
+                break;
+              case 404:
+                navigate('/error-404');
+                break;
+              default:
+                navigate('/error-500');
+            }
         });
       }
     }

@@ -50,19 +50,47 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
     async function fetchQuestion() {
       let questionData = {};
 
-      const responseCategory = await categoryServices.getCategory(0, 3, categoryId);
+      try {
+        const responseCategory = await categoryServices.getCategory(0, 3, categoryId);
 
-      setCategory(new Category(responseCategory.data));
-
-      if (questionId) {
-        const response = await questionServices.getQuestion(0, 3, questionId);
-        questionData = response.data;
-
-        setOldQuestion(questionData);
-        initializeView(questionData);
+        switch(responseCategory.status) {
+          case 200:
+            setCategory(new Category(responseCategory.data));
+  
+            if (questionId) {
+              const response = await questionServices.getQuestion(0, 3, questionId);
+  
+              switch(response.status) {
+                case 200:
+                  questionData = response.data;
+      
+                  setOldQuestion(questionData);
+                  initializeView(questionData);
+                  break;
+                default:
+                  navigate('/error-500');
+              }
+            }
+      
+            setQuestion(new Question(questionData));
+  
+            break;
+          default:
+            navigate('/error-500');
+        }
+      } catch (e) {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
+        }
       }
-
-      setQuestion(new Question(questionData));
     };
 
     fetchQuestion();
@@ -104,16 +132,6 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
       feedbackInput: data.feedback,
     });
   }
-
-  /*useEffect(() => {
-    async function fetchCategory() {
-      const response = await categoryServices.getCategory(0, categoryId);
-
-      setCategory(new Category(response.data));
-    };
-
-    fetchCategory();
-  }, [id]);*/
 
   const onStatementImageChange = (e) => {
     const urlImageRegex = new RegExp('http(s)?://.*\.(jpg|jpeg|png|gif)');
@@ -196,23 +214,57 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
       if(questionId) {
         await questionServices.updateQuestion(0, 3, newQuestion)
         .then((res) => {
-          if (res.status === 200) {
-            setMessage({
-              severity: 'success',
-              text: 'La pregunta ha sido actualizada correctamente'
-            });
-            navigate(`/category/${categoryId}`);
+          switch(res.status) {
+            case 200:
+              setMessage({
+                severity: 'success',
+                text: 'La pregunta ha sido actualizada correctamente'
+              });
+              navigate(`/category/${categoryId}`);
+              break;
+            default:
+              navigate('/error-500');
+          }
+        })
+        .catch((e) => {
+          switch(e.response.status) {
+            case 400:
+            case 401:
+              navigate('/error-401');
+              break;
+            case 404:
+              navigate('/error-404');
+              break;
+            default:
+              navigate('/error-500');
           }
         });
       } else {
         await questionServices.createQuestion(0, 3, newQuestion)
       .then((res) => {
-        if (res.status === 200) {
-          setMessage({
-            severity: 'success',
-            text: 'La pregunta ha sido creada correctamente'
-          });
-          navigate(`/category/${categoryId}`);
+        switch(res.status) {
+          case 200:
+            setMessage({
+              severity: 'success',
+              text: 'La pregunta ha sido creada correctamente'
+            });
+            navigate(`/category/${categoryId}`);
+            break;
+          default:
+            navigate('/error-500');
+        }
+      })
+      .catch((e) => {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
         }
       });
       }

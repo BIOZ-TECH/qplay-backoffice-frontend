@@ -11,7 +11,7 @@ const AppLayout = ({ children, breadcrumb, action, message }) => {
 
   return (
     <BodyWrapper>
-      {pathname !== "/login" && <NavigationLayout breadcrumb={breadcrumb} action={action} />}
+      {pathname !== "/login" && pathname !== '/error-401' && <NavigationLayout breadcrumb={breadcrumb} action={action} />}
       <PageWrapper pathname={pathname}>
         {children}
       </PageWrapper>

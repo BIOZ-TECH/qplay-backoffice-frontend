@@ -13,15 +13,17 @@ import './styles.css';
 import Card from '@mui/material/Card';
 import Appearance from '../../entities/Appearance';
 import AppearanceValidator from "../../validators/entity/AppearanceValidator";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [errorMessages, setErrorMessages] = useState({});
-  /*const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);*/
+  const navigate = useNavigate();
+  const [updateState, setUpdateState] = useState(true);
 
   useEffect(() => {
+    setActiveTab(0);
     setBreadcrumb([
       {
         name: 'Apariencia',
@@ -34,13 +36,34 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
       onActionClick: onSaveAppearanceChangesClick,
     });
     async function fetchAppearance() {
-      const response = await appearanceService.getApplicationAppearance(0, 3);
 
-      setAppearance(new Appearance(response.data));
+      try {
+        const response = await appearanceService.getApplicationAppearance(0, 3);
+  
+        switch(response.status) {
+          case 200:
+            setAppearance(new Appearance(response.data));
+            break;
+          default:
+            navigate('/error-500');
+        }
+      } catch (e) {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
+        }
+      }
     };
 
     fetchAppearance();
-  }, []);
+  }, [updateState]);
 
   useEffect(() => {
     updateAction();
@@ -67,13 +90,30 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
     if (Object.keys(newMessages).length === 0) {
     await appearanceService.updateApplicationAppearance(appearance, 0, 3)
     .then((res) => {
-      if (res.status = 200) {
-        setMessage({
-          severity: 'success',
-          text: 'La apariencia ha sido actualizada correctamente'
-        });
-        window.location.reload();
+      switch(res.status) {
+        case 200:
+          setMessage({
+            severity: 'success',
+            text: 'La apariencia ha sido actualizada correctamente'
+          });
+          setUpdateState(!!updateState);
+          break;
+        default:
+          navigate('/error-500');
       }
+    })
+    .catch((e) => {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
+        }
     });
     }
   };

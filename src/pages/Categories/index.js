@@ -34,9 +34,30 @@ const Categories = ({ setBreadcrumb, setAction }) => {
       onActionClick: onNewCategoryClick,
     });
     async function fetchCategories() {
-      const response = await categoryServices.getCategories(0, 3);
+      try {
+        const response = await categoryServices.getCategories(0, 3);
   
-      setCategories(response.data);
+        switch(response.status) {
+          case 200:
+            setCategories(response.data);
+            break;
+          default:
+            navigate('/error-500');
+        }
+      } catch (e) {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
+        }
+      }
+      
     };
   
     fetchCategories();

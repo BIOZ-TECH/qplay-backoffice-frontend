@@ -26,13 +26,39 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const categoryResponse = await categoryService.getCategory(0, 3, categoryId);
+      try {
+        const categoryResponse = await categoryService.getCategory(0, 3, categoryId);
+  
+        switch(categoryResponse.status) {
+          case 200:
+            setCategory(new Category(categoryResponse.data));
 
-      setCategory(new Category(categoryResponse.data));
+            const response = await questionServices.getQuestion(0, 3, questionId);
 
-      const response = await questionServices.getQuestion(0, 3, questionId);
-
-      setQuestion(new Question(response.data));
+            switch(response.status) {
+              case 200:
+                setQuestion(new Question(response.data));
+                break;
+              default:
+                navigate('/error-500');
+            }
+            break;
+          default:
+            navigate('/error-500');
+        }
+      } catch (e) {
+        switch(e.response.status) {
+          case 400:
+          case 401:
+            navigate('/error-401');
+            break;
+          case 404:
+            navigate('/error-404');
+            break;
+          default:
+            navigate('/error-500');
+        }
+      }
     };
 
     fetchData();
@@ -60,16 +86,6 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
     });
   }, [category]);
 
-  /*useEffect(() => {
-    async function fetchCategory() {
-      const response = await categoryServices.getCategory(0, categoryId);
-
-      setCategory(new Category(response.data));
-    };
-
-    fetchCategory();
-  }, [id]);*/
-
   const onTabClick = (event, newValue) => {
     setActiveTab(newValue);
   };
@@ -80,11 +96,6 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
 
   return (
         <div className="question-detail-container">
-        {/*<p><a>Categoría: Esta es la categoría</a> {'>'} Pregunta</p>
-          <button className="edit-question-btn" type="button" onClick={onEditQuestionClick}>
-      <FontAwesomeIcon className="mr-2" icon={faPencil} />
-        Editar pregunta
-  </button>-*/}
     <QuestionDetailTabs
           activeTab={activeTab}
           onTabClick={onTabClick}
