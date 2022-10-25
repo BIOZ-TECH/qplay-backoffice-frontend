@@ -38,6 +38,18 @@
     display: flex;
 }
 
+.category-image-uploader > .MuiTooltip-popper {
+    max-width: 300px;
+}
+
+.category-image-uploader > .MuiTooltip-popper > .MuiTooltip-tooltip {
+    background-color: #d11111;
+}
+
+.category-image-uploader > .MuiTooltip-popper > .MuiTooltip-tooltip > .MuiTooltip-arrow {
+    color: #d11111;
+}
+
 
 .edit-category-header > div {
     width: fit-content;

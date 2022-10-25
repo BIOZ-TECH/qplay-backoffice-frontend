@@ -1,6 +1,6 @@
 export default class Appearance {
     constructor(data) {
-        const { id, holderId, appName, logo, header, button, inputText, appBackground, complementaryLetters } = data;
+        const { holderId, appName, logo, header, button, inputText, appBackground, complementaryLetters, id = null } = data;
         this.id = id;
         this.holderId = holderId;
         this.appName = appName;

@@ -1,13 +1,13 @@
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FormControl, InputAdornment, OutlinedInput } from "@mui/material";
+import { FormControl, FormHelperText, InputAdornment, OutlinedInput } from "@mui/material";
 import React, { createRef, useEffect, useState } from "react";
 import YoutubeEmbed from "../../../../components/YoutubeEmbed";
 import InflatedFeedback from "../../../../entities/InflatedFeedback";
 
 import "./styles.css";
 
-const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeedback }) => {
+const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages }) => {
 
   console.log("veamos");
   console.log(inflatedFeedback);
@@ -15,6 +15,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
     const statementInput = createRef();
     const [feedbackStyle, setFeedbackStyle] = useState({});
     const [videoLink, setVideoLink] = useState(null);
+    const [inflatedFeedbackType, setInflatedFeedbackType] = useState(null);
     
     useEffect(() => {
       if(!inflatedFeedback) setInflatedFeedback(new InflatedFeedback({}));
@@ -25,6 +26,9 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
     }, [inflatedFeedback]);
 
     useEffect(() => {
+      setInflatedFeedbackType(
+        feedbackResultType === 'incorrect' ? 'inflatedIncorrectFeedback' : 'inflatedFeedback'
+      );
       switch(feedbackResultType) {
         case 'correct':
           setFeedbackStyle({
@@ -60,6 +64,13 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
 
    const onFeedbackStatementChange = (e) => {
     setInflatedFeedback(new InflatedFeedback({ ...inflatedFeedback, statement: e.target.value}));
+    setErrorMessages({
+      ...errorMessages,
+      [inflatedFeedbackType]: {
+        ...errorMessages[inflatedFeedbackType],
+        statement: null,
+      },
+    });
    }
 
   return (
@@ -67,7 +78,8 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
 
       { feedbackStyle.title && <p className="feedback-title">{feedbackStyle.title}</p>}
           <div className="inflated-feedback-preview" style={{ backgroundColor: feedbackStyle.backgroundColor }}>
-          <FormControl fullWidth>
+          <FormControl fullWidth
+          error={!!errorMessages[inflatedFeedbackType]?.statement}>
           <OutlinedInput
             id="feedback-statement-input"
             className="feedback-statement"
@@ -78,6 +90,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
             onChange={onFeedbackStatementChange}
             value={inflatedFeedback?.statement}
           />
+          <FormHelperText className={errorMessages[inflatedFeedbackType]?.statement ? "feedback-statement-error" : ""}>{errorMessages[inflatedFeedbackType]?.statement}</FormHelperText>
         </FormControl>
         {
             inflatedFeedback?.imagePermalink

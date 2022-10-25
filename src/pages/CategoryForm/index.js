@@ -4,15 +4,16 @@ import Category from "../../entities/Category";
 
 import "./styles.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { Card, TextField } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Card, TextField, Tooltip } from "@mui/material";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import ImageUploader from "../../components/ImageUploader";
+import CategoryValidator from "../../validators/entity/CategoryValidator";
 
 const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
   const { id: categoryId } = useParams();
   const [category, setCategory] = useState(null);
   const [oldCategory, setOldCategory] = useState(null);
+  const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
     imageInput: '',
@@ -101,18 +102,22 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
   
 
     setInputValues({ ...inputValues, imageInput: inputValue });
+    setErrorMessages({ ...errorMessages, permalink: null });
   }
 
   const onDescriptionCategoryChange = (e) => {
     setInputValues({ ...inputValues, descriptionInput: e.target.value });
+    setErrorMessages({ ...errorMessages, description: null });
   }
 
   const onNameCategoryChange = (e) => {
     setInputValues({ ...inputValues, nameInput: e.target.value });
+    setErrorMessages({ ...errorMessages, name: null });
   }
 
   const onOrderCategoryChange = (e) => {
-    setInputValues({ ...inputValues, orderInput: e.target.value });
+    setInputValues({ ...inputValues, orderInput: parseInt(e.target.value) });
+    setErrorMessages({ ...errorMessages, position: null });
   }
 
   const updateAction = () => {
@@ -132,29 +137,35 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
       position: orderInput,
     });
 
+    const categoryValidator = new CategoryValidator(newCategory);
 
-    if (categoryId) {
-      await categoryServices.updateCategory(0, 3, newCategory)
-      .then((res) => {
-        if(res.status === 200) {
-          setMessage({
-            severity: 'success',
-            text: 'La categoría ha sido actualizado correctamente'
-          });
-          navigate('/categories');
-        }
-      });
-    } else {
-      await categoryServices.createCategory(0, 3, newCategory)
-      .then((res) => {
-        if(res.status === 200) {
-          setMessage({
-            severity: 'success',
-            text: 'La categoría ha sido creada correctamente'
-          });
-          navigate('/categories');
-        }
-      });
+    const newMessages = categoryValidator.validate();
+    setErrorMessages(newMessages);
+
+    if (Object.keys(newMessages).length === 0) {
+      if (categoryId) {
+        await categoryServices.updateCategory(0, 3, newCategory)
+        .then((res) => {
+          if(res.status === 200) {
+            setMessage({
+              severity: 'success',
+              text: 'La categoría ha sido actualizado correctamente'
+            });
+            navigate('/categories');
+          }
+        });
+      } else {
+        await categoryServices.createCategory(0, 3, newCategory)
+        .then((res) => {
+          if(res.status === 200) {
+            setMessage({
+              severity: 'success',
+              text: 'La categoría ha sido creada correctamente'
+            });
+            navigate('/categories');
+          }
+        });
+      }
     }
   }
 
@@ -166,15 +177,32 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
         <>
               <div className="primary-info">
                 <div className="category-image-uploader">
+                
+                <Tooltip
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                open={!!errorMessages.permalink}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+                title={errorMessages.permalink}
+                arrow
+              >
+                <div>
                 <ImageUploader  selectedFile={category?.permalink} setSelectedFile={onCategoryImageChange} dialogType='de la categoría'/>
+                </div>
+              </Tooltip>
                 </div>
       </div>
 
       <div className="category-data-container">
       <div className="category-input">
         <TextField id="category-name-input" label="Nombre de la categoría" variant="outlined" fullWidth
+          error={!!errorMessages.name}
           onChange={onNameCategoryChange}
           value={nameInput}
+          helperText={errorMessages.name}
           />
       </div>
 
@@ -183,6 +211,8 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
             type='number'
           onChange={onOrderCategoryChange}
           value={orderInput}
+          error={!!errorMessages.position}
+          helperText={errorMessages.position}
           />
       </div>
       <div className="category-input">
@@ -190,6 +220,8 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
           onChange={onDescriptionCategoryChange}
           multiline
           value={descriptionInput}
+          error={!!errorMessages.description}
+          helperText={errorMessages.description}
           />
           </div>
       </div>

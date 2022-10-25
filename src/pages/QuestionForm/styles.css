@@ -92,3 +92,11 @@ label.Mui-focused {
     width: fit-content;
     align-self: center;
 }
+
+.statement-container > .MuiTooltip-popper > .MuiTooltip-tooltip {
+    background-color: #d11111;
+}
+
+.statement-container > .MuiTooltip-popper > .MuiTooltip-tooltip > .MuiTooltip-arrow {
+    color: #d11111;
+}

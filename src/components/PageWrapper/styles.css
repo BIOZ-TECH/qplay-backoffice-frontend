@@ -1,10 +1,13 @@
 @import '../../theme.css';
 
-.page {
+.page-login, .page-auth {
     flex-grow: 2;
     flex-basis: 0%;
-    margin-top: 6vh;
     background-color: var(--alter-tertiary-color);
+}
+
+.page-auth {
+    margin-top: 6vh;
 }
 
 .content-box {
@@ -16,4 +19,12 @@
     margin-bottom: 4vh;
     display: flex;
     flex-flow: column;
+}
+
+.content-box.auth {
+    height: 86vh;
+}
+
+.content-box.login {
+    height: 92vh;
 }

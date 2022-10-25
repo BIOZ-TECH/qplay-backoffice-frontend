@@ -12,10 +12,12 @@ import './styles.css';
 
 import Card from '@mui/material/Card';
 import Appearance from '../../entities/Appearance';
+import AppearanceValidator from "../../validators/entity/AppearanceValidator";
 
 const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [errorMessages, setErrorMessages] = useState({});
   /*const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);*/
 
@@ -57,6 +59,12 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   }
 
   const onSaveAppearanceChangesClick = async() => {
+    const appearanceValidator = new AppearanceValidator(appearance);
+
+    const newMessages = appearanceValidator.validate();
+    setErrorMessages(newMessages);
+  
+    if (Object.keys(newMessages).length === 0) {
     await appearanceService.updateApplicationAppearance(appearance, 0, 3)
     .then((res) => {
       if (res.status = 200) {
@@ -67,6 +75,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
         window.location.reload();
       }
     });
+    }
   };
 
   return (
@@ -82,6 +91,8 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
       <Brand
       appearance={appearance}
       setAppearance={setAppearance}
+      errorMessages={errorMessages}
+      setErrorMessages={setErrorMessages}
       />}
       { activeTab === 1 && 
       <Palette

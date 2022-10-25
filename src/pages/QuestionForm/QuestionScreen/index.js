@@ -1,12 +1,12 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 
 import "./styles.css";
-import { Card, FormControl, InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import { Card, FormControl, FormHelperText, InputAdornment, OutlinedInput, TextField, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Answer from "../../../entities/Answer";
 
-const QuestionScreen = ({ question, inputValues, setInputValues }) => {
+const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, setErrorMessages }) => {
 
   const statementInput = createRef();
   const correctAnswerInput = createRef();
@@ -39,69 +39,112 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
       ...inputValues,
       statementInput: e.target.value,
     });
+
+    setErrorMessages({
+      ...errorMessages,
+      statement: null,
+    });
   }
 
   const onCorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
-    newAnswers[0] = new Answer({
+    newAnswers[0] = e.target.value ? new Answer({
       id: newAnswers[0]?.id || null,
       description: e.target.value,
       isCorrect: true,
-    });
+    }) : null;
 
     setInputValues({
       ...inputValues,
       answersInput: newAnswers,
+    });
+
+    setErrorMessages({
+      ...errorMessages,
+      answers: null,
+      firstAnswer: null,
     });
   }
 
   const onFirstIncorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
-    newAnswers[1] = new Answer({
+    newAnswers[1] = e.target.value ? new Answer({
       id: newAnswers[1]?.id || null,
       description: e.target.value,
       isCorrect: false,
-    });
+    }) : null;
 
     setInputValues({
       ...inputValues,
       answersInput: newAnswers,
+    });
+
+    setErrorMessages({
+      ...errorMessages,
+      answers: null,
+      secondAnswer: null,
     });
   }
 
   const onSecondIncorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
-    newAnswers[2] = new Answer({
+    newAnswers[2] = e.target.value ? new Answer({
       id: newAnswers[2]?.id || null,
       description: e.target.value,
       isCorrect: false,
-    });
+    }) : null;
 
     setInputValues({
       ...inputValues,
       answersInput: newAnswers,
+    });
+    
+    setErrorMessages({
+      ...errorMessages,
+      answers: null,
+      thirdAnswer: null,
     });
   }
 
   const onThirdIncorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
-    newAnswers[3] = new Answer({
+    newAnswers[3] = e.target.value? new Answer({
       id: newAnswers[3]?.id || null,
       description: e.target.value,
       isCorrect: false,
-    });
+    }) : null;
 
     setInputValues({
       ...inputValues,
       answersInput: newAnswers,
     });
+
+    setErrorMessages({
+      ...errorMessages,
+      answers: null,
+      fourthAnswer: null,
+    });
   }
 
   return (
+    <>
+    <Tooltip
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                open={!!errorMessages.answers}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+                title={errorMessages.answers}
+                arrow
+                placement="right-end"
+              >
 <div className="mobile-device">
+
   <div className="app-body">
   <div className="mobile-question-card">
-  <FormControl fullWidth>
+  <FormControl fullWidth error={!!errorMessages.statement}>
           <OutlinedInput
             id="statement-input"
             className="mobile-statement"
@@ -111,7 +154,9 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
             ref={statementInput}
             value={inputValues.statementInput}
             onChange={onStatementChange}
+            
           />
+          <FormHelperText className={errorMessages.statement ? "question-statement-error" : ""}>{errorMessages.statement}</FormHelperText>
         </FormControl>
     {
       question?.permalink
@@ -121,7 +166,7 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
     }
   </div>
   <div className="mobile-answers">
-  <FormControl fullWidth>
+  <FormControl fullWidth error={!!errorMessages.firstAnswer?.description}>
           <OutlinedInput
             id="correct-answer-input"
             className="mobile-answer correct"
@@ -131,9 +176,11 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
             ref={correctAnswerInput}
             value={inputValues.answersInput[0]?.description || null}
             onChange={onCorrectAnswerChange}
+            
           />
+          <FormHelperText className={errorMessages.firstAnswer?.description ? "question-answer-error" : ""}>{errorMessages.firstAnswer?.description}</FormHelperText>
         </FormControl>
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!!errorMessages.secondAnswer?.description}>
           <OutlinedInput
             id="first-incorrect-answer-input"
             className="mobile-answer incorrect"
@@ -143,9 +190,11 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
             ref={firstIncorrectAnswerInput}
             value={inputValues.answersInput[1]?.description || null}
             onChange={onFirstIncorrectAnswerChange}
+            
           />
+          <FormHelperText className={errorMessages.secondAnswer?.description ? "question-answer-error" : ""}>{errorMessages.secondAnswer?.description}</FormHelperText>
         </FormControl>
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!!errorMessages.thirdAnswer?.description}>
           <OutlinedInput
             id="second-incorrect-answer-input"
             className="mobile-answer incorrect"
@@ -155,9 +204,11 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
             ref={secondIncorrectAnswerInput}
             value={inputValues.answersInput[2]?.description || null}
             onChange={onSecondIncorrectAnswerChange}
+            
           />
+          <FormHelperText className={errorMessages.thirdAnswer?.description ? "question-answer-error" : ""}>{errorMessages.thirdAnswer?.description}</FormHelperText>
         </FormControl>
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!!errorMessages.fourthAnswer?.description}>
           <OutlinedInput
             id="third-incorrect-answer-input"
             className="mobile-answer incorrect"
@@ -167,11 +218,17 @@ const QuestionScreen = ({ question, inputValues, setInputValues }) => {
             ref={thirdIncorrectAnswerInput}
             value={inputValues.answersInput[3]?.description || null}
             onChange={onThirdIncorrectAnswerChange}
+            
           />
+          <FormHelperText className={errorMessages.fourthAnswer?.description ? "question-answer-error" : ""}>{errorMessages.fourthAnswer?.description}</FormHelperText>
         </FormControl>
   </div>
   </div>
+
+
 </div>
+</Tooltip>
+</>
   );
 }
 

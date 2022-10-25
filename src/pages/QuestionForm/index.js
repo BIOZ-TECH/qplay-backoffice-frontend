@@ -14,6 +14,9 @@ import Feedback from "../../entities/Feedback";
 import InflatedFeedback from "../../entities/InflatedFeedback";
 import categoryServices from "../../services/category";
 import Category from "../../entities/Category";
+import QuestionValidator from "../../validators/entity/QuestionValidator";
+import InflatedFeedbackValidator from "../../validators/entity/InflatedFeedbackValidator";
+import AnswerValidator from "../../validators/entity/AnswerValidator";
 
 const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
   const { id: questionId, categoryId } = useParams();
@@ -22,6 +25,7 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
   const [question, setQuestion] = useState(null);
   const [statementType, setStatementType] = useState("only-text");
   const [statementImage, setStatementImage] = useState(null);
+  const [errorMessages, setErrorMessages] = useState({});
   const [category, setCategory] = useState(null)
   const [oldQuestion, setOldQuestion] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -121,6 +125,10 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
     }
 
     setInputValues({ ...inputValues, statementImageInput: inputValue });
+    setErrorMessages({
+      ...errorMessages,
+      permalink: null,
+    });
   }
 
   const updateAction = () => {
@@ -155,28 +163,59 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
       categoryId,
     });
 
-    if(questionId) {
-      await questionServices.updateQuestion(0, 3, newQuestion)
+    const questionValidator = new QuestionValidator(newQuestion);
+
+    let newMessages = questionValidator.validate();
+
+    const firstAnswerValidator = answersInput[0] ? new AnswerValidator(answersInput[0]) : null;
+    const secondAnswerValidator = answersInput[1] ? new AnswerValidator(answersInput[1]) : null;
+    const thirdAnswerValidator = answersInput[2] ? new AnswerValidator(answersInput[2]) : null;
+    const fourthAnswerValidator = answersInput[3] ? new AnswerValidator(answersInput[3]) : null;
+
+    newMessages = {
+      ...newMessages,
+      firstAnswer: firstAnswerValidator ? firstAnswerValidator.validate() : {},
+      secondAnswer: secondAnswerValidator ? secondAnswerValidator.validate() : {},
+      thirdAnswer: thirdAnswerValidator ? thirdAnswerValidator.validate() : {},
+      fourthAnswer: fourthAnswerValidator ? fourthAnswerValidator.validate() : {},
+    };
+
+    const inflatedFeedbackValidator = newInflatedFeedback ? new InflatedFeedbackValidator(newInflatedFeedback) : null;
+    const inflatedIncorrectFeedbackValidator = newInflatedIncorrectFeedback ? new InflatedFeedbackValidator(newInflatedIncorrectFeedback) : null;
+    newMessages = {
+      ...newMessages,
+      inflatedFeedback: inflatedFeedbackValidator ? inflatedFeedbackValidator.validate() : {},
+      inflatedIncorrectFeedback: inflatedIncorrectFeedbackValidator ? inflatedIncorrectFeedbackValidator.validate() : {},
+    };
+
+    setErrorMessages(newMessages);
+
+    console.log(newMessages);
+
+    if (Object.keys(newMessages).length === 0) {
+      if(questionId) {
+        await questionServices.updateQuestion(0, 3, newQuestion)
+        .then((res) => {
+          if (res.status === 200) {
+            setMessage({
+              severity: 'success',
+              text: 'La pregunta ha sido actualizada correctamente'
+            });
+            navigate(`/category/${categoryId}`);
+          }
+        });
+      } else {
+        await questionServices.createQuestion(0, 3, newQuestion)
       .then((res) => {
         if (res.status === 200) {
           setMessage({
             severity: 'success',
-            text: 'La pregunta ha sido actualizada correctamente'
+            text: 'La pregunta ha sido creada correctamente'
           });
           navigate(`/category/${categoryId}`);
         }
       });
-    } else {
-      await questionServices.createQuestion(0, 3, newQuestion)
-    .then((res) => {
-      if (res.status === 200) {
-        setMessage({
-          severity: 'success',
-          text: 'La pregunta ha sido creada correctamente'
-        });
-        navigate(`/category/${categoryId}`);
       }
-    });
     }
   };
 
@@ -189,13 +228,18 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
     />
     { activeTab === 0 && <Card className="statement-section">
     <div className="statement-container">
-    <QuestionScreen question={question} inputValues={inputValues} setInputValues={setInputValues} />
+    <QuestionScreen question={question} inputValues={inputValues} setInputValues={setInputValues}
+    errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+    />
     
     <div className='image-input-container'>
     <TextField id="statement-image-input" label="Imágen de enunciado (opcional)" variant="outlined"
           type="url"
           value={statementImageInput}
+          errorMessages={errorMessages} setErrorMessages={setErrorMessages}
           onChange={onStatementImageChange}
+          error={!!errorMessages.permalink}
+          helperText={errorMessages.permalink}
           className="image-statement-input"/>
     </div>
           </div>
@@ -204,7 +248,8 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
 
     { activeTab === 1 && <div className="question-card">
 
-    <FeedbackEdition inputValues={inputValues} setInputValues={setInputValues}/>
+    <FeedbackEdition inputValues={inputValues} setInputValues={setInputValues}
+    errorMessages={errorMessages} setErrorMessages={setErrorMessages}/>
     </div>}
     
     </div>

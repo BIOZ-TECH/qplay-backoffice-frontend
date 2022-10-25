@@ -6,6 +6,7 @@ import AppLayout from "../components/AppLayout";
 import { Categories, Appearance } from "../pages";
 import CategoryDetail from "../pages/CategoryDetail";
 import CategoryForm from "../pages/CategoryForm";
+import Login from "../pages/Login";
 import QuestionDetail from "../pages/QuestionDetail";
 import QuestionForm from "../pages/QuestionForm";
 
@@ -25,7 +26,9 @@ const Router = () => {
         <Route exact path="/category/:categoryId/question/new" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
         <Route exact path="/category/:categoryId/question/edit/:id" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
         <Route exact path="/category/:categoryId/question/:id" element={<QuestionDetail setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
-        <Route exact path="*" element={<Categories setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/login" element={<Login />}/>
+        <Route exact path="/" element={<Categories setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="*" element={<Login />}/>
       </Routes>
     </AppLayout>
     </BrowserRouter>

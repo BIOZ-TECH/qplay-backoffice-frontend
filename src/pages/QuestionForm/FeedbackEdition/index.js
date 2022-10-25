@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./styles.css";
 import Feedback from "../../../entities/Feedback";
-import { Accordion, AccordionDetails, AccordionSummary, Card, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Card, FormControl, FormHelperText, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import OneFeedback from "./OneFeedback";
@@ -10,7 +10,7 @@ import OnePerResultFeedback from "./OnePerResultFeedback";
 import FeedbackPreview from "./FeedbackPreview";
 import InflatedFeedback from "../../../entities/InflatedFeedback";
 
-const FeedbackEdition = ({ inputValues, setInputValues }) => {
+const FeedbackEdition = ({ inputValues, setInputValues, errorMessages, setErrorMessages }) => {
   //const [feedback, setFeedback] = useState(new Feedback({}));
 
 /*useEffect(() => {
@@ -28,6 +28,12 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
             inflatedIncorrectFeedback: new InflatedFeedback({ statement: ''}),
             type: e.target.value }),
         });
+        setErrorMessages({
+          ...errorMessages,
+          inflatedFeedback: null,
+          inflatedIncorrectFeedback: null,
+          feedbackType: null,
+        });
     }
   }
 
@@ -36,7 +42,6 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
       ...inputValues,
       feedbackInput: new Feedback({ ...inputValues.feedbackInput, inflatedFeedback: new InflatedFeedback(inflatedFeedback) }),
     });
-    console.log(inputValues);
   }
 
   const setInflatedIncorrectFeedback = (inflatedIncorrectFeedback) => {
@@ -49,7 +54,9 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
   return (
     <>
     <Card className="feedback-data-container">
-    <FormControl fullWidth>
+    <FormControl fullWidth
+    error={!!errorMessages.feedbackType}
+    >
         <InputLabel id="feedback-type-label">¿Cuántos feedback tiene la pregunta?</InputLabel>
         <Select
     labelId="feedback-type-label"
@@ -62,18 +69,22 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
     <MenuItem value="unique-feedback">Uno solo para todas las respuestas</MenuItem>
     <MenuItem value="variable-feedback">Uno para la respuesta correcta y otro para las respuestas incorrectas</MenuItem>
         </Select>
+        <FormHelperText>{errorMessages.feedbackType}</FormHelperText>
       </FormControl>
 
     {
         inputValues.feedbackInput?.type === 'unique-feedback'
         && (
-            <OneFeedback inflatedFeedback={inputValues.feedbackInput.inflatedFeedback} setInflatedFeedback={setInflatedFeedback} />
+            <OneFeedback
+            errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+            inflatedFeedback={inputValues.feedbackInput.inflatedFeedback} setInflatedFeedback={setInflatedFeedback} />
         )
     }
         {
         inputValues.feedbackInput?.type === 'variable-feedback'
         && (
             <OnePerResultFeedback 
+            errorMessages={errorMessages} setErrorMessages={setErrorMessages}
             correctInflatedFeedback={inputValues.feedbackInput.inflatedFeedback} setCorrectInflatedFeedback={setInflatedFeedback}
             inflatedIncorrectFeedback={inputValues.feedbackInput.inflatedIncorrectFeedback} setInflatedIncorrectFeedback={setInflatedIncorrectFeedback}/>
         )
@@ -85,11 +96,15 @@ const FeedbackEdition = ({ inputValues, setInputValues }) => {
         inputValues.feedbackInput.type !== 'no-feedback'
         && (
           <>
-            <FeedbackPreview inflatedFeedback={inputValues.feedbackInput.inflatedFeedback} feedbackResultType={inputValues.feedbackInput.type === 'variable-feedback' ? 'correct': 'any'} setInflatedFeedback={setInflatedFeedback}/>
+            <FeedbackPreview
+            errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+            inflatedFeedback={inputValues.feedbackInput.inflatedFeedback} feedbackResultType={inputValues.feedbackInput.type === 'variable-feedback' ? 'correct': 'any'} setInflatedFeedback={setInflatedFeedback}/>
             {
               inputValues.feedbackInput.type === 'variable-feedback'
               && (
-                <FeedbackPreview inflatedFeedback={inputValues.feedbackInput.inflatedIncorrectFeedback} feedbackResultType="incorrect" setInflatedFeedback={setInflatedIncorrectFeedback}/>
+                <FeedbackPreview
+                errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+                inflatedFeedback={inputValues.feedbackInput.inflatedIncorrectFeedback} feedbackResultType="incorrect" setInflatedFeedback={setInflatedIncorrectFeedback}/>
               )
             }
           </>

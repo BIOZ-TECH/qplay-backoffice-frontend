@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import InflatedFeedbackEdition from "../InflatedFeedbackEdition";
 
-const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedback, inflatedIncorrectFeedback, setInflatedIncorrectFeedback }) => {
+const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedback, inflatedIncorrectFeedback, setInflatedIncorrectFeedback, errorMessages, setErrorMessages }) => {
   return (
     <>
     <Accordion className="accordion-container mt-5">
@@ -19,7 +19,9 @@ const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedb
   <Typography>Feedback para respuesta correcta</Typography>
 </AccordionSummary>
 <AccordionDetails className="accordion-body">
-<InflatedFeedbackEdition inflatedFeedback={correctInflatedFeedback} setInflatedFeedback={setCorrectInflatedFeedback}/>
+<InflatedFeedbackEdition
+errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+inflatedFeedback={correctInflatedFeedback} setInflatedFeedback={setCorrectInflatedFeedback}/>
 </AccordionDetails>
 </Accordion>
 <Accordion className="accordion-container mt-5">
@@ -32,7 +34,9 @@ const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedb
   <Typography>Feedback para respuestas incorrectas</Typography>
 </AccordionSummary>
 <AccordionDetails className="accordion-body">
-<InflatedFeedbackEdition inflatedFeedback={inflatedIncorrectFeedback} setInflatedFeedback={setInflatedIncorrectFeedback} />
+<InflatedFeedbackEdition
+errorMessages={errorMessages} setErrorMessages={setErrorMessages} inflatedMessageType="inflatedIncorrectFeedback"
+inflatedFeedback={inflatedIncorrectFeedback} setInflatedFeedback={setInflatedIncorrectFeedback} />
 </AccordionDetails>
 </Accordion>
     </>

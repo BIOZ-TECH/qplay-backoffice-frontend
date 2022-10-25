@@ -2,7 +2,7 @@ import InflatedFeedback from "./InflatedFeedback";
 
 export default class Feedback {
     constructor(data) {
-        const { id, type, inflatedFeedback, inflatedIncorrectFeedback } = data;
+        const { type, id = null, inflatedFeedback = null, inflatedIncorrectFeedback = null } = data;
 
         this.id = id;
         this.type = type;

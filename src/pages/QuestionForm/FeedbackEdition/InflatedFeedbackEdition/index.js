@@ -4,7 +4,7 @@ import InflatedFeedback from "../../../../entities/InflatedFeedback";
 
 import "./styles.css";
 
-const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
+const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages, inflatedMessageType = "inflatedFeedback" }) => {
     const [inflatedFeedbackType, setInflatedFeedbackType] = useState("only-text");
     const [imageInput, setImageInput] = useState('');
     const [videoInput, setVideoInput] = useState('');
@@ -32,6 +32,7 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
         case 'text-and-video':
           setVideoInput(inflatedFeedback.videoPermalink);
           break;
+        default:
       }
 
     }
@@ -48,24 +49,29 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
       if (newInflatedFeedbackType) {
         switch (newInflatedFeedbackType) {
           case "only-text":
-            const newnflatedFeedback = new InflatedFeedback({ ...inflatedFeedback, imagePermalink: '', videoPermalink: '' });
+            const newnflatedFeedback = new InflatedFeedback({ ...inflatedFeedback, type: newInflatedFeedbackType, imagePermalink: '', videoPermalink: '' });
             setInflatedFeedback(newnflatedFeedback);
             setImageInput('');
             setVideoInput('');
             break;
           case "text-and-image":
-            const newIflatedFeedback = new InflatedFeedback({ ...inflatedFeedback, videoPermalink: '' });
+            const newIflatedFeedback = new InflatedFeedback({ ...inflatedFeedback, type: newInflatedFeedbackType, videoPermalink: '' });
             setInflatedFeedback(newIflatedFeedback);
             setVideoInput('');
             break;
           case "text-and-video":
-            const newInfatedFeedback = new InflatedFeedback({ ...inflatedFeedback, imagePermalink: '' });
+            const newInfatedFeedback = new InflatedFeedback({ ...inflatedFeedback, type: newInflatedFeedbackType, imagePermalink: '' });
             setInflatedFeedback(newInfatedFeedback);
             setImageInput('');
             break;
+          default:
         }
 
         setInflatedFeedbackType(e.target.value);
+        setErrorMessages({
+          ...errorMessages,
+          [inflatedMessageType]: null,
+        });
       }
     }
 
@@ -79,6 +85,13 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
       }
 
       setImageInput(inputValue);
+      setErrorMessages({
+        ...errorMessages,
+        [inflatedFeedbackType]: {
+          ...errorMessages[inflatedFeedbackType],
+          imagePermalink: null,
+        },
+      });
     }
 
     const onInflatedFeedbackDescriptionVideoChange = (e) => {
@@ -91,6 +104,13 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
       }
 
       setVideoInput(inputValue);
+      setErrorMessages({
+        ...errorMessages,
+        [inflatedFeedbackType]: {
+          ...errorMessages[inflatedFeedbackType],
+          videoPermalink: null,
+        },
+      });
     }
   return (
     <div className="inflated-feedback-container">
@@ -116,6 +136,8 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
         <TextField id="inflated-feedback-image-input" label="Enlace de imagen" variant="outlined" fullWidth
         value={imageInput}
         onChange={onInflatedFeedbackDescriptionImageChange}
+        error={!!errorMessages[inflatedMessageType]?.imagePermalink}
+        helperText={errorMessages[inflatedMessageType]?.imagePermalink}
         />
         </div>
       )}
@@ -125,6 +147,8 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback }) => {
         <TextField id="inflated-feedback-video-input" label="Enlace de video" variant="outlined" fullWidth
         value={videoInput}
         onChange={onInflatedFeedbackDescriptionVideoChange}
+        error={!!errorMessages[inflatedMessageType]?.videoPermalink}
+        helperText={errorMessages[inflatedMessageType]?.videoPermalink}
         />
         </div>
       )}
