@@ -1,0 +1,12 @@
+.accordion-header {
+    color: white !important;
+    box-shadow: inset;
+}
+
+#incorrect-feedback-accordion {
+    background-color: #ed3535;
+}
+
+#correct-feedback-accordion {
+    background-color: #21bd21;
+}

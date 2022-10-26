@@ -1,0 +1,40 @@
+@import "../../../theme.css";
+
+.question-detail-tabs > div > span {
+    background-color: #6356e0
+}
+
+.tab {
+    background: var(--tertiary-color);
+    color: var(--secondary-color);
+    border-radius: 0.5rem !important;
+    padding-top: 0 !important; 
+}
+
+.tab >  .icon {
+    color: var(--secondary-color);
+}
+
+.tab:focus {
+    outline: none !important;    
+}
+
+.tab:hover {
+    background: var(--secondary-color);
+    color: var(--tertiary-color);
+    border-radius: 0.5rem !important;    
+}
+
+.tab:hover >  .icon {
+    color: var(--tertiary-color);
+}
+
+.Mui-selected.tab, .Mui-selected.tab:hover {
+    background: #ffffff;
+    color: #6356e0 !important;
+    border-radius: 0.5rem;
+}
+
+.Mui-selected.tab >  .icon, .Mui-selected.tab:hover >  .icon {
+    color: #6356e0;
+}

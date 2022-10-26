@@ -1,0 +1,93 @@
+@import '../../theme.css';
+
+.image-input {
+    display: none;
+}
+
+.image-container {
+    position: relative;
+    max-width: 120px;
+    max-height: 120px;
+    min-height: 120px;
+    min-width: 120px;
+    border-radius: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: 0px 0px 5px rgb(66 66 66);
+    background-color: var(--tertiary-color);
+    cursor: pointer;
+}
+
+.image-uploader {
+    min-width: fit-content;
+    height: fit-content;
+}
+
+.upload-icon {
+    float: right;
+    margin-right: 7px;
+    margin-top: 7px;
+    z-index: 10;
+}
+
+.uploaded-container {
+    position: relative;
+}
+
+.upload-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: #4f469e;
+    padding: 0.5rem;
+    border-radius: 5rem;
+    color: #ebe3ff;
+    box-shadow: 1px 1px 5px black;
+    cursor: pointer;
+}
+
+.upload-icon:hover {
+    background: #7164e3;
+    color: white;
+}
+
+.image-uploader-dialog > .MuiDialog-container > .MuiDialog-paper {
+    width: 50%;
+}
+
+.dialog-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    width: fit-content;
+    color: white;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 5px black;
+    float: right;
+    align-self: center;
+    margin-left: auto;
+}
+
+.cancel-dialog-btn {
+    background-color: var(--primary-incorrect-color);
+    border: 2px solid var(--primary-incorrect-color);
+}
+
+.confirm-dialog-btn {
+    background-color: var(--primary-correct-color);
+    border: 2px solid var(--primary-correct-color);
+}
+
+.cancel-dialog-btn:hover, .cancel-dialog-btn:focus {
+    background-color: var(--secondary-incorrect-color);
+    color: var(--primary-incorrect-color);
+    border: 0px solid var(--secondary-incorrect-color);
+}
+
+.confirm-dialog-btn:hover, .cnfirm-dialog-btn:focus {
+    background-color: var(--secondary-correct-color);
+    color: var(--primary-correct-color);
+    border: 0px solid var(--secondary-correct-color);
+}

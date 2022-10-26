@@ -1,0 +1,70 @@
+@import '../../theme.css';
+
+.category-container {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-container > .primary-info {
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.category-img {
+    max-width: 120px;
+    max-height: 120px;
+    min-height: 120px;
+    min-width: 120px;
+    border-radius: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: 0px 0px 5px rgb(66, 66, 66);
+}
+
+.category-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 1.5rem;
+}
+
+.category-container > .divider {
+    height: 1.5px;
+    width: auto;
+    margin: 1.5rem;
+    background-color: #dedede;
+}
+
+.edit-category-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    width: fit-content;
+    background-color: #6356e0;
+    border: 2px solid #6356e0;
+    color: #ffffff;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 5px black;
+    align-self: center;
+    margin-left: auto;
+    height: fit-content;
+    align-self: flex-start;
+}
+
+.edit-category-btn:hover, .edit-category-btn:focus {
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.category-description {
+    padding-left: 2rem;
+    padding-top: 1.5rem;
+    padding-right: 1.5rem;
+}
