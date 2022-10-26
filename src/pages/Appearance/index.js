@@ -38,7 +38,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
     async function fetchAppearance() {
 
       try {
-        const response = await appearanceService.getApplicationAppearance(0, 3);
+        const response = await appearanceService.getApplicationAppearance(0, 5);
   
         switch(response.status) {
           case 200:
@@ -88,7 +88,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
     setErrorMessages(newMessages);
   
     if (Object.keys(newMessages).length === 0) {
-    await appearanceService.updateApplicationAppearance(appearance, 0, 3)
+    await appearanceService.updateApplicationAppearance(appearance, 0, 5)
     .then((res) => {
       switch(res.status) {
         case 200:

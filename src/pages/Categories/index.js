@@ -35,7 +35,7 @@ const Categories = ({ setBreadcrumb, setAction }) => {
     });
     async function fetchCategories() {
       try {
-        const response = await categoryServices.getCategories(0, 3);
+        const response = await categoryServices.getCategories(0, 5);
   
         switch(response.status) {
           case 200:
