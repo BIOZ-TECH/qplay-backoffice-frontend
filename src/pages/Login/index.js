@@ -61,7 +61,7 @@ const Login = () => {
                value={password}
                type="password"
           className="password"/>
-          <a className="forgot-password">Olvide mi contraseña</a>
+          {/*<a className="forgot-password">Olvide mi contraseña</a>*/}
           <button
           className="btn-login"
           type="button"
