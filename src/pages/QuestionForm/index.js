@@ -208,8 +208,14 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
 
     setErrorMessages(newMessages);
 
-
-    if (Object.keys(newMessages).length === 0) {
+    if (Object.keys(newMessages).length <= 6
+    && Object.keys(newMessages.firstAnswer).length === 0
+    && Object.keys(newMessages.secondAnswer).length === 0
+    && Object.keys(newMessages.thirdAnswer).length === 0
+    && Object.keys(newMessages.fourthAnswer).length === 0
+    && Object.keys(newMessages.inflatedFeedback).length === 0
+    && Object.keys(newMessages.inflatedIncorrectFeedback).length === 0
+    ) {
       if(questionId) {
         await questionServices.updateQuestion(0, 3, newQuestion)
         .then((res) => {

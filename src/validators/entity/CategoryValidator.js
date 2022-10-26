@@ -14,7 +14,7 @@ export default class CategoryValidator {
         const invalidPropertyMessages = {};
 
         if(!CategoryProperties.name.validate(this.name)) {
-            invalidPropertyMessages.name = `Por favor, ingrese un nombre de no más de ${properties.name.maximumLength} carácteres`;
+            invalidPropertyMessages.name = `Por favor, ingrese un nombre de no más de ${CategoryProperties.name.maximumLength} carácteres`;
         }
 
         if(!CategoryProperties.position.validate(this.position)) {
@@ -26,7 +26,7 @@ export default class CategoryValidator {
         }
 
         if(!CategoryProperties.description.validate(this.description)) {
-            invalidPropertyMessages.description = `Por favor, ingrese una descripción de no más de ${properties.description.maximumLength} carácteres`;
+            invalidPropertyMessages.description = `Por favor, ingrese una descripción de no más de ${CategoryProperties.description.maximumLength} carácteres`;
         }
 
         return invalidPropertyMessages;
