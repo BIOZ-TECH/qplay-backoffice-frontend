@@ -35,7 +35,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback }) => {
    }
 
   return (
-    <div className='inflated-feedback-preview container' style={{ marginBottom: feedbackResultType === 'correct' ? '1rem' : 0 }}>
+    <div className='inflated-feedback-preview container'>
       { feedbackStyle.title && <p className="feedback-title">{feedbackStyle.title}</p>}
           <div className="inflated-feedback" style={{ backgroundColor: feedbackStyle.backgroundColor }}>
           <div className="statement">{inflatedFeedback.statement}</div>

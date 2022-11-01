@@ -54,3 +54,34 @@
     border-radius: 0.5rem;
     border: 1px solid white;
 }
+
+.feedback-image-container {
+    width: auto;
+    padding: 0.5rem !important;
+}
+
+.feedback-image-container> img {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    max-height: 6rem;
+    border-radius: 0.5rem;
+}
+.feedback-image-container> div {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    max-height: 6rem;
+    border-radius: 0.5rem;
+}
+
+
+.image-multimedia-container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}

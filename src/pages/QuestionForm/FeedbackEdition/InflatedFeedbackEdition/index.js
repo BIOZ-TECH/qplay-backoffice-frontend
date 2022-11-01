@@ -1,10 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import InflatedFeedback from "../../../../entities/InflatedFeedback";
+import FeedbackPreview from "../FeedbackPreview";
 
 import "./styles.css";
 
-const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages, inflatedMessageType = "inflatedFeedback" }) => {
+const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages, inflatedMessageType = "inflatedFeedback", feedbackResultType }) => {
     const [inflatedFeedbackType, setInflatedFeedbackType] = useState("only-text");
     const [imageInput, setImageInput] = useState('');
     const [videoInput, setVideoInput] = useState('');
@@ -115,7 +116,7 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorM
   return (
     <div className="inflated-feedback-container">
 
-          <FormControl fullWidth id="inflated-feedback-type">
+          {/*<FormControl fullWidth id="inflated-feedback-type">
         <InputLabel id="inflated-feedback-type-label">¿Qué contiene?</InputLabel>
         <Select
     labelId="inflated-feedback-type-label"
@@ -128,9 +129,13 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorM
     <MenuItem value="text-and-image">Texto e imagen</MenuItem>
     <MenuItem value="text-and-video">Texto y video multimedia</MenuItem>
         </Select>
-      </FormControl>
+  </FormControl>*/}
 
-      { inflatedFeedbackType === 'text-and-image'
+      <FeedbackPreview
+                errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+                inflatedFeedback={inflatedFeedback} feedbackResultType={feedbackResultType} setInflatedFeedback={setInflatedFeedback}/>
+
+      {/* inflatedFeedbackType === 'text-and-image'
       && (
         <div className="feedback-image-input">
         <TextField id="inflated-feedback-image-input" label="Enlace de imagen" variant="outlined" fullWidth
@@ -140,8 +145,8 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorM
         helperText={errorMessages[inflatedMessageType]?.imagePermalink}
         />
         </div>
-      )}
-            { inflatedFeedbackType === 'text-and-video'
+      )*/}
+            {/* inflatedFeedbackType === 'text-and-video'
       && (
         <div className="feedback-video-input">
         <TextField id="inflated-feedback-video-input" label="Enlace de video" variant="outlined" fullWidth
@@ -151,7 +156,7 @@ const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorM
         helperText={errorMessages[inflatedMessageType]?.videoPermalink}
         />
         </div>
-      )}
+      )*/}
     </div>
   );
 }

@@ -93,6 +93,10 @@ label.Mui-focused {
     align-self: center;
 }
 
+.statement-container {
+    justify-content: center;
+}
+
 .statement-container > .MuiTooltip-popper > .MuiTooltip-tooltip {
     background-color: #d11111;
 }

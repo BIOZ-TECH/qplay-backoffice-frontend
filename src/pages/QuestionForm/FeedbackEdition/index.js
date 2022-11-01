@@ -90,9 +90,9 @@ const FeedbackEdition = ({ inputValues, setInputValues, errorMessages, setErrorM
         )
     }
     </Card>
-    <Card className="feedback-preview-container">
+    {/*<Card className="feedback-preview-container">
 
-    {
+    
         inputValues.feedbackInput.type !== 'no-feedback'
         && (
           <>
@@ -109,8 +109,8 @@ const FeedbackEdition = ({ inputValues, setInputValues, errorMessages, setErrorM
             }
           </>
         )
-    }
-    </Card>
+          
+    </Card>*/}
     </>
   );
 }

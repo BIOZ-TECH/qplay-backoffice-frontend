@@ -13,10 +13,9 @@
 }
 
 .feedback-data-container {
-    width: 60%;
+    width: 100%;
     padding: 2rem;
     border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
 }
 
 .feedback-preview-container {

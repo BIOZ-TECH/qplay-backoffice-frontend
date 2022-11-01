@@ -58,3 +58,9 @@
 .login-card > .forgot-password:hover {
     color: var(--secondary-color);
 }
+
+.login-error {
+    color: #f42828;
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
