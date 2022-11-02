@@ -27,6 +27,7 @@ const Login = () => {
 
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
+
     setErrorMessages({
       ...errorMessages,
       incorrectPassword: null,

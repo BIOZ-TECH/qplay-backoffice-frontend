@@ -146,7 +146,7 @@ const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, 
 
     setOpen(false);
   };
-
+  
   return (
     <>
     <Tooltip
@@ -252,7 +252,7 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
       )
     }
 </div>
-    
+
   </div>
   <div className="mobile-answers">
   <FormControl fullWidth error={!!errorMessages.firstAnswer?.description}>

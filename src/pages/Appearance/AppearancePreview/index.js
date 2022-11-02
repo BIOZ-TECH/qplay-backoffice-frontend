@@ -14,6 +14,7 @@ const AppearancePreview = (props) => {
   const { primaryColor: selectableAnswersBackgroundColor, secondaryColor: selectableAnswersFontColor } = selectableAnswers;
 
 
+
   return (
     <Card className="preview-card">
         <div className="mobile-device" style={{ backgroundColor }}>

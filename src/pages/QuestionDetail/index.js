@@ -100,7 +100,7 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           activeTab={activeTab}
           onTabClick={onTabClick}
     />
-    
+
       <>
       {
         question
@@ -148,7 +148,6 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
         )
       }
       </>
-    
     
     </div>
   );
