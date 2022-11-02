@@ -1,13 +1,18 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 
 import "./styles.css";
-import { Card, FormControl, FormHelperText, InputAdornment, OutlinedInput, TextField, Tooltip } from "@mui/material";
+import { Button, Card, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper, TextField, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faPencil, faPhotoFilm, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Answer from "../../../entities/Answer";
+import ImageDialog from "../../../components/multimedia-dialogs/ImageDialog";
 
-const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, setErrorMessages }) => {
+const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, setErrorMessages, setStatementImage, statementImage }) => {
 
+  const [open, setOpen] = useState(false);
+  const [openImageDialog, setOpenImageDialog] = useState(false);
+
+  const anchorRef = useRef(null);
   const statementInput = createRef();
   const correctAnswerInput = createRef();
   const firstIncorrectAnswerInput = createRef();
@@ -126,6 +131,22 @@ const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, 
     });
   }
 
+  const handleToggle = () => {
+    if (statementImage) {
+    setOpen((prevOpen) => !prevOpen);
+  } else {
+    setOpenImageDialog(true);
+  }
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+  
   return (
     <>
     <Tooltip
@@ -158,12 +179,80 @@ const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, 
           />
           <FormHelperText className={errorMessages.statement ? "question-statement-error" : ""}>{errorMessages.statement}</FormHelperText>
         </FormControl>
-    {
+        <div className="image-statement-form-container">
+<div style={{ position: question && question.permalink ? 'absolute' : 'relative', width: '100%' }}>
+
+<Button
+className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
+          size="small"
+          aria-controls={open ? 'split-button-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-label="select merge strategy"
+          aria-haspopup="menu"
+          onMouseOver={(e) => {
+            if(!!statementImage) handleToggle(e); 
+          }}
+          onClick={(e) => {
+            if(!statementImage) handleToggle(e); 
+          }}
+        >
+          <FontAwesomeIcon className={!statementImage ? "mr-2" : ""} icon={statementImage ? faPencil : faImage} />
+          {!statementImage && <p>Agregar imagen</p>}
+        </Button>
+
+        {question && question.permalink && <Popper
+        sx={{
+          zIndex: 1,
+        }}
+        style={{ top:'auto', left: 'auto', right: 0, position: 'absolute' }}
+        placement="bottom"
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === 'bottom' ? 'center top' : 'center bottom',
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList id="split-button-menu" autoFocusItem>
+                <MenuItem
+                      key="image-link"
+                      onClick={() => setOpenImageDialog(true)}
+                    >
+                      Cambiar imagen
+                    </MenuItem>
+                     <MenuItem
+                      key="video-link"
+                      onClick={() => setStatementImage(null)}
+                    >
+                      Eliminar imagen
+                    </MenuItem>
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>}
+</div>
+      {
       question?.permalink
       && (
-        <img className="question-statement-image" src={question.permalink || ''} />
+        <div className="question-image-container">
+          <img className="question-statement-image" src={question.permalink || ''} />
+          </div>
+        
       )
     }
+</div>
+
   </div>
   <div className="mobile-answers">
   <FormControl fullWidth error={!!errorMessages.firstAnswer?.description}>
@@ -228,6 +317,13 @@ const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, 
 
 </div>
 </Tooltip>
+<ImageDialog
+open={openImageDialog}
+setOpen={setOpenImageDialog}
+selectedFile={statementImage}
+setSelectedFile={setStatementImage}
+dialogType="para pregunta"
+/>
 </>
   );
 }

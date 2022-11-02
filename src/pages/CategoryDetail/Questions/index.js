@@ -54,7 +54,7 @@ const Questions = ({ questions, categoryId }) => {
   }
 
   return (
-    <div className="questions">
+    <div className="questions" style={{ display: 'flex', flexFlow: 'column'}}>
       <div className="questions-header">
       <h3>Preguntas</h3>
       <button className="new-question" type="button" onClick={onAddNewQuestion}>
@@ -62,8 +62,9 @@ const Questions = ({ questions, categoryId }) => {
         Nueva pregunta
       </button>
       </div>
-      
-          {
+
+      <div style={{ height: '100%'}}>
+      {
         questions && questions.length > 0
         && (
           <AutoSizer>
@@ -72,7 +73,7 @@ const Questions = ({ questions, categoryId }) => {
                     <FixedSizeList
                     height={height}
                     width={width}
-                    itemSize={height/5}
+                    itemSize={height/4}
                     itemCount={questions.length}
                     overscanCount={5}
                   >
@@ -83,6 +84,7 @@ const Questions = ({ questions, categoryId }) => {
                   </AutoSizer>
         )
       }
+      </div>
     </div>
   );
 }

@@ -10,3 +10,19 @@
 #correct-feedback-accordion {
     background-color: #21bd21;
 }
+
+.one-per-result-feedback-container {
+    display: flex;
+}
+
+.one-per-result-feedback-container > .feedback-container {
+    width: 50%;
+}
+
+.one-per-result-feedback-container > .feedback-container.correct {
+    padding-right: 1rem;
+}
+
+.one-per-result-feedback-container > .feedback-container.incorrect {
+    padding-left: 1rem;
+}

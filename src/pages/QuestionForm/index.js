@@ -287,9 +287,11 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
     <div className="statement-container">
     <QuestionScreen question={question} inputValues={inputValues} setInputValues={setInputValues}
     errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+    statementImage={question?.permalink}
+    setStatementImage={(image) => { setQuestion({...question, permalink: image}) }}
     />
     
-    <div className='image-input-container'>
+    {/*<div className='image-input-container'>
     <TextField id="statement-image-input" label="Imágen de enunciado (opcional)" variant="outlined"
           type="url"
           value={statementImageInput}
@@ -298,7 +300,7 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
           error={!!errorMessages.permalink}
           helperText={errorMessages.permalink}
           className="image-statement-input"/>
-    </div>
+  </div>*/}
           </div>
     </Card>
     }

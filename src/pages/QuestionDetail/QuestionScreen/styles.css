@@ -1,3 +1,13 @@
 .mobile-device > .statement {
     color: black;
 }
+
+.question-statement-image.detail {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    max-height: 6rem;
+    border-radius: 0.5rem;
+}

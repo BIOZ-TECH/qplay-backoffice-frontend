@@ -11,13 +11,13 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
 
-const ComplementaryLettersPalette  = ({ appearance, setAppearance }) => {
-  const { primaryColor: primaryFontColor, secondaryColor: secondaryFontColor } = appearance.complementaryLetters;
+const LettersPalette  = ({ appearance, setAppearance }) => {
+  const { primaryColor: primaryFontColor, secondaryColor: secondaryFontColor } = appearance.letters;
 
   const setPrimaryFontColor = (color) => {
     setAppearance({
-      ...appearance, complementaryLetters: {
-        ...appearance.complementaryLetters,
+      ...appearance, letters: {
+        ...appearance.letters,
         primaryColor: color,
       },
     });
@@ -25,8 +25,8 @@ const ComplementaryLettersPalette  = ({ appearance, setAppearance }) => {
 
   const setSecondaryFontColor = (color) => {
     setAppearance({
-      ...appearance, complementaryLetters: {
-        ...appearance.complementaryLetters,
+      ...appearance, letters: {
+        ...appearance.letters,
         secondaryColor: color,
       },
     });
@@ -52,7 +52,7 @@ const ComplementaryLettersPalette  = ({ appearance, setAppearance }) => {
       />
       </div>
       <div className="letters-input">
-        <p>Letras secundarias</p>
+        <p>Letras sobre fondo</p>
       <ColorPicker
       color={secondaryFontColor}
       setColor={setSecondaryFontColor}
@@ -63,4 +63,4 @@ const ComplementaryLettersPalette  = ({ appearance, setAppearance }) => {
   );
 }
 
-export default ComplementaryLettersPalette;
+export default LettersPalette;

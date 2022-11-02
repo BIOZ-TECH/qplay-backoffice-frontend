@@ -14,7 +14,7 @@ const QuestionScreen = ({ question }) => {
     {
       question.permalink
       && (
-        <img className="question-statement-image" src={question.permalink || ''} />
+        <img className="question-statement-image detail" src={question.permalink || ''} />
       )
     }
   </div>

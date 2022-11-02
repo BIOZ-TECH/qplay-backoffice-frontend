@@ -100,7 +100,7 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           activeTab={activeTab}
           onTabClick={onTabClick}
     />
-    <Card className="question-detail-card">
+
       <>
       {
         question
@@ -109,21 +109,33 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
                 {
         activeTab === 0
         && (
+          <Card className="question-detail-card">
           <QuestionScreen question={question}/>
+          </Card>
         )
       }
       { activeTab === 1
         && (
           <div className="question-data-container">
           {
+            (!question.feedback || question.feedback?.type === 'no-feedback')
+            && <Card className='feedback-detail-card'>
+              <h1>No posee feedbacks</h1>
+            </Card>
+          }
+          {
               question.feedback?.type !== 'no-feedback'
               && (
                 <>
+                <Card className={`feedback-detail-card ${question.feedback.type === 'variable-feedback' ? 'left': ''}`}>
                   <FeedbackPreview inflatedFeedback={question.feedback.inflatedFeedback} feedbackResultType={question.feedback.type === 'variable-feedback' ? 'correct': 'any'}/>
+                  </Card>
                   {
                     question.feedback.type === 'variable-feedback' && question.feedback.inflatedIncorrectFeedback
                     && (
+                      <Card className="feedback-detail-card right">
                       <FeedbackPreview inflatedFeedback={question.feedback.inflatedIncorrectFeedback} feedbackResultType="incorrect"/>
+                      </Card>
                     )
                   }
                 </>
@@ -136,7 +148,6 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
         )
       }
       </>
-    </Card>
     
     </div>
   );

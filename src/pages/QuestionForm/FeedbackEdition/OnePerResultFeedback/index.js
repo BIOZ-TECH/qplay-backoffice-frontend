@@ -8,8 +8,9 @@ import InflatedFeedbackEdition from "../InflatedFeedbackEdition";
 
 const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedback, inflatedIncorrectFeedback, setInflatedIncorrectFeedback, errorMessages, setErrorMessages }) => {
   return (
-    <>
-    <Accordion className="accordion-container mt-5">
+    <div className="one-per-result-feedback-container">
+      <div className="feedback-container correct">
+      <Accordion className="accordion-container mt-5">
 <AccordionSummary
   className="accordion-header"
   expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
@@ -21,9 +22,13 @@ const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedb
 <AccordionDetails className="accordion-body">
 <InflatedFeedbackEdition
 errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+feedbackResultType='correct'
 inflatedFeedback={correctInflatedFeedback} setInflatedFeedback={setCorrectInflatedFeedback}/>
 </AccordionDetails>
 </Accordion>
+      </div>
+
+<div className="feedback-container incorrect">
 <Accordion className="accordion-container mt-5">
 <AccordionSummary
   className="accordion-header"
@@ -36,10 +41,13 @@ inflatedFeedback={correctInflatedFeedback} setInflatedFeedback={setCorrectInflat
 <AccordionDetails className="accordion-body">
 <InflatedFeedbackEdition
 errorMessages={errorMessages} setErrorMessages={setErrorMessages} inflatedMessageType="inflatedIncorrectFeedback"
+feedbackResultType='incorrect'
 inflatedFeedback={inflatedIncorrectFeedback} setInflatedFeedback={setInflatedIncorrectFeedback} />
 </AccordionDetails>
 </Accordion>
-    </>
+</div>
+
+    </div>
   );
 }
 

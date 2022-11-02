@@ -11,14 +11,22 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
 
-const BackgroundPalette = ({ appearance, setAppearance }) => {
-  const { appBackground } = appearance;
+const SelectableAnswersPalette = ({ appearance, setAppearance }) => {
+  const { primaryColor: backgroundColor, secondaryColor: fontColor } = appearance.selectableAnswers;
 
   const setBackgroundColor = (color) => {
     setAppearance({
-      ...appearance, appBackground: color,
+      ...appearance,
+      selectableAnswers: { ...appearance.selectableAnswers, primaryColor: color }
     });
   };
+
+  const setFontColor = (color) => {
+    setAppearance({
+      ...appearance,
+      selectableAnswers: { ...appearance.selectableAnswers, secondaryColor: color }
+    });
+  }
 
   return (
     <Accordion className="accordion-container mt-5">
@@ -27,15 +35,23 @@ const BackgroundPalette = ({ appearance, setAppearance }) => {
       aria-controls="header-palette"
       id="header-palette"
     >
-      <Typography>Fondo de la aplicación</Typography>
-      <div className="color-square" style={{ backgroundColor: appBackground }}></div>
+      <Typography>Respuestas seleccionables</Typography>
+      <div className="color-square" style={{ backgroundColor }}></div>
+      <div className="color-square" style={{ backgroundColor: fontColor }}></div>
     </AccordionSummary>
     <AccordionDetails className="accordion-body">
       <div className="background-input">
         <p>Fondo</p>
       <ColorPicker
-      color={appBackground}
+      color={backgroundColor}
       setColor={setBackgroundColor}
+      />
+      </div>
+      <div className="letters-input">
+        <p>Letras</p>
+      <ColorPicker
+      color={fontColor}
+      setColor={setFontColor}
       />
       </div>
     </AccordionDetails>
@@ -43,4 +59,4 @@ const BackgroundPalette = ({ appearance, setAppearance }) => {
   );
 }
 
-export default BackgroundPalette;
+export default SelectableAnswersPalette;

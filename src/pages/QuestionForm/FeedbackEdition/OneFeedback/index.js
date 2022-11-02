@@ -9,7 +9,9 @@ const OneFeedback = ({ inflatedFeedback, setInflatedFeedback, errorMessages, set
 
     <InflatedFeedbackEdition
     errorMessages={errorMessages} setErrorMessages={setErrorMessages}
-    inflatedFeedback={inflatedFeedback} setInflatedFeedback={setInflatedFeedback} />
+    inflatedFeedback={inflatedFeedback} setInflatedFeedback={setInflatedFeedback}
+    feedbackResultType='any'
+    />
     </div>
   );
 }
