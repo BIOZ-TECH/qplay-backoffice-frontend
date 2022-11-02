@@ -1,0 +1,8 @@
+.snackbar-alert {
+    background-color: #3dc442 !important;
+    color: white !important;
+}
+
+.snackbar-alert > * > svg {
+    color: white;
+}

@@ -1,0 +1,67 @@
+.error-card {
+    margin: auto;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+}
+
+.error-card > .info-container , .error-card > .image-401 {
+    height: 100%;
+}
+
+.error-card > .info-container {
+    background: linear-gradient(to right, transparent 0%, transparent 0%, #ff4f5a 0%, #ffffff 100%);
+    color: #385a64;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 70%;
+}
+
+.error-card > .info-container > .info {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-card > .info-container > .info > h1 {
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.error-card > .info-container > .info > .go-back-btn {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: #385a64;
+    border: 2px solid #385a64;
+    color: white;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 5px black;
+    align-self: center;
+    margin-left: auto;
+}
+
+.error-card > .info-container > .info > .go-back-btn:hover, .error-card > .info-container > .info > .go-back-btn:focus {
+    background-color: white;
+    border: 2px solid white;
+    color: #385a64;
+}
+
+.error-card > .info-container > .info > p {
+    font-size: 1.5rem;
+}
+
+.error-card > .image-401 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;  
+    width: 50%;
+}

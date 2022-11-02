@@ -1,0 +1,12 @@
+.feedback-image-input, .feedback-video-input, .feedback-description-input {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.inflated-feedback-container {
+    width: 100%;
+}
+
+#feedback-type-label {
+    background-color: white;
+}

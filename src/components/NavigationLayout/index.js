@@ -3,7 +3,7 @@ import BlurredBackground from "./BlurredBackground";
 import Navbar from "./Appbar";
 import Sidebar from "./Sidebar";
 
-const NavSidebar = () => {
+const NavSidebar = ({ breadcrumb, action}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -16,14 +16,8 @@ const NavSidebar = () => {
 
       <Navbar
       setIsSidebarOpen={setIsSidebarOpen}
+      breadcrumb={breadcrumb} action={action}
       />
-
-      {/*<div className="absolute right-0">
-        <a href="https://github.com/abhijithvijayan/react-minimal-side-navigation">
-          View on GitHub
-        </a>
-  </div>*/}
-
 
 
 <Sidebar

@@ -1,0 +1,26 @@
+.inflated-feedback-preview.container > .inflated-feedback {
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.inflated-feedback-preview.container > .inflated-feedback > .statement {
+    text-align-last: center;
+    color: white;
+}
+
+.inflated-feedback-preview.container > .inflated-feedback > img {
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    max-height: 6rem;
+    border-radius: 0.5rem;
+}
+
+.inflated-feedback-preview.container > .inflated-feedback > .video-responsive {
+    padding-bottom: 30.25%;
+    width: 50%;
+    margin-top: 1rem;
+}

@@ -22,6 +22,19 @@
     display: flex;
 }
 
+.brand.first-row > .MuiTooltip-popper {
+    max-width: 300px;
+}
+
+.brand.first-row > .MuiTooltip-popper > .MuiTooltip-tooltip {
+    background-color: #d11111;
+    margin-left: 5rem;
+}
+
+.brand.first-row > .MuiTooltip-popper > .MuiTooltip-tooltip > .MuiTooltip-arrow {
+    color: #d11111;
+}
+
 .save-appearance {
     display: flex;
     align-self: flex-end;
@@ -45,4 +58,8 @@
 
 .app-name-input {
     width: 100%;
+}
+
+.appearance-tabs > div > span {
+    background-color: #6356e0
 }
