@@ -1,27 +1,23 @@
 import React from "react";
 
-import HeaderPalette from "./palettes/HeaderPalette";
-import ButtonPalette from "./palettes/ButtonPalette";
-import BackgroundPalette from "./palettes/BackgroundPalette";
-import ComplementaryLettersPalette from "./palettes/ComplementaryLettersPalette";
-import InputTextPalette from "./palettes/InputTextPalette";
+import HeaderAndButtonsPalette from "./palettes/HeaderAndButtonsPalette";
+import BackgroundAndOvergroundPalette from "./palettes/BackgroundAndOvergroundPalette";
+import LettersPalette from "./palettes/LettersPalette";
+import SelectableAnswersPalette from "./palettes/SelectableAnswersPalette";
 
 const Palette = (props) => {
   return (
     <>
-    <HeaderPalette
+    <HeaderAndButtonsPalette
     {...props}
     />
-        <ButtonPalette
+        <BackgroundAndOvergroundPalette
     {...props}
     />
-            <InputTextPalette
+            <SelectableAnswersPalette
     {...props}
     />
-        <BackgroundPalette
-    {...props}
-    />
-        <ComplementaryLettersPalette
+        <LettersPalette
     {...props}
     />
     </>

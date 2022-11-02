@@ -11,33 +11,33 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
 
-const HeaderPalette = ({ appearance, setAppearance }) => {
-  const { primaryColor: backgroundColor, secondaryColor: fontColor } = appearance.header;
+const BackgroundAndOvergroundPalette = ({ appearance, setAppearance }) => {
+  const { primaryColor: backgroundColor, secondaryColor: overgroundColor } = appearance.backgrounds;
 
   const setBackgroundColor = (color) => {
     setAppearance({
       ...appearance,
-      header: { ...appearance.header, primaryColor: color }
+      backgrounds: { ...appearance.backgrounds, primaryColor: color },
     });
   };
 
-  const setFontColor = (color) => {
+  const setOvergroundColor = (color) => {
     setAppearance({
       ...appearance,
-      header: { ...appearance.header, secondaryColor: color }
+      backgrounds: { ...appearance.backgrounds, secondaryColor: color },
     });
-  }
+  };
 
   return (
-    <Accordion className="accordion-container">
+    <Accordion className="accordion-container mt-5">
     <AccordionSummary
       expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
       aria-controls="header-palette"
       id="header-palette"
     >
-      <Typography>Header</Typography>
-      <div className="color-square" style={{ backgroundColor }}></div>
-      <div className="color-square" style={{ backgroundColor: fontColor }}></div>
+      <Typography>Fondo de la aplicación</Typography>
+      <div className="color-square" style={{ backgroundColor: backgroundColor }}></div>
+      <div className="color-square" style={{ backgroundColor: overgroundColor }}></div>
     </AccordionSummary>
     <AccordionDetails className="accordion-body">
       <div className="background-input">
@@ -48,10 +48,10 @@ const HeaderPalette = ({ appearance, setAppearance }) => {
       />
       </div>
       <div className="letters-input">
-        <p>Letras</p>
+        <p>Sobrefondo</p>
       <ColorPicker
-      color={fontColor}
-      setColor={setFontColor}
+      color={overgroundColor}
+      setColor={setOvergroundColor}
       />
       </div>
     </AccordionDetails>
@@ -59,4 +59,4 @@ const HeaderPalette = ({ appearance, setAppearance }) => {
   );
 }
 
-export default HeaderPalette;
+export default BackgroundAndOvergroundPalette;

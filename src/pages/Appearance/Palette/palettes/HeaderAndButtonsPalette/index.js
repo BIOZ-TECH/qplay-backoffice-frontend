@@ -11,20 +11,20 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
 
-const ButtonPalette = ({ appearance, setAppearance }) => {
-  const { primaryColor: backgroundColor, secondaryColor: fontColor } = appearance.button;
+const HeaderAndButtonsPalette = ({ appearance, setAppearance }) => {
+  const { primaryColor: backgroundColor, secondaryColor: fontColor } = appearance.headerAndButtons;
 
   const setBackgroundColor = (color) => {
     setAppearance({
       ...appearance,
-      button: { ...appearance.button, primaryColor: color }
+      headerAndButtons: { ...appearance.headerAndButtons, primaryColor: color },
     });
   };
 
   const setFontColor = (color) => {
     setAppearance({
       ...appearance,
-      button: { ...appearance.button, secondaryColor: color }
+      headerAndButtons: { ...appearance.headerAndButtons, secondaryColor: color },
     });
   }
 
@@ -35,7 +35,7 @@ const ButtonPalette = ({ appearance, setAppearance }) => {
       aria-controls="header-palette"
       id="header-palette"
     >
-      <Typography>Botones</Typography>
+      <Typography>Barra superior y botones</Typography>
       <div className="color-square" style={{ backgroundColor }}></div>
       <div className="color-square" style={{ backgroundColor: fontColor }}></div>
     </AccordionSummary>
@@ -59,4 +59,4 @@ const ButtonPalette = ({ appearance, setAppearance }) => {
   );
 }
 
-export default ButtonPalette;
+export default HeaderAndButtonsPalette;
