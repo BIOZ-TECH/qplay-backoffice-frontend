@@ -55,7 +55,7 @@ const ImageUploader = ({ selectedFile, setSelectedFile, dialogType }) => {
     
     const renderUploadedImage = () => (<div className="uploaded-container" onClick={onDialogOpen}>
     <FontAwesomeIcon className="upload-icon" icon={faUpload} />
-    <img  className="image-container" src={selectedFile} />
+    <div className="image-container" style={{ backgroundImage: `url(${selectedFile})` }}></div>
     </div>);
 
 const onCategoryImageChange = (e) => {

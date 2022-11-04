@@ -245,9 +245,9 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
                 title={errorMessages.permalink}
                 arrow
               >
-                <div>
+
                 <ImageUploader  selectedFile={category?.permalink} setSelectedFile={onCategoryImageChange} dialogType='de la categoría'/>
-                </div>
+
               </Tooltip>
                 </div>
       </div>

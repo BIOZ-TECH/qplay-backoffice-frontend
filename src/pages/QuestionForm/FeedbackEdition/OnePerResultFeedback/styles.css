@@ -13,16 +13,36 @@
 
 .one-per-result-feedback-container {
     display: flex;
+    height: 100%;
+    align-items: center;
 }
 
-.one-per-result-feedback-container > .feedback-container {
+.one-per-result-feedback-container> * > .feedback-container {
     width: 50%;
 }
 
-.one-per-result-feedback-container > .feedback-container.correct {
+.one-per-result-feedback-container> * > .feedback-container.correct {
     padding-right: 1rem;
 }
 
-.one-per-result-feedback-container > .feedback-container.incorrect {
+.one-per-result-feedback-container> * > .feedback-container.incorrect {
     padding-left: 1rem;
+}
+
+.feedbacks-container {
+    width: 100%;
+    display: flex;
+}
+
+.feedbacks-container > .feedback-container {
+    width: 50%;
+    margin: 1rem;
+}
+
+.feedbacks-container > .feedback-container.correct {
+    margin-left: 2.5rem;
+}
+
+.feedbacks-container > .feedback-container.incorrect {
+    margin-right: 2.5rem;
 }

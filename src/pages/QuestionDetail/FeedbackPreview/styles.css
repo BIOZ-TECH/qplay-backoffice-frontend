@@ -1,14 +1,14 @@
 .inflated-feedback-preview.container > .inflated-feedback {
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 1rem 0;
 }
 
-.inflated-feedback-preview.container > .inflated-feedback > .statement {
+.inflated-feedback-preview.container > .inflated-feedback >.feedback-data > .statement {
     text-align-last: center;
     color: white;
 }
 
-.inflated-feedback-preview.container > .inflated-feedback > img {
+.inflated-feedback-preview.container > .inflated-feedback >.feedback-data > img {
     margin-top: 1rem;
     margin-left: auto;
     margin-right: auto;
@@ -19,8 +19,43 @@
     border-radius: 0.5rem;
 }
 
-.inflated-feedback-preview.container > .inflated-feedback > .video-responsive {
+.inflated-feedback-preview.container > .inflated-feedback >.feedback-data > .video-responsive {
     padding-bottom: 30.25%;
     width: 50%;
     margin-top: 1rem;
+}
+
+.inflated-feedback-preview.container > .inflated-feedback >.feedback-data {
+    margin: 0 1rem;
+}
+
+.inflated-feedback-preview.container > .inflated-feedback{
+    padding-bottom: 2rem;
+}
+
+.ear {
+    width: fit-content;
+    background-color: white;
+    margin-bottom: 1.5rem;
+    padding: 0.3rem 1rem 0.3rem 2rem;
+    box-shadow: 1px 1px 8px rgb(49, 49, 49);
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+}
+
+.ear > p {
+    width: fit-content;
+}
+
+.ear > .ear-type {
+    margin-left: 0.5rem;
+}
+
+.ear.correct {
+    color: #21bd21;
+}
+
+.ear.incorrect {
+    color: #ed3535;
 }

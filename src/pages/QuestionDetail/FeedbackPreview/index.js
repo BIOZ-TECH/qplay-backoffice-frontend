@@ -1,3 +1,5 @@
+import { faCheck, faClose, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import YoutubeEmbed from "../../../components/YoutubeEmbed";
 
@@ -36,8 +38,14 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback }) => {
 
   return (
     <div className='inflated-feedback-preview container'>
-      { feedbackStyle.title && <p className="feedback-title">{feedbackStyle.title}</p>}
-          <div className="inflated-feedback" style={{ backgroundColor: feedbackStyle.backgroundColor }}>
+          <div className={`inflated-feedback ${feedbackResultType}`} style={{ backgroundColor: feedbackStyle.backgroundColor }}>
+
+              <div className={`ear ${feedbackResultType}`}>
+                <p>{`Feedback ${feedbackResultType === 'any' ? 'único' : `ante respuesta${ feedbackResultType === 'correct' ? ' correcta' : 's incorrectas' }` }`}</p>
+                <FontAwesomeIcon className="ear-type" icon={feedbackResultType === 'any' ? faCommentDots : (feedbackResultType === 'correct' ? faCheck : faClose)} />
+                </div>
+
+          <div className="feedback-data">
           <div className="statement">{inflatedFeedback.statement}</div>
         {
             inflatedFeedback?.imagePermalink
@@ -51,6 +59,7 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback }) => {
                 <YoutubeEmbed youtubeLink={`https://www.youtube.com/embed/${getVideoId()}`} />
             )
         }
+          </div>
     </div>
     </div>
   );
