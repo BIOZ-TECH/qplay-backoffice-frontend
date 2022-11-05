@@ -126,19 +126,21 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           {
               question.feedback?.type !== 'no-feedback'
               && (
-                <>
-                <Card className={`feedback-detail-card ${question.feedback.type === 'variable-feedback' ? 'left': ''}`}>
+                <Card className="feedback-detail-card">
+                  <div className="feedback-detail">
+                  <div className={`feedback-type ${question.feedback.type === 'variable-feedback' ? 'left': ''}`}>
                   <FeedbackPreview inflatedFeedback={question.feedback.inflatedFeedback} feedbackResultType={question.feedback.type === 'variable-feedback' ? 'correct': 'any'}/>
-                  </Card>
+                  </div>
                   {
                     question.feedback.type === 'variable-feedback' && question.feedback.inflatedIncorrectFeedback
                     && (
-                      <Card className="feedback-detail-card right">
+                      <div className="feedback-type right">
                       <FeedbackPreview inflatedFeedback={question.feedback.inflatedIncorrectFeedback} feedbackResultType="incorrect"/>
-                      </Card>
+                      </div>
                     )
                   }
-                </>
+                  </div>
+                </Card>
               )
           }
           </div>
