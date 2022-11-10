@@ -2,25 +2,40 @@
 
 .login-card {
     display: flex;
-    flex-flow: column;
+    justify-content: center;
     padding: 3rem;
     margin: auto;
     width: 40%;
     height: 85%;
-    justify-content: center;
 }
 
-.login-card > img {
+.login-card > form{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login-card > form > .logo {
     width: 50%;
     align-self: center;
     margin-bottom: 2rem;
 }
 
-.login-card > .username, .login-card > .password {
+.login-card > form > .email-or-username, .login-card > form > .password {
     margin-top: 2rem;
 }
 
-.login-card > .btn-login {
+.login-card > form > .forgot-password {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+    align-self: self-end;
+    margin-top: 0.5rem;
+}
+
+.login-card > form > .btn-login {
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
@@ -38,29 +53,21 @@
     margin-top: 2rem;
 }
 
-.login-card > .btn-login > svg {
+.login-card > form > .forgot-password:hover {
+    color: var(--secondary-color);
+}
+
+.login-card > form > .login-error {
+    color: #f42828;
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+.login-card > form > .btn-login > svg {
     color: white;
     margin-right: 0.5rem;
 }
 
-.login-card > .btn-login > p {
+.login-card > form > .btn-login > p {
     font-size: 1.3rem;
-}
-
-.login-card > .forgot-password {
-    color: var(--primary-color);
-    text-decoration: underline;
-    cursor: pointer;
-    align-self: self-end;
-    margin-top: 0.5rem;
-}
-
-.login-card > .forgot-password:hover {
-    color: var(--secondary-color);
-}
-
-.login-error {
-    color: #f42828;
-    margin-top: 0.5rem;
-    font-weight: bold;
 }

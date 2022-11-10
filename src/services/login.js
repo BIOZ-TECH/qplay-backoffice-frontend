@@ -1,6 +1,6 @@
 import Api from './api';
 
-const login = (email, password) => {
+const logIn = (email, password) => {
     return Api.post(`authentication`,
     {
         email,
@@ -16,7 +16,7 @@ const login = (email, password) => {
 }
 
 const userServices = {
-    login,
+    logIn,
 };
 
 export default userServices;
