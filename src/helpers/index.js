@@ -1,6 +1,6 @@
 import ROUTES from "../resources/routes";
 
-const getRedirectBasedOnResponseStatus = (response) => {
+export const getRedirectBasedOnResponseStatus = (response) => {
     switch(response?.status) {
         case 400:
         case 401:
@@ -12,11 +12,11 @@ const getRedirectBasedOnResponseStatus = (response) => {
       }
 }
 
-const setUserToken = (token) => {
+export const setUserToken = (token) => {
     localStorage.setItem('ACCESS_TOKEN', token);
 }
 
-const checkIfEnterIsPressed = (event) => event.code === "Enter" || event.code === "NumpadEnter";
+export const checkIfEnterIsPressed = (event) => event.code === "Enter" || event.code === "NumpadEnter";
 
 const helpers = {
     checkIfEnterIsPressed,

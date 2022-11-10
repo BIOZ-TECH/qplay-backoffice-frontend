@@ -10,7 +10,7 @@ import ROUTES from "../../resources/routes";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import userServices from "../../services/login";
-import { getRedirectBasedOnResponseStatus, setUserToken } from "../../helpers";
+import { getRedirectBasedOnResponseStatus, setUserToken } from "../../helpers/index.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Login = () => {
   const { email, password } = credentials;
 
   const logIn = () => {
-    userServices.logIn(email, password)
+    userServices.logIn(email.value, password.value)
       .then((response) => {
 
         if (response?.status !== 200) {   

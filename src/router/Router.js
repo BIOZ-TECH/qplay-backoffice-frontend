@@ -22,6 +22,11 @@ const Router = () => {
     return localStorage.getItem('ACCESS_TOKEN') ? '/categories' : '/login';
   }
 
+  const setAppBarContent = (newBreadcrumb, newAction) => {
+    setBreadcrumb(newBreadcrumb);
+    setAction(newAction);
+  }
+
   return (
     <BrowserRouter>
     <AppLayout breadcrumb={breadcrumb} action={action} message={message}>
@@ -37,7 +42,7 @@ const Router = () => {
         <Route exact path="/error-401" element={<Error401 />} />
         <Route exact path="/error-404" element={<Error404 />} />
         <Route exact path="/error-500" element={<Error500 />} />
-        <Route exact path="/categories" element={<Categories setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/categories" element={<Categories setAppBarContent={setAppBarContent} />}/>
         <Route path='*' element={ <Navigate to={getRedirection()} /> }/>
       </Routes>
     </AppLayout>
