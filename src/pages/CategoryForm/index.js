@@ -35,7 +35,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
 
       if (categoryId) {
         try {
-          const response = await categoryServices.getCategory(0, 5, categoryId);
+          const response = await categoryServices.getCategory(categoryId);
     
           switch(response.status) {
             case 200:
@@ -165,7 +165,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
 
     if (Object.keys(newMessages).length === 0) {
       if (categoryId) {
-        await categoryServices.updateCategory(0, 5, newCategory)
+        await categoryServices.updateCategory(newCategory)
         .then((res) => {
           switch(res.status) {
             case 200:
@@ -193,7 +193,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
             }
         });
       } else {
-        await categoryServices.createCategory(0, 5, newCategory)
+        await categoryServices.createCategory(newCategory)
         .then((res) => {
           switch(res.status) {
             case 200:
