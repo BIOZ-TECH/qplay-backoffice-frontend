@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
-import LOGIN_STRINGS from "../../resources/strings/login";
 import ROUTES from "../../resources/routes";
+import LOGIN_STRINGS from "../../resources/strings/login";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import userServices from "../../services/login";

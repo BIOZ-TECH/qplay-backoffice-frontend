@@ -9,6 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 
+import ROUTES from "../../resources/routes";
 import CATEGORIES_STRINGS from "../../resources/strings/categories";
 import Category from "../../entities/Category";
 
@@ -29,9 +30,13 @@ const CategoryRow = (props) => {
     }
   }
 
+  const handleCategoryClick = () => {
+    navigate(ROUTES.CATEGORY_DETAIL(category.id));
+  }
+
   return (
     <ListItem style={style} className={`category ${getItemClass(index)}`} key={index} component="div" disablePadding>
-      <Card className="item cursor-pointer" onClick={() => navigate(`/category/${category.id}`)}>
+      <Card className="item cursor-pointer" onClick={handleCategoryClick}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto', padding: '0 !important' }}>
             <div className="detail">

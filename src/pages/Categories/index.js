@@ -5,8 +5,8 @@ import { FixedSizeList } from 'react-window';
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
-import CATEGORIES_STRINGS from "../../resources/strings/categories";
 import ROUTES from "../../resources/routes";
+import CATEGORIES_STRINGS from "../../resources/strings/categories";
 import CategoryRow from "./CategoryRow";
 import categoryServices from "../../services/category";
 import { getRedirectBasedOnResponseStatus } from '../../helpers';
