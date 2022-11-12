@@ -51,14 +51,14 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
       let questionData = {};
 
       try {
-        const responseCategory = await categoryServices.getCategory(0, 5, categoryId);
+        const responseCategory = await categoryServices.getCategory(categoryId);
 
         switch(responseCategory.status) {
           case 200:
             setCategory(new Category(responseCategory.data));
   
             if (questionId) {
-              const response = await questionServices.getQuestion(0, 5, questionId);
+              const response = await questionServices.getQuestion(questionId);
   
               switch(response.status) {
                 case 200:
@@ -217,7 +217,7 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
     && Object.keys(newMessages.inflatedIncorrectFeedback).length === 0
     ) {
       if(questionId) {
-        await questionServices.updateQuestion(0, 5, newQuestion)
+        await questionServices.updateQuestion(newQuestion)
         .then((res) => {
           switch(res.status) {
             case 200:
@@ -245,7 +245,7 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
           }
         });
       } else {
-        await questionServices.createQuestion(0, 5, newQuestion)
+        await questionServices.createQuestion(newQuestion)
       .then((res) => {
         switch(res.status) {
           case 200:

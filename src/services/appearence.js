@@ -1,9 +1,12 @@
 import Api from './api';
+import { getUserIdentifiers } from '../helpers/user';
 
-const getApplicationAppearance = (userId, holderId) => {
-    return Api.get(`appearance?caller.id=${userId}&holder.id=${holderId}`, {
+const getApplicationAppearance = () => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.get(`appearance?holder.id=${holderId}`, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',
@@ -11,10 +14,12 @@ const getApplicationAppearance = (userId, holderId) => {
     });
 } 
 
-const updateApplicationAppearance = (appearance, userId, holderId) => {
-    return Api.put(`appearance?caller.id=${userId}&holder.id=${holderId}`, JSON.parse(JSON.stringify(appearance)), {
+const updateApplicationAppearance = (appearance) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.put(`appearance?holder.id=${holderId}`, JSON.parse(JSON.stringify(appearance)), {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',

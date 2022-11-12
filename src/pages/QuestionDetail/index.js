@@ -27,13 +27,13 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const categoryResponse = await categoryService.getCategory(0, 5, categoryId);
+        const categoryResponse = await categoryService.getCategory(categoryId);
   
         switch(categoryResponse.status) {
           case 200:
             setCategory(new Category(categoryResponse.data));
 
-            const response = await questionServices.getQuestion(0, 5, questionId);
+            const response = await questionServices.getQuestion(questionId);
 
             switch(response.status) {
               case 200:
