@@ -14,6 +14,7 @@ import Card from '@mui/material/Card';
 import Appearance from '../../entities/Appearance';
 import AppearanceValidator from "../../validators/entity/AppearanceValidator";
 import { Navigate, useNavigate } from "react-router-dom";
+import Gameplay from "./Gameplay";
 
 const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
@@ -136,6 +137,11 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
       />}
       { activeTab === 1 && 
       <Palette
+      appearance={appearance}
+      setAppearance={setAppearance}
+      />}
+            { activeTab === 2 && 
+      <Gameplay
       appearance={appearance}
       setAppearance={setAppearance}
       />}
