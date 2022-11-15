@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: `https://qplay-api-gateway.azurewebsites.net/api/`
+  baseURL: `http://localhost:8080/api/`
 });
 
 export default Api;
