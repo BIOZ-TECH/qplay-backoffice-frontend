@@ -15,6 +15,9 @@ import Appearance from '../../entities/Appearance';
 import AppearanceValidator from "../../validators/entity/AppearanceValidator";
 import { Navigate, useNavigate } from "react-router-dom";
 import Gameplay from "./Gameplay";
+import CategoriesScreenPreview from "./AppearancePreview/CategoriesScreenPreview";
+import { Button, ButtonGroup } from "@mui/material";
+import LoginPreview from "./AppearancePreview/LoginPreview";
 
 const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
@@ -22,6 +25,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
   const [updateState, setUpdateState] = useState(true);
+  const [selectedPreview, setSelectedPreview] = useState(1);
 
   useEffect(() => {
     setActiveTab(0);
@@ -146,9 +150,22 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
       setAppearance={setAppearance}
       />}
       </Card>
-      <AppearancePreview
+      <Card className="preview-card">
+      <ButtonGroup className="preview-btn-group" variant="contained" aria-label="outlined primary button group">
+      <button className={`action-btn first ${selectedPreview === 1 ? 'selected' : ''}`} onClick={() => setSelectedPreview(1)}>Inicio de sesión</button>
+  <button className={`action-btn middle ${selectedPreview === 2 ? 'selected' : ''}`} onClick={() => setSelectedPreview(2)}>Listado de categorías</button>
+  <button className={`action-btn last ${selectedPreview === 3 ? 'selected' : ''}`} onClick={() => setSelectedPreview(3)}>Pregunta</button>
+</ButtonGroup>
+{selectedPreview === 1 && <LoginPreview
       {...appearance}
-      />
+      />}
+            {selectedPreview === 2 && <CategoriesScreenPreview
+      {...appearance}
+      />}
+                  {selectedPreview === 3 && <AppearancePreview
+      {...appearance}
+            />}
+      </Card>
       </div>}
     </>
   );

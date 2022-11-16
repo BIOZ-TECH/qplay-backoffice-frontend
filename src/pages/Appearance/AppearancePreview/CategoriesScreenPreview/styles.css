@@ -6,8 +6,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
-    flex-flow: column;
 }
 
 .mobile-device {
@@ -87,4 +85,45 @@
 .mobile-progress-bar > .progress-bar > .remaining-progress {
     height: 100%;
     width: 40%;
+}
+
+.category-row {
+    display: flex;
+}
+
+.category-row > .category-image-container {
+    border-radius: 5rem;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.category-row > .category-image-container > .image {
+    background-image: url("http://pm1.narvii.com/6265/da854332e138322c1ece2c542456a01d49d92412_00.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 5rem;
+    min-height: 80%;
+    max-height: 80%;
+    min-width: 80%;
+    max-width: 80%;
+    position: absolute;
+}
+
+.category-row > .category-detail {
+    align-self: center;
+    margin-left: 0.8rem;
+}
+
+.category-row > .category-detail > .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.mobile-device > .app-body {
+    overflow-y: hidden;
 }
