@@ -40,8 +40,10 @@ const Login = () => {
     .then((res) => {
       switch(res.status) {
         case 200:
-          localStorage.setItem('ACCESS_TOKEN', res.data);
-
+          const { token, holderId } = res.data;  
+          localStorage.setItem('ACCESS_TOKEN', token);
+          localStorage.setItem('HOLDER', holderId);
+          
           navigate('/categories');  
           break;
         default:

@@ -1,9 +1,12 @@
 import Api from './api';
+import { getUserIdentifiers } from '../helpers/user';
 
-const getCategories = (userId, holderId) => {
-    return Api.get(`categories?caller.id=${userId}&holder.id=${holderId}`, {
+const getCategories = () => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.get(`categories?holder.id=${holderId}`, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',
@@ -11,10 +14,12 @@ const getCategories = (userId, holderId) => {
     });
 }
 
-const getCategory = (userId, holderId, id) => {
-    return Api.get(`categories/${id}?caller.id=${userId}&holder.id=${holderId}`, {
+const getCategory = (id) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.get(`categories/${id}?holder.id=${holderId}`, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',
@@ -22,10 +27,12 @@ const getCategory = (userId, holderId, id) => {
     });
 }
 
-const createCategory = (userId, holderId, category) => {
-    return Api.post(`categories?caller.id=${userId}&holder.id=${holderId}`, category, {
+const createCategory = (category) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.post(`categories?holder.id=${holderId}`, category, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',
@@ -33,10 +40,12 @@ const createCategory = (userId, holderId, category) => {
     });
 };
 
-const updateCategory = (userId, holderId, category) => {
-    return Api.put(`categories?caller.id=${userId}&holder.id=${holderId}`, category, {
+const updateCategory = (category) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.put(`categories?holder.id=${holderId}`, category, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',

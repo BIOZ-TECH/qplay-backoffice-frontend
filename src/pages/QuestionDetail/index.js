@@ -27,13 +27,13 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const categoryResponse = await categoryService.getCategory(0, 5, categoryId);
+        const categoryResponse = await categoryService.getCategory(categoryId);
   
         switch(categoryResponse.status) {
           case 200:
             setCategory(new Category(categoryResponse.data));
 
-            const response = await questionServices.getQuestion(0, 5, questionId);
+            const response = await questionServices.getQuestion(questionId);
 
             switch(response.status) {
               case 200:
@@ -126,19 +126,22 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           {
               question.feedback?.type !== 'no-feedback'
               && (
-                <>
-                <Card className={`feedback-detail-card ${question.feedback.type === 'variable-feedback' ? 'left': ''}`}>
+                <Card className="feedback-detail-card">
+                  <div className="feedback-detail">
+                  <div className={`feedback-type ${question.feedback.type === 'variable-feedback' ? 'left': ''}`}>
                   <FeedbackPreview inflatedFeedback={question.feedback.inflatedFeedback} feedbackResultType={question.feedback.type === 'variable-feedback' ? 'correct': 'any'}/>
-                  </Card>
+                  </div>
                   {
                     question.feedback.type === 'variable-feedback' && question.feedback.inflatedIncorrectFeedback
                     && (
-                      <Card className="feedback-detail-card right">
+                      <div className="feedback-type right">
                       <FeedbackPreview inflatedFeedback={question.feedback.inflatedIncorrectFeedback} feedbackResultType="incorrect"/>
-                      </Card>
+                      </div>
+
                     )
                   }
-                </>
+                  </div>
+                </Card>
               )
           }
           </div>

@@ -1,4 +1,4 @@
-import { faPencil, faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faPhotoFilm, faCommentDots, faCheck, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper } from "@mui/material";
 import React, { createRef, useEffect, useRef, useState } from "react";
@@ -112,8 +112,13 @@ const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeed
 
   return (
     <div className='inflated-feedback-preview-container'>
-          <div className="inflated-feedback-preview" style={{ backgroundColor: feedbackStyle.backgroundColor }}>
-          <FormControl fullWidth
+          <div className={`inflated-feedback-preview ${feedbackResultType}`} style={{ backgroundColor: feedbackStyle.backgroundColor }}>
+          <div className={`ear ${feedbackResultType}`}>
+                <p>{`Feedback ${feedbackResultType === 'any' ? 'único' : `ante respuesta${ feedbackResultType === 'correct' ? ' correcta' : 's incorrectas' }` }`}</p>
+                <FontAwesomeIcon className="ear-type" icon={feedbackResultType === 'any' ? faCommentDots : (feedbackResultType === 'correct' ? faCheck : faClose)} />
+                </div>
+                <div className="feedback-data">
+                <FormControl fullWidth
           error={!!errorMessages[inflatedFeedbackType]?.statement}>
           <OutlinedInput
             id="feedback-statement-input"
@@ -217,6 +222,10 @@ className={`multimedia-btn ${inflatedFeedback && (inflatedFeedback.imagePermalin
             )
         }
         </div>
+
+                  </div>
+
+
     </div>
     <ImageDialog
 open={openImageDialog}
