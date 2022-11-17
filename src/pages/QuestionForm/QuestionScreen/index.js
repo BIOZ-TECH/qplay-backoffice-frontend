@@ -182,24 +182,24 @@ const QuestionScreen = (props) => {
           <FormHelperText className={errorMessages.statement ? "question-statement-error" : ""}>{errorMessages.statement}</FormHelperText>
         </FormControl>
         <div className="image-statement-form-container">
-<div style={{ position: question && question.permalink ? 'absolute' : 'relative', width: '100%' }}>
+<div style={{ position: inputValues?.statementImageInput ? 'absolute' : 'relative', width: '100%' }}>
 
 <Button
-className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
+className={`multimedia-btn ${inputValues?.statementImageInput ? 'uploaded' : ''}`}
           size="small"
           aria-controls={open ? 'split-button-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={(e) => {
-            if(!!inputValues.statementImageInput) handleToggle(e); 
+            handleToggle(e); 
           }}
         >
           <FontAwesomeIcon className={!inputValues.statementImageInput ? "mr-2" : ""} icon={inputValues.statementImageInput ? faPencil : faImage} />
           {!inputValues.statementImageInput && <p>Agregar imagen</p>}
         </Button>
 
-        {question && question.permalink && <Popper
+        {inputValues?.statementImageInput && <Popper
         sx={{
           zIndex: 1,
         }}
@@ -242,7 +242,7 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
       </Popper>}
 </div>
       {
-      question?.permalink
+      inputValues?.statementImageInput
       && (
         <div className="question-image-container">
                   <Tooltip
@@ -250,7 +250,7 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
         arrow
         placement="right"
       >
-          <img className="question-statement-image" src={question.permalink || ''} />
+          <img className="question-statement-image" src={inputValues.statementImageInput || ''} />
           
         </Tooltip>
           </div>
