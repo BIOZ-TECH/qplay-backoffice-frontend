@@ -12,8 +12,8 @@
 
 .mobile-device {
     position: relative;
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 70%;
+    max-width: 70%;
     height: 65vh;
     background-color: red;
     display: flex;

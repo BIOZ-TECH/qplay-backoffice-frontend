@@ -1,0 +1,9 @@
+.apk-download-screen {
+    margin: -4vh -2.5vw;
+    background: linear-gradient(110deg, #7164e3 60%, #4f469e 60%);
+    height: fill-available;
+}
+
+.apk-download-screen > .phone {
+    background-image: url('../../../public/phone.png');
+}

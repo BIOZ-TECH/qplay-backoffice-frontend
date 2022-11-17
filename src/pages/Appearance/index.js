@@ -18,6 +18,7 @@ import Gameplay from "./Gameplay";
 import CategoriesScreenPreview from "./AppearancePreview/CategoriesScreenPreview";
 import { Button, ButtonGroup } from "@mui/material";
 import LoginPreview from "./AppearancePreview/LoginPreview";
+import categoryServices from "../../services/category";
 
 const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
@@ -26,6 +27,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const navigate = useNavigate();
   const [updateState, setUpdateState] = useState(true);
   const [selectedPreview, setSelectedPreview] = useState(1);
+  const [categories, setCategories] = useState(null);
 
   useEffect(() => {
     setActiveTab(0);
@@ -48,6 +50,11 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
         switch(response.status) {
           case 200:
             setAppearance(new Appearance(response.data));
+
+            const responseCategories = await categoryServices.getCategories();
+
+            setCategories(responseCategories.data);
+
             break;
           default:
             navigate('/error-500');
@@ -159,8 +166,8 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
 {selectedPreview === 1 && <LoginPreview
       {...appearance}
       />}
-            {selectedPreview === 2 && <CategoriesScreenPreview
-      {...appearance}
+            {selectedPreview === 2 && categories && <CategoriesScreenPreview
+      {...appearance} categories={categories}
       />}
                   {selectedPreview === 3 && <AppearancePreview
       {...appearance}

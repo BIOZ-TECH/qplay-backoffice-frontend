@@ -1,40 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 
 import './styles.css';
 import CategoryRow from './CategoryRow';
 
 const CategoriesScreenPreview = (props) => {
-  const { appName, headerAndButtons, backgrounds, letters, selectableAnswers, logo } = props;
+  const [previewCategories, setPreviewCategories] = useState(null);
+  const { appName, headerAndButtons, backgrounds, letters, selectableAnswers, logo, categories } = props;
   const { primaryColor: headerAndButtonsBackgroundColor, secondaryColor: headerAndButtonsFontColor } = headerAndButtons;
   const { primaryColor: primaryLettersColor, secondaryColor: overgroundLettersColor } = letters;
   const { primaryColor: backgroundColor, secondaryColor: overgroundColor } = backgrounds;
   const { primaryColor: selectableAnswersBackgroundColor, secondaryColor: selectableAnswersFontColor } = selectableAnswers;
 
-  const categories = [
-    {
-      name: 'Categoría 1',
-      state: 'unblock',
-      answers: 5
-    },
-    {
-      name: 'Categoría 2',
-      state: 'progress',
-      answers: 4
-    },
-    {
-      name: 'Categoría 3',
-      state: 'block',
-      answers: 6
-    },
-    {
-      name: 'Categoría 4',
-      state: 'block',
-      answers: 5
-    },
-  ];
+  useEffect(() => {
+    const newCategories = [];
 
+    for(let i = 0; i <= 7; i++) {
+      const category = categories[i];
+      newCategories.push({
+        name: category.name,
+        state: i < 4 ? 'unblock' : (i === 4 ? 'progress' : 'block'),
+        permalink: category.permalink,
+        questions: category.questions.length,
+      });
+    }
 
+    setPreviewCategories(newCategories);
+  }, []);
 
   return (
         <div className="mobile-device" style={{ backgroundColor }}>
@@ -42,7 +34,7 @@ const CategoriesScreenPreview = (props) => {
           <p className="mobile-app-name">{appName}</p>
           </div>
           <div className="app-body">
-          { categories.map((category, index) => (
+          { previewCategories && previewCategories.map((category, index) => (
             <CategoryRow  {...props} category={category} index={index} />
           ))}
           </div>

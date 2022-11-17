@@ -8,10 +8,10 @@ const Line = (props) => {
     <div style={{ width: '100%', transform: rowPosition === 0 ? 'scale(1, -1)' : 'scale(1, 1)' }}>
 <div class="line-container">
   <div class="line-piece left">
-    <div class="piece"  style={{ borderColor: `transparent transparent ${borderColor} ${borderColor}` }}></div>
+    <div class="piece"  style={{ borderColor: `transparent transparent transparent ${borderColor}` }}></div>
   </div>
   <div class="line-piece right">
-    <div class="piece" style={{ borderColor: `${borderColor} ${borderColor} transparent transparent` }}></div>
+    <div class="piece" style={{ borderColor: `transparent ${borderColor} transparent transparent` }}></div>
   </div>
 </div>
     </div>

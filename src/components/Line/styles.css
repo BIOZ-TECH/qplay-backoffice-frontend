@@ -1,6 +1,6 @@
 .line-container {
     display: flex;
-    height: 80px;
+    height: 40px;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -16,7 +16,7 @@
   }
   
   .line-container > .line-piece.right {
-    height: 54%;
+    height: 57%;
     margin-top: auto;
   }
   
@@ -24,7 +24,7 @@
     width: 100%;
     height: 100%;
     border: solid 3px;
-    border-radius: 0 100px 0 100px/100%;
+    border-radius: 0 100px 0 100px;
     border-style: dashed;
   }
   
