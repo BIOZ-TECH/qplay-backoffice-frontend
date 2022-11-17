@@ -145,11 +145,9 @@ const QuestionScreen = (props) => {
 
     setOpen(false);
   };
-
   const setImageData = (image, accessibility) => {
     setInputValues({...inputValues, statementImageInput: image, imageAccessibilityInput: accessibility});
   }
-
   
   return (
     <>
@@ -246,7 +244,6 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
       {
       question?.permalink
       && (
-
         <div className="question-image-container">
                   <Tooltip
         title={inputValues?.imageAccessibilityInput}

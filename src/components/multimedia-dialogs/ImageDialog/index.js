@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faClose, faCross, faUpload } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 
 const ImageDialog = ({ open, setOpen, selectedFile, setSelectedFile, dialogType }) => {
 

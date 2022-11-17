@@ -1,0 +1,63 @@
+.app-body.login {
+    margin: 1.5rem;
+}
+
+.login-mobile-card {
+    height: 100%;
+    padding: 2rem;
+    margin: 0 1rem;
+    display: flex;
+    flex-flow: column;
+    border-radius: 0.3rem;
+}
+
+.login-mobile-card > .image {
+    height: 120px;
+    margin: auto;
+}
+
+.login-mobile-card > .form {
+    width: 100%;
+    margin-top: auto;
+}
+
+.login-mobile-card > .form > .login-input {
+    padding-top: 1.5rem;
+}
+
+.login-mobile-card > .form > .login-input > .base-line {
+    height: 2px;
+}
+
+.login-mobile-card > .form > .forgot-password-link {
+    font-size: 0.8rem;
+    text-decoration: underline;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    text-align: end;
+}
+
+.login-mobile-card > .form > .login-btn {
+    text-align: center;
+    padding: 0.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 3px #c8c7c7;
+}
+
+.login-mobile-card > .form > .divider {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.login-mobile-card > .form > .divider > .line {
+    height: 2px;
+    width: fill-available;
+}
+
+.login-mobile-card > .form > .divider > .or {
+    margin: 0 1rem;
+}

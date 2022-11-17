@@ -25,4 +25,5 @@
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
     border: 2px solid var(--secondary-color);
+    outline: none !important;
 }
