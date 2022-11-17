@@ -46,8 +46,8 @@ const Gameplay = (props) => {
   ];
 
   useEffect(() => {
-    setBlockProgress(!appearance.progressOn ? 1 : 0);
-    setExamMode(!appearance.examsOn ? 1 : 0);
+    setBlockProgress(!appearance.gameplaySettings?.progressOn ? 1 : 0);
+    setExamMode(!appearance.gameplaySettings?.examsOn ? 1 : 0);
   }, [])
 
   useEffect(() => {

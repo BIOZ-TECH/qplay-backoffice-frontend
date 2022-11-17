@@ -71,8 +71,6 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
                   navigate('/error-500');
               }
             }
-
-            console.log("se llamo 2 ");
       
             setQuestion(new Question(questionData));
   
