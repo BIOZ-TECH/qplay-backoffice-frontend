@@ -46,6 +46,11 @@ const Gameplay = (props) => {
   ];
 
   useEffect(() => {
+    setBlockProgress(!appearance.progressOn ? 1 : 0);
+    setExamMode(!appearance.examsOn ? 1 : 0);
+  }, [])
+
+  useEffect(() => {
     setAppearance({
       ...appearance,
       gameplaySettings: {
@@ -60,7 +65,7 @@ const Gameplay = (props) => {
       ...appearance,
       gameplaySettings: {
         ...appearance.gameplaySettings,
-        examOn: examModeOptions[examMode].value,
+        examsOn: examModeOptions[examMode].value,
       }
     });
   }, [ examMode ]);
@@ -73,13 +78,14 @@ const Gameplay = (props) => {
         selectedConfig={ blockProgress }
         setSelectedConfig={ setBlockProgress }
       />
-      <ConfigSelector
+
+      {/*<ConfigSelector
         name="Modo de evaluaciones"
         selectorClass="no-first"
         configOptions={ examModeOptions }
         selectedConfig={ examMode }
         setSelectedConfig={ setExamMode }
-      />
+  />*/}
     </div>
   );
 }

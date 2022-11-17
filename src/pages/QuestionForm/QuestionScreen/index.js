@@ -11,7 +11,6 @@ const QuestionScreen = (props) => {
   const { question, inputValues, setInputValues, errorMessages, setErrorMessages } = props;
   const [open, setOpen] = useState(false);
   const [openImageDialog, setOpenImageDialog] = useState(false);
-
   const anchorRef = useRef(null);
   const statementInput = createRef();
   const correctAnswerInput = createRef();
@@ -150,6 +149,7 @@ const QuestionScreen = (props) => {
   const setImageData = (image, accessibility) => {
     setInputValues({...inputValues, statementImageInput: image, imageAccessibilityInput: accessibility});
   }
+
   
   return (
     <>

@@ -275,6 +275,8 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
     <div className="statement-container">
     <QuestionScreen question={question} inputValues={inputValues} setInputValues={setInputValues}
     errorMessages={errorMessages} setErrorMessages={setErrorMessages}
+    statementImage={question?.permalink}
+    setStatementImage={(image) => { setQuestion({...question, permalink: image}) }}
     />
     
     {/*<div className='image-input-container'>
