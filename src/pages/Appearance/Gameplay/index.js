@@ -78,6 +78,7 @@ const Gameplay = (props) => {
         selectedConfig={ blockProgress }
         setSelectedConfig={ setBlockProgress }
       />
+
       {/*<ConfigSelector
         name="Modo de evaluaciones"
         selectorClass="no-first"

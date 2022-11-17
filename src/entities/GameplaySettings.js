@@ -1,8 +1,8 @@
 export default class GameplaySettings {
     constructor(data) {
-        const { progressOn, examsOn, id = null } = data;
+        const { progressOn, examOn, id = null } = data;
         this.id = id;
         this.progressOn = progressOn;
-        this.examsOn = examsOn;
+        this.examOn = examOn;
     }
 }

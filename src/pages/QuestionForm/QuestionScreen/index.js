@@ -1,17 +1,16 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useRef, useState } from "react";
 
 import "./styles.css";
-import { Button, Card, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper, TextField, Tooltip } from "@mui/material";
+import { Button, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage, faPencil, faPhotoFilm, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faPencil } from "@fortawesome/free-solid-svg-icons";
 import Answer from "../../../entities/Answer";
-import ImageDialog from "../../../components/multimedia-dialogs/ImageDialog";
+import AccessibleImageDialog from "../../../components/multimedia-dialogs/AccessibleImageDialog";
 
-const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, setErrorMessages, setStatementImage, statementImage }) => {
-
+const QuestionScreen = (props) => {
+  const { question, inputValues, setInputValues, errorMessages, setErrorMessages } = props;
   const [open, setOpen] = useState(false);
   const [openImageDialog, setOpenImageDialog] = useState(false);
-
   const anchorRef = useRef(null);
   const statementInput = createRef();
   const correctAnswerInput = createRef();
@@ -132,7 +131,7 @@ const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, 
   }
 
   const handleToggle = () => {
-    if (statementImage) {
+    if (inputValues.statementImageInput) {
     setOpen((prevOpen) => !prevOpen);
   } else {
     setOpenImageDialog(true);
@@ -146,6 +145,11 @@ const QuestionScreen = ({ question, inputValues, setInputValues, errorMessages, 
 
     setOpen(false);
   };
+
+  const setImageData = (image, accessibility) => {
+    setInputValues({...inputValues, statementImageInput: image, imageAccessibilityInput: accessibility});
+  }
+
   
   return (
     <>
@@ -189,15 +193,12 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
           aria-expanded={open ? 'true' : undefined}
           aria-label="select merge strategy"
           aria-haspopup="menu"
-          onMouseOver={(e) => {
-            if(!!statementImage) handleToggle(e); 
-          }}
           onClick={(e) => {
-            if(!statementImage) handleToggle(e); 
+            if(!!inputValues.statementImageInput) handleToggle(e); 
           }}
         >
-          <FontAwesomeIcon className={!statementImage ? "mr-2" : ""} icon={statementImage ? faPencil : faImage} />
-          {!statementImage && <p>Agregar imagen</p>}
+          <FontAwesomeIcon className={!inputValues.statementImageInput ? "mr-2" : ""} icon={inputValues.statementImageInput ? faPencil : faImage} />
+          {!inputValues.statementImageInput && <p>Agregar imagen</p>}
         </Button>
 
         {question && question.permalink && <Popper
@@ -231,7 +232,7 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
                     </MenuItem>
                      <MenuItem
                       key="video-link"
-                      onClick={() => setStatementImage(null)}
+                      onClick={() => setImageData(null, null)}
                     >
                       Eliminar imagen
                     </MenuItem>
@@ -245,10 +246,17 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
       {
       question?.permalink
       && (
+
         <div className="question-image-container">
+                  <Tooltip
+        title={inputValues?.imageAccessibilityInput}
+        arrow
+        placement="right"
+      >
           <img className="question-statement-image" src={question.permalink || ''} />
+          
+        </Tooltip>
           </div>
-        
       )
     }
 </div>
@@ -317,11 +325,12 @@ className={`multimedia-btn ${question && question.permalink ? 'uploaded' : ''}`}
 
 </div>
 </Tooltip>
-<ImageDialog
+<AccessibleImageDialog
 open={openImageDialog}
 setOpen={setOpenImageDialog}
-selectedFile={statementImage}
-setSelectedFile={setStatementImage}
+selectedFile={inputValues.statementImageInput}
+imageAccessibility={inputValues.imageAccessibilityInput}
+setImageData={setImageData}
 dialogType="para pregunta"
 />
 </>

@@ -1,7 +1,7 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import { Tooltip } from "@mui/material";
+import React from "react";
 
 import "./styles.css";
-import { Card } from "@mui/material";
 
 const QuestionScreen = ({ question }) => {
 
@@ -14,7 +14,13 @@ const QuestionScreen = ({ question }) => {
     {
       question.permalink
       && (
+        <Tooltip
+        title={question?.imageAccessibility}
+        arrow
+        placement="right"
+      >
         <img className="question-statement-image detail" src={question.permalink || ''} />
+        </Tooltip>
       )
     }
   </div>

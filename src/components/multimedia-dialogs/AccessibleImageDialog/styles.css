@@ -1,0 +1,3 @@
+.image-uploader-dialog.image-accessibility > .MuiDialog-container > * > .MuiDialogContent-root > .MuiTextField-root {
+    margin: 1rem 0;
+}
