@@ -22,6 +22,7 @@ inflatedFeedback={correctInflatedFeedback} setInflatedFeedback={setCorrectInflat
 errorMessages={errorMessages} setErrorMessages={setErrorMessages} inflatedMessageType="inflatedIncorrectFeedback"
 feedbackResultType='incorrect'
 inflatedFeedback={inflatedIncorrectFeedback} setInflatedFeedback={setInflatedIncorrectFeedback} />
+
 </div>
       </div>
 

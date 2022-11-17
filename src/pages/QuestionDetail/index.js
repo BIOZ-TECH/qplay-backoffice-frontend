@@ -137,6 +137,7 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
                       <div className="feedback-type right">
                       <FeedbackPreview inflatedFeedback={question.feedback.inflatedIncorrectFeedback} feedbackResultType="incorrect"/>
                       </div>
+
                     )
                   }
                   </div>
