@@ -223,7 +223,6 @@ className={`multimedia-btn ${inflatedFeedback && (inflatedFeedback.imagePermalin
         }
         </div>
                   </div>
-
     </div>
     <ImageDialog
 open={openImageDialog}
