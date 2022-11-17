@@ -63,3 +63,40 @@
 .appearance-tabs > div > span {
     background-color: #6356e0
 }
+
+.action-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    color: white;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 5px black;
+    float: right;
+    align-self: center;
+    margin-left: auto;
+}
+
+.action-btn.selected, .action-btn.selected:hover, .action-btn.selected:focus {
+    background-color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    color: white;
+}
+
+.action-btn.first, .action-btn.middle {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.action-btn.last, .action-btn.middle {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.preview-btn-group {
+    margin-bottom: 1.5rem; 
+}

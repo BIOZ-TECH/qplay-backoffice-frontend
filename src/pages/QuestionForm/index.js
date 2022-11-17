@@ -23,20 +23,20 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
   const navigate = useNavigate();
 
   const [question, setQuestion] = useState(null);
-  const [statementType, setStatementType] = useState("only-text");
-  const [statementImage, setStatementImage] = useState(null);
   const [errorMessages, setErrorMessages] = useState({});
   const [category, setCategory] = useState(null)
   const [oldQuestion, setOldQuestion] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [inputValues, setInputValues] = useState({
     statementImageInput: '',
+    imageAccessibilityInput: '',
     answersInput: [],
     statementInput: '',
     feedbackInput: {},
   });
   const {
     statementImageInput,
+    imageAccessibilityInput,
     answersInput,
     statementInput,
     feedbackInput,
@@ -127,25 +127,10 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
   const initializeView = (data) => {
     setInputValues({
       statementImageInput: data.permalink,
+      imageAccessibilityInput: data.imageAccessibility,
       statementInput: data.statement,
       answersInput: data.answers,
       feedbackInput: data.feedback,
-    });
-  }
-
-  const onStatementImageChange = (e) => {
-    const urlImageRegex = new RegExp('http(s)?://.*\.(jpg|jpeg|png|gif)');
-    const inputValue = e.target.value;
-
-    if (urlImageRegex.test(inputValue) || !inputValue) {
-      const newQuestion = new Question({ ...question, permalink: inputValue });
-      setQuestion(newQuestion);
-    }
-
-    setInputValues({ ...inputValues, statementImageInput: inputValue });
-    setErrorMessages({
-      ...errorMessages,
-      permalink: null,
     });
   }
 
@@ -177,7 +162,8 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
       statement: statementInput,
       answers: answersInput,
       feedback: newFeedback,
-      permalink: question.permalink,
+      permalink: statementImageInput,
+      imageAccessibility: imageAccessibilityInput,
       categoryId,
     });
 

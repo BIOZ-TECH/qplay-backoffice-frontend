@@ -32,8 +32,6 @@ export default class AppearanceValidator {
             invalidPropertyMessages.logo = 'Por favor, especifique el enlace de su logo de aplicación en formato jpg, jpeg o png';
         }
 
-
-
         return invalidPropertyMessages;
     }
 }
