@@ -25,7 +25,7 @@ const ApkDownload = () => {
           case 200:
             setAppearance(new Appearance(response.data));
 
-            const responseCategories = await categoryServices.getCategories();
+            const responseCategories = await categoryServices.getCategories(7);
 
             setCategories(responseCategories.data);
             break;
