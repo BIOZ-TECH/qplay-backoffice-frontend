@@ -1,6 +1,6 @@
-.app-body.login {
+/*.app-body.login {
     margin: 1.5rem;
-}
+}*/
 
 .login-mobile-card {
     height: 100%;
@@ -60,4 +60,9 @@
 
 .login-mobile-card > .form > .divider > .or {
     margin: 0 1rem;
+}
+
+.mobile-device > .mobile-body {
+    height: 100%;
+    position: relative;
 }

@@ -1,3 +1,5 @@
+import { faM, faMobileAndroid, faMobilePhone, faMobileScreen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Appearance from "../../entities/Appearance";
@@ -50,11 +52,23 @@ const ApkDownload = () => {
 
   return (
     <div className="apk-download-screen">
-        { appearance && categories && <div className="phone">
+      <div className="content">
+      { appearance && categories && <div className="phone-container">
           <CategoriesScreenPreview {...appearance} categories={categories}/>
+          <img className="phone" src="/phone.png"/>
           </div>}
-        <h1>Descarga tu aplicación</h1>
-        <p>Descarga, comparte y desafía el ingenio con tu aplicación de preguntas y respuestas</p>
+          <div className="text">
+          <h1>Descarga tu aplicación</h1>
+        <p>Descargá, compartí y desafía el ingenio con tu aplicación de preguntas y respuestas</p>
+        <button className="download-btn" type="button">
+              <FontAwesomeIcon className="mr-2" icon={faMobileScreen} />
+              <div className="download-detail">
+              <p className="download">Descargar</p>
+                <p className="android-apk">Android APK</p>
+              </div>
+            </button>
+          </div>
+      </div>
     </div>
   );
 }

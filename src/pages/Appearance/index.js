@@ -163,6 +163,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   <button className={`action-btn middle ${selectedPreview === 2 ? 'selected' : ''}`} onClick={() => setSelectedPreview(2)}>Listado de categorías</button>
   <button className={`action-btn last ${selectedPreview === 3 ? 'selected' : ''}`} onClick={() => setSelectedPreview(3)}>Pregunta</button>
 </ButtonGroup>
+<div className="preview-container">
 {selectedPreview === 1 && <LoginPreview
       {...appearance}
       />}
@@ -172,6 +173,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
                   {selectedPreview === 3 && <AppearancePreview
       {...appearance}
             />}
+</div>
       </Card>
       </div>}
     </>

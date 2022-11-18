@@ -19,7 +19,7 @@ const CategoriesScreenPreview = (props) => {
       const category = categories[i];
       newCategories.push({
         name: category.name,
-        state: i < 4 ? 'unblock' : (i === 4 ? 'progress' : 'block'),
+        state: i < 2 ? 'unblock' : (i === 2 ? 'progress' : 'block'),
         permalink: category.permalink,
         questions: category.questions.length,
       });
@@ -29,14 +29,17 @@ const CategoriesScreenPreview = (props) => {
   }, []);
 
   return (
-        <div className="mobile-device" style={{ backgroundColor }}>
+        <div className="mobile-device">
           <div className="mobile-header" style={{ backgroundColor: headerAndButtonsBackgroundColor, color: headerAndButtonsFontColor }}>
           <p className="mobile-app-name">{appName}</p>
           </div>
+          <div className="mobile-body" style={{ backgroundColor }}>
           <div className="app-body">
-          { previewCategories && previewCategories.map((category, index) => (
+            { previewCategories && previewCategories.map((category, index) => (
             <CategoryRow  {...props} category={category} index={index} />
           ))}
+
+          </div>
           </div>
         </div>
   );

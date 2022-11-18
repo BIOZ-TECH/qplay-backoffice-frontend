@@ -4,6 +4,81 @@
     height: fill-available;
 }
 
-.apk-download-screen > .phone {
-    background-image: url('../../../public/phone.png');
+.apk-download-screen > .content {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.apk-download-screen > .content > .phone-container {
+    display: flex;
+    width: 22rem;
+}
+
+.apk-download-screen > .content > .phone-container > .mobile-device {
+    padding: 0.8rem;
+    height: 75vh;
+}
+
+.apk-download-screen > .content > .phone-container > .phone {
+    z-index: 10;
+    width: 22rem;
+    height: 75vh;
+    position: absolute;
+}
+
+.apk-download-screen > .content > .text {
+    margin-left: 3rem;
+}
+
+.apk-download-screen > .content > .text > h1 {
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.apk-download-screen > .content > .text > p {
+    font-size: 1.5rem;
+}
+
+.apk-download-screen > .content > .text > .download-btn {
+    padding-left: 1rem;
+padding-right: 1rem;
+padding-top: 0.5rem;
+padding-bottom: 0.5rem;
+width: -moz-fit-content;
+width: fit-content;
+background-color: #121212;
+border: 2px solid #121212;
+color: white;
+border-radius: 0.3rem;
+box-shadow: 1px 1px 5px black;
+float: right;
+align-self: center;
+margin-left: auto;
+display: flex;
+align-items: center;
+float: left;
+    margin-top: 2rem;
+}
+
+.apk-download-screen > .content > .text > .download-btn:focus, .apk-download-screen > .content > .text > .download-btn:hover {
+    outline: none;
+}
+
+.apk-download-screen > .content > .text > .download-btn > svg {
+    margin-right: 1rem;
+    font-size: xxx-large;
+}
+
+.apk-download-screen > .content > .text > .download-btn > .download-detail {
+    text-align: center;
+}
+
+.apk-download-screen > .content > .text > .download-btn > .download-detail > .download {
+    font-weight: 200;
+}
+
+.apk-download-screen > .content > .text > .download-btn > .download-detail > .android-apk {
+    font-size: 1.3rem;
 }
