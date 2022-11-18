@@ -60,13 +60,13 @@ const ApkDownload = () => {
           <div className="text">
           <h1>Descarga tu aplicación</h1>
         <p>Descargá, compartí y desafía el ingenio con tu aplicación de preguntas y respuestas</p>
-        <button className="download-btn" type="button">
+        <a className="download-btn" type="button" href="https://onedrive.live.com/download.aspx?authkey=%21AFiFgAS2DPr0cpg&cid=64C1DFBA3E026192&resid=64C1DFBA3E026192%21653&parId=root&action=locate">
               <FontAwesomeIcon className="mr-2" icon={faMobileScreen} />
               <div className="download-detail">
               <p className="download">Descargar</p>
                 <p className="android-apk">Android APK</p>
               </div>
-            </button>
+            </a>
           </div>
       </div>
     </div>
