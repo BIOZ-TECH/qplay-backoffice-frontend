@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "../components/AppLayout";
 
 import { Categories, Appearance } from "../pages";
+import ApkDownload from "../pages/ApkDownload";
 import CategoryDetail from "../pages/CategoryDetail";
 import CategoryForm from "../pages/CategoryForm";
 import Error401 from "../pages/error/Error401";
@@ -38,6 +39,7 @@ const Router = () => {
         <Route exact path="/error-404" element={<Error404 />} />
         <Route exact path="/error-500" element={<Error500 />} />
         <Route exact path="/categories" element={<Categories setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/download-app" element={<ApkDownload />}/>
         <Route path='*' element={ <Navigate to={getRedirection()} /> }/>
       </Routes>
     </AppLayout>

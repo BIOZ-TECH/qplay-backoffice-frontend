@@ -11,10 +11,11 @@ const LoginPreview = (props) => {
     const { primaryColor: selectableAnswersBackgroundColor, secondaryColor: selectableAnswersFontColor } = selectableAnswers;
 
   return (
-    <div className="mobile-device" style={{ backgroundColor }}>
+    <div className="mobile-device">
     <div className="mobile-header" style={{ backgroundColor: headerAndButtonsBackgroundColor, color: headerAndButtonsFontColor }}>
     <p className="mobile-app-name">{appName}</p>
     </div>
+    <div className="mobile-body" style={{ backgroundColor }}>
     <div className="app-body login">
     <div className="login-mobile-card" style={{ backgroundColor: overgroundColor }}>
     <img className="image" src={logo}/>
@@ -39,6 +40,7 @@ const LoginPreview = (props) => {
               <div className="login-btn" style={{ backgroundColor: headerAndButtonsBackgroundColor, color: headerAndButtonsFontColor}}>
                 Registrarse
               </div>
+    </div>
     </div>
     </div>
     </div>
