@@ -15,15 +15,14 @@ const CategoriesScreenPreview = (props) => {
   useEffect(() => {
     const newCategories = [];
 
-    for(let i = 0; i <= 7; i++) {
-      const category = categories[i];
+    categories?.forEach((category, index) => {
       newCategories.push({
         name: category.name,
-        state: i < 2 ? 'unblock' : (i === 2 ? 'progress' : 'block'),
+        state: index < 2 ? 'unblock' : (index === 2 ? 'progress' : 'block'),
         permalink: category.permalink,
         questions: category.questions.length,
       });
-    }
+    });
 
     setPreviewCategories(newCategories);
   }, []);
