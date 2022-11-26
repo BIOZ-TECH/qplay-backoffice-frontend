@@ -22,7 +22,7 @@ const Categories = (props) => {
 
     async function fetchCategories() {
       try {
-        const response = await categoryServices.getCategories(0, 5);
+        const response = await categoryServices.getCategories();
 
         if (response?.status !== 200) {   
           throw { response };       

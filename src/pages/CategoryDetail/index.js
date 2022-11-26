@@ -18,7 +18,7 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
   useEffect(() => {
     async function fetchCategory() {
       try {
-        const response = await categoryServices.getCategory(0, 5, categoryId);
+        const response = await categoryServices.getCategory(categoryId);
   
         switch(response.status) {
           case 200:

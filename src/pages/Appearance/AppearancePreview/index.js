@@ -16,11 +16,11 @@ const AppearancePreview = (props) => {
 
 
   return (
-    <Card className="preview-card">
-        <div className="mobile-device" style={{ backgroundColor }}>
+        <div className="mobile-device">
           <div className="mobile-header" style={{ backgroundColor: headerAndButtonsBackgroundColor, color: headerAndButtonsFontColor }}>
           <p className="mobile-app-name">{appName}</p>
           </div>
+          <div className="mobile-body" style={{ backgroundColor }}>
           <div className="app-body">
           <div className="mobile-question-card" style={{ backgroundColor: overgroundColor }}>
             <p  style={{ color: primaryLettersColor }}>¿Este es el logo de la aplicación?</p>
@@ -40,8 +40,8 @@ const AppearancePreview = (props) => {
             <div className="answer-progress" style={{ color: overgroundLettersColor }}>3/5</div>
             </div>
           </div>
+          </div>
         </div>
-    </Card>
   );
 }
 

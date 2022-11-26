@@ -12,8 +12,10 @@ export const getRedirectBasedOnResponseStatus = (response) => {
       }
 }
 
-export const setUserToken = (token) => {
-    localStorage.setItem('ACCESS_TOKEN', token);
+export const setUserInformation = (user) => {
+  const { token, holderId } = user; 
+  localStorage.setItem('ACCESS_TOKEN', token);
+  localStorage.setItem('HOLDER', holderId);
 }
 
 export const checkIfEnterIsPressed = (event) => event.code === "Enter" || event.code === "NumpadEnter";
@@ -21,7 +23,7 @@ export const checkIfEnterIsPressed = (event) => event.code === "Enter" || event.
 const helpers = {
     checkIfEnterIsPressed,
     getRedirectBasedOnResponseStatus,
-    setUserToken,
+    setUserInformation,
 }
 
 export default helpers;

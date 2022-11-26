@@ -1,9 +1,12 @@
 import Api from './api';
+import { getUserIdentifiers } from '../helpers/user';
 
-const getQuestion = (userId, holderId, id) => {
-    return Api.get(`questions/${id}?caller.id=${userId}&holder.id=${holderId}`, {
+const getQuestion = (id) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.get(`questions/${id}?holder.id=${holderId}`, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',
@@ -11,10 +14,12 @@ const getQuestion = (userId, holderId, id) => {
     });
 }
 
-const createQuestion = (userId, holderId, question) => {
-    return Api.post(`questions?caller.id=${userId}&holder.id=${holderId}`, question, {
+const createQuestion = (question) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.post(`questions?holder.id=${holderId}`, question, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',
@@ -22,10 +27,12 @@ const createQuestion = (userId, holderId, question) => {
     });
 }
 
-const updateQuestion = (userId, holderId, question) => {
-    return Api.put(`questions?caller.id=${userId}&holder.id=${holderId}`, question, {
+const updateQuestion = (question) => {
+    const { accessToken, holderId } = getUserIdentifiers();
+
+    return Api.put(`questions?holder.id=${holderId}`, question, {
         headers: {
-            'Authorization': localStorage.getItem('ACCESS_TOKEN'),
+            'Authorization': accessToken,
             "Accept": 'application/json',
             "Content-Type": 'application/json',
             "Access-Control-Allow-Origin": '*',

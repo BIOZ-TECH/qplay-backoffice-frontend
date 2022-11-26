@@ -1,0 +1,21 @@
+.lock {
+    z-index: 1;
+    font-size: 1.2rem;
+    color: #ffd000;
+}
+
+.lock > * {
+    position: relative;
+    padding: 1rem 0 0 1rem;
+}
+
+.lock > * > svg {
+    position: absolute;
+    margin: 0.5rem auto auto 0.5rem;
+}
+
+.lock > *> svg.shadow {
+    font-size: 1.5rem;
+    color: black;
+    margin: 0.3rem auto auto 0.4rem;
+}

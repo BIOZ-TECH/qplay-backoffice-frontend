@@ -10,7 +10,7 @@ import LOGIN_STRINGS from "../../resources/strings/login";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import userServices from "../../services/login";
-import { getRedirectBasedOnResponseStatus, setUserToken } from "../../helpers/index.js";
+import { getRedirectBasedOnResponseStatus, setUserInformation } from "../../helpers/index.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Login = () => {
           throw { response };       
         }
 
-        setUserToken(response?.data);
+        setUserInformation(response?.data);
         navigate(ROUTES.CATEGORIES);
     })
     .catch((e) => {
