@@ -100,3 +100,9 @@
 .preview-btn-group {
     margin-bottom: 1.5rem; 
 }
+
+.preview-container {
+    min-width: 70%;
+    max-width: 70%;
+    margin: auto;
+}

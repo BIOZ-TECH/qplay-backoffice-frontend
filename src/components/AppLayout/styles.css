@@ -1,0 +1,54 @@
+.download-apk {
+    bottom: 2.5rem;
+    right: 2.5rem;
+  position: fixed;
+  width: 4.3rem;
+  height: 4.3rem;
+  font-size: 1.3rem;
+  border-radius: 5rem !important;
+  border: 0;
+  background-color: #e87601;
+  color: #fff;
+  transition: width 0.7s;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.download-apk:hover, .download-apk:focus {
+  outline: none;
+  background-color: #e87601;
+  color: white;
+}
+
+.download-apk:hover {
+    width: 15%;
+    transition: width 0.7s;
+  }
+
+.download-apk > svg {
+    opacity: 1;
+    transition: opacity 0.5s
+  }
+
+  .download-apk:hover > svg  {
+    opacity: 0;
+    transition: opacity 0.5s
+  }
+
+  .download-apk > .button-text  {
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+    width: 100%;
+    left: 0;
+   }
+
+   .download-apk:hover > .button-text {
+    opacity: 1;
+    transition: opacity 0.5s
+  }
+
+  .download-apk:hover > .button-text > svg {
+    margin-right: 1rem;
+  }
+
+  

@@ -1,10 +1,10 @@
 import Api from './api';
 import { getUserIdentifiers } from '../helpers/user';
 
-const getCategories = () => {
+const getCategories = (limit = 0) => {
     const { accessToken, holderId } = getUserIdentifiers();
 
-    return Api.get(`categories?holder.id=${holderId}`, {
+    return Api.get(`categories?holder.id=${holderId}${limit !== 0 ? `&limit=${limit}` : ''}`, {
         headers: {
             'Authorization': accessToken,
             "Accept": 'application/json',

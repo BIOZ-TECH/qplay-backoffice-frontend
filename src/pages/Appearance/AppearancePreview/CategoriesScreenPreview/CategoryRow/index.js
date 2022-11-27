@@ -17,7 +17,7 @@ const CategoriesScreenPreview = (props) => {
           { index !== 0 && <Line borderColor={ overgroundLettersColor} rowPosition={rowPosition} />}
           <div className="category-row" style={{ flexDirection: rowPosition === 0 ? 'row' : 'row-reverse' }} >
             <div className="category-image-container" style={{ backgroundColor: category.state === 'block' && progressOn ? 'gray' : headerAndButtonsBackgroundColor }}>
-              <div className="image" style={{ filter: category.state === 'block' && progressOn ? 'grayscale(100%)' : 'none' }}>
+              <div className="image" style={{ backgroundImage: `url(${category.permalink})`, filter: category.state === 'block' && progressOn ? 'grayscale(100%)' : 'none' }}>
               </div>
               { category.state === 'block' && progressOn && (
                               <div className="lock">
@@ -30,7 +30,7 @@ const CategoriesScreenPreview = (props) => {
             </div>
             <div className="category-detail" style={{ paddingRight: rowPosition === 0 ? '0' : '0.8rem' }}>
               <p className="title" style={{ color: overgroundLettersColor }}>{category.name}</p>
-              <p style={{ color: overgroundLettersColor }}>{`${category.state === 'block' && progressOn ? 0 : (category.answers / ( category.state === 'progress' ? 2 : 1))}/${category.answers}`}</p>
+              <p style={{ color: overgroundLettersColor }}>{`${category.state === 'block' && progressOn ? 0 : (category.questions / ( category.state === 'progress' ? 2 : 1))}/${category.questions}`}</p>
             </div>
           </div>
           </>
