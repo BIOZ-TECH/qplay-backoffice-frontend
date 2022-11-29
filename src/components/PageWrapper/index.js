@@ -17,7 +17,7 @@ const PageWrapper = ({ children, pathname }) => {
           {pathname !== "/login" && pathname !== '/error-401' && pathname !== '/error-404'
           && pathname !== '/error-500' && pathname !== '/download-app' && <button className="download-apk" onClick={() => { navigate('/download-app'); }}>
           <FontAwesomeIcon icon={faDownload} />
-          <span class="button-text"><FontAwesomeIcon icon={faDownload} />Descargar aplicación</span>
+          <span className="button-text"><FontAwesomeIcon icon={faDownload} />Descargar aplicación</span>
           </button>}
         </div>
       </section>

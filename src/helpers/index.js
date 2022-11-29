@@ -18,12 +18,18 @@ export const setUserInformation = (user) => {
   localStorage.setItem('HOLDER', holderId);
 }
 
+export const removeUserInformation = (user) => {
+  localStorage.removeItem('ACCESS_TOKEN');
+  localStorage.removeItem('HOLDER');
+}
+
 export const checkIfEnterIsPressed = (event) => event.code === "Enter" || event.code === "NumpadEnter";
 
 const helpers = {
     checkIfEnterIsPressed,
     getRedirectBasedOnResponseStatus,
     setUserInformation,
+    removeUserInformation,
 }
 
 export default helpers;

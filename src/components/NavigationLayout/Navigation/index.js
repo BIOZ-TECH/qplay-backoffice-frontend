@@ -28,8 +28,9 @@ const Navigation = ({
           aria-label="side-navigation"
           className="side-navigation-panel"
         >
-          {items.map((item) => (
+          {items.map((item, index) => (
             <NavigationItem
+            key={`menu-item-${index}`}
             {...item}
             onSelect={onSelect}
             activeItem={activeItem}

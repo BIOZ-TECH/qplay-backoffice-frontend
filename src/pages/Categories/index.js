@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList } from 'react-window';
+import { Skeleton } from "@mui/material";
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
@@ -67,8 +68,7 @@ const Categories = (props) => {
 
   return (
     <div className="categories">
-      { categories?.length > 0
-        && (
+      { categories?.length > 0 ? (
           <AutoSizer>
             {({ height, width }) => (
               <FixedSizeList
@@ -83,6 +83,24 @@ const Categories = (props) => {
               </FixedSizeList>
             )}
           </AutoSizer>
+        ) : (
+          <>
+            <Skeleton className="category-row-skeleton first" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton middle" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton middle" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton middle" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton last" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+          </>
         )
       }
     </div>

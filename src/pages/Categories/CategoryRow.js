@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -17,13 +17,23 @@ const CategoryRow = (props) => {
   const navigate = useNavigate();
 
   const { index, style, categories } = props;
-  const category = new Category(categories[index]);
+  const [category, setCategory] = useState(null);
+
+  useEffect(() => {
+    if (categories !== undefined) {
+      setCategory(new Category(categories[index]));
+    }
+  }, []);
 
   const getItemClass = (index) => {
+    if (index === null) {
+      return 'middle';
+    }
+
     switch(index) {
       case 0:
         return 'first';
-      case categories.length:
+      case categories?.length:
         return 'last';
       default:
         return 'middle';
@@ -40,13 +50,13 @@ const CategoryRow = (props) => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto', padding: '0 !important' }}>
             <div className="detail">
-              <div className="img" style={{ backgroundImage: `url(${category.permalink})` }}></div>
+              <div className="img" style={{ backgroundImage: `url(${category?.permalink})` }}></div>
               <div className="data">
                 <Typography variant="h5" className='category-item-title' component="div">
-                  { `${CATEGORIES_STRINGS.CATEGORY} ${category.position}: ${category.name}` }
+                  { `${CATEGORIES_STRINGS.CATEGORY} ${category?.position}: ${category?.name}` }
                 </Typography>
                 <Typography color="text.secondary">
-                  { `${category.questions.length} ${CATEGORIES_STRINGS.ANSWERS.toLowerCase()}` }
+                  { `${category?.questions?.length} ${CATEGORIES_STRINGS.ANSWERS.toLowerCase()}` }
                 </Typography>
               </div>
             </div>

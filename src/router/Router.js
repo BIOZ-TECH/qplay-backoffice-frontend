@@ -44,7 +44,7 @@ const Router = () => {
         <Route exact path="/error-404" element={<Error404 />} />
         <Route exact path="/error-500" element={<Error500 />} />
         <Route exact path="/categories" element={<Categories setAppBarContent={setAppBarContent} />}/>
-        <Route exact path="/download-app" element={<ApkDownload />}/>
+        <Route exact path="/download-app" element={<ApkDownload setAppBarContent={setAppBarContent} />}/>
         <Route path='*' element={ <Navigate to={getRedirection()} /> }/>
       </Routes>
     </AppLayout>

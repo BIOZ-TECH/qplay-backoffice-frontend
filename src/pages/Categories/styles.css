@@ -4,6 +4,26 @@
     height: 100%;
 }
 
+.categories > .category-row-skeleton {
+    margin-left: 1rem;
+    margin-right: 1.6rem;
+    height: 19%;
+    max-width: 100%;
+}
+
+.categories > .category-row-skeleton.first {
+    margin-bottom: 1rem;
+}
+
+.categories > .category-row-skeleton.last {
+    margin-top: 1rem;
+}
+
+.categories > .category-row-skeleton.middle {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
 .categories-list > * > .category {
     padding-left: 1rem;
     padding-right: 1rem;

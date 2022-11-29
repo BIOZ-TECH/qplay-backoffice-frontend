@@ -6,11 +6,9 @@ import CategoryRow from './CategoryRow';
 
 const CategoriesScreenPreview = (props) => {
   const [previewCategories, setPreviewCategories] = useState(null);
-  const { appName, headerAndButtons, backgrounds, letters, selectableAnswers, logo, categories } = props;
+  const { appName, headerAndButtons = {}, backgrounds = {}, categories } = props;
   const { primaryColor: headerAndButtonsBackgroundColor, secondaryColor: headerAndButtonsFontColor } = headerAndButtons;
-  const { primaryColor: primaryLettersColor, secondaryColor: overgroundLettersColor } = letters;
-  const { primaryColor: backgroundColor, secondaryColor: overgroundColor } = backgrounds;
-  const { primaryColor: selectableAnswersBackgroundColor, secondaryColor: selectableAnswersFontColor } = selectableAnswers;
+  const { primaryColor: backgroundColor } = backgrounds;
 
   useEffect(() => {
     const newCategories = [];
@@ -35,7 +33,7 @@ const CategoriesScreenPreview = (props) => {
           <div className="mobile-body" style={{ backgroundColor }}>
           <div className="app-body">
             { previewCategories && previewCategories.map((category, index) => (
-            <CategoryRow  {...props} category={category} index={index} />
+            <CategoryRow key={`category-${index}`} {...props} category={category} index={index} />
           ))}
 
           </div>

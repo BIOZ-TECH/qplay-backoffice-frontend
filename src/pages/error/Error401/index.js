@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./styles.css";
 import { Card } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { removeUserInformation } from "../../../helpers";
 
 const Error401 = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+      removeUserInformation();
+    }, [])
+    
 
     const onGoBackClick = () => {
         navigate('/');
