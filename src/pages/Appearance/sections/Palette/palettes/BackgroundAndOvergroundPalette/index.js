@@ -5,6 +5,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
 import ColorPicker from '../../../../../../components/ColorPicker';
+import APPEARANCE_STRINGS from "../../../../../../resources/strings/appearance";
 
 const BackgroundAndOvergroundPalette = ({ appearance, setAppearance }) => {
   const { primaryColor: backgroundColor, secondaryColor: overgroundColor } = appearance.backgrounds;
@@ -30,20 +31,20 @@ const BackgroundAndOvergroundPalette = ({ appearance, setAppearance }) => {
       aria-controls="header-palette"
       id="header-palette"
     >
-      <Typography>Fondo de la aplicación</Typography>
+      <Typography>{ APPEARANCE_STRINGS.PALETTE_SECTION.BACKGROUND_AND_OVERGROUND_PALETTE.TITLE }</Typography>
       <div className="color-square" style={{ backgroundColor: backgroundColor }}></div>
       <div className="color-square" style={{ backgroundColor: overgroundColor }}></div>
     </AccordionSummary>
     <AccordionDetails className="accordion-body">
       <div className="background-input">
-        <p>Fondo</p>
+        <p>{ APPEARANCE_STRINGS.PALETTE_SECTION.BACKGROUND_AND_OVERGROUND_PALETTE.MAIN_BACKGROUND }</p>
       <ColorPicker
       color={backgroundColor}
       setColor={setBackgroundColor}
       />
       </div>
       <div className="letters-input">
-        <p>Sobrefondo</p>
+        <p>{ APPEARANCE_STRINGS.PALETTE_SECTION.BACKGROUND_AND_OVERGROUND_PALETTE.OVERGROUND }</p>
       <ColorPicker
       color={overgroundColor}
       setColor={setOvergroundColor}

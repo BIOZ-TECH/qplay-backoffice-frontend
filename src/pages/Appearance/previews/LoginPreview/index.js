@@ -1,4 +1,5 @@
 import React from "react";
+import APPEARANCE_STRINGS from "../../../../resources/strings/appearance";
 
 import './styles.css';
 
@@ -19,16 +20,16 @@ const LoginPreview = (props) => {
     <img className="image" src={logo}/>
     <div className="form">
     <div className="login-input">
-                <p style={{ color: primaryLettersColor }}>MiUsuario</p>
+                <p style={{ color: primaryLettersColor }}>{ APPEARANCE_STRINGS.LOGIN_PREVIEW.FAKE_USER }</p>
                 <div className="base-line" style={{ backgroundColor: headerAndButtonsBackgroundColor }}></div>
               </div>
               <div className="login-input">
-                <p style={{ color: headerAndButtonsBackgroundColor }}>Contraseña</p>
+                <p style={{ color: headerAndButtonsBackgroundColor }}>{ APPEARANCE_STRINGS.LOGIN_PREVIEW.PASSWORD }</p>
                 <div className="base-line" style={{ backgroundColor: headerAndButtonsBackgroundColor }}></div>
               </div>
-              <p className="forgot-password-link" style={{ color: headerAndButtonsBackgroundColor }}>¿Olvidaste tu contraseña?</p>
+              <p className="forgot-password-link" style={{ color: headerAndButtonsBackgroundColor }}>{ APPEARANCE_STRINGS.LOGIN_PREVIEW.FORGOT_PASSWORD }</p>
               <div className="login-btn" style={{ backgroundColor: headerAndButtonsBackgroundColor, color: headerAndButtonsFontColor}}>
-                Iniciar sesión
+              { APPEARANCE_STRINGS.LOGIN_PREVIEW.LOG_IN }
               </div>
               <div className="divider">
                 <div className="line" style={{ backgroundColor: primaryLettersColor }}></div>
@@ -36,7 +37,7 @@ const LoginPreview = (props) => {
                 <div className="line" style={{ backgroundColor: primaryLettersColor }}></div>
               </div>
               <div className="login-btn" style={{ backgroundColor: headerAndButtonsBackgroundColor, color: headerAndButtonsFontColor}}>
-                Registrarse
+              { APPEARANCE_STRINGS.LOGIN_PREVIEW.SIGN_UP }
               </div>
     </div>
     </div>

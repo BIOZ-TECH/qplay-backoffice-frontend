@@ -41,11 +41,7 @@ const Categories = (props) => {
   }, []);
 
   const defineAppBar = () => {
-    const breadcrumb = [
-      {
-        name: CATEGORIES_STRINGS.CURRENT_BREADCRUMB_LOCATION,
-      }
-    ];
+    const breadcrumb = CATEGORIES_STRINGS.BREADCRUMB;
     const action = {
       name: CATEGORIES_STRINGS.NEW_CATEGORY,
       icon: faAdd,

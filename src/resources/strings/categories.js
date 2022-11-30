@@ -1,5 +1,9 @@
 /* View texts */
-const CURRENT_BREADCRUMB_LOCATION = 'Categorías';
+const BREADCRUMB = [
+    {
+      name: 'Categorías',
+    }
+];
 const NEW_CATEGORY = 'Nueva categoría';
 
 /* Item texts */
@@ -7,7 +11,7 @@ const CATEGORY = 'Categoría';
 const ANSWERS = 'Preguntas';
 
 const CATEGORIES_STRINGS = {
-    CURRENT_BREADCRUMB_LOCATION,
+    BREADCRUMB,
     NEW_CATEGORY,
     CATEGORY,
     ANSWERS,

@@ -15,8 +15,9 @@ import AppearanceValidator from "../../validators/entity/AppearanceValidator";
 import appearanceServices from '../../services/appearence';
 import categoryServices from "../../services/category";
 import { getRedirectBasedOnResponseStatus } from "../../helpers";
+import APPEARANCE_STRINGS from "../../resources/strings/appearance";
 
-const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
+const AppearancePage = ({ setMessage, setAppBarContent }) => {
   const [appearance, setAppearance] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [errorMessages, setErrorMessages] = useState({});
@@ -27,17 +28,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
 
   useEffect(() => {
     setActiveTab(0);
-    setBreadcrumb([
-      {
-        name: 'Apariencia',
-        route: '/appearance',
-      },
-    ]);
-    setAction({
-      name: 'Guardar cambios',
-      icon: faFloppyDisk,
-      onActionClick: onSaveAppearanceChangesClick,
-    });
+    updateAction();
     async function fetchAppearance() {
 
       try {
@@ -74,11 +65,13 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   };
 
   const updateAction = () => {
-    setAction({
-      name: 'Guardar cambios',
+    const breadcrumb = APPEARANCE_STRINGS.BREADCRUMB;
+    const action = {
+      name: APPEARANCE_STRINGS.SAVE_CHANGES,
       icon: faFloppyDisk,
       onActionClick: onSaveAppearanceChangesClick,
-    });
+    };
+    setAppBarContent(breadcrumb, action);
   }
 
   const onSaveAppearanceChangesClick = async() => {
@@ -92,10 +85,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
     .then((res) => {
       switch(res.status) {
         case 200:
-          setMessage({
-            severity: 'success',
-            text: 'La apariencia ha sido actualizada correctamente'
-          });
+          setMessage(APPEARANCE_STRINGS.UPDATE_SUCCESS);
           setUpdateState(!!updateState);
           break;
         default:
@@ -147,9 +137,9 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
       </Card>
       <Card className="preview-card">
       <ButtonGroup className="preview-btn-group" variant="contained" aria-label="outlined primary button group">
-      <button className={`action-btn first ${selectedPreview === 1 ? 'selected' : ''}`} onClick={() => setSelectedPreview(1)}>Inicio de sesión</button>
-  <button className={`action-btn middle ${selectedPreview === 2 ? 'selected' : ''}`} onClick={() => setSelectedPreview(2)}>Listado de categorías</button>
-  <button className={`action-btn last ${selectedPreview === 3 ? 'selected' : ''}`} onClick={() => setSelectedPreview(3)}>Pregunta</button>
+      <button className={`action-btn first ${selectedPreview === 1 ? 'selected' : ''}`} onClick={() => setSelectedPreview(1)}>{ APPEARANCE_STRINGS.MOBILE_SCREENS.LOGIN }</button>
+  <button className={`action-btn middle ${selectedPreview === 2 ? 'selected' : ''}`} onClick={() => setSelectedPreview(2)}>{ APPEARANCE_STRINGS.MOBILE_SCREENS.CATEGORIES }</button>
+  <button className={`action-btn last ${selectedPreview === 3 ? 'selected' : ''}`} onClick={() => setSelectedPreview(3)}>{ APPEARANCE_STRINGS.MOBILE_SCREENS.QUESTION }</button>
 </ButtonGroup>
 <div className="preview-container">
 {selectedPreview === 1 && <LoginPreview

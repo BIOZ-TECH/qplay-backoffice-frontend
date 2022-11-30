@@ -5,6 +5,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
 import ColorPicker from '../../../../../../components/ColorPicker';
+import APPEARANCE_STRINGS from "../../../../../../resources/strings/appearance";
 
 const HeaderAndButtonsPalette = ({ appearance, setAppearance }) => {
   const { primaryColor: backgroundColor, secondaryColor: fontColor } = appearance.headerAndButtons;
@@ -30,20 +31,20 @@ const HeaderAndButtonsPalette = ({ appearance, setAppearance }) => {
       aria-controls="header-palette"
       id="header-palette"
     >
-      <Typography>Barra superior y botones</Typography>
+      <Typography>{ APPEARANCE_STRINGS.PALETTE_SECTION.HEADER_AND_BUTTONS_PALETTE.TITLE }</Typography>
       <div className="color-square" style={{ backgroundColor }}></div>
       <div className="color-square" style={{ backgroundColor: fontColor }}></div>
     </AccordionSummary>
     <AccordionDetails className="accordion-body">
       <div className="background-input">
-        <p>Fondo</p>
+        <p>{ APPEARANCE_STRINGS.PALETTE_SECTION.HEADER_AND_BUTTONS_PALETTE.BACKGROUND }</p>
       <ColorPicker
       color={backgroundColor}
       setColor={setBackgroundColor}
       />
       </div>
       <div className="letters-input">
-        <p>Letras</p>
+        <p>{ APPEARANCE_STRINGS.PALETTE_SECTION.HEADER_AND_BUTTONS_PALETTE.LETTERS }</p>
       <ColorPicker
       color={fontColor}
       setColor={setFontColor}

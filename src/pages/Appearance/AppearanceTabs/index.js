@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faMobileScreen, faPalette } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
+import APPEARANCE_STRINGS from "../../../resources/strings/appearance";
 
 const AppearanceTabs = ({ activeTab, onTabClick }) => {
   return (
@@ -13,9 +14,9 @@ const AppearanceTabs = ({ activeTab, onTabClick }) => {
       aria-label="icon position tabs example"
       className="appearance-tabs"
     >
-      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faMobileScreen} />} iconPosition="start" label="marca" />
-      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faPalette} />} iconPosition="start" label="paleta de colores" />
-      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faGamepad} />} iconPosition="start" label="jugabilidad" />
+      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faMobileScreen} />} iconPosition="start" label={ APPEARANCE_STRINGS.BRAND_TAB } />
+      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faPalette} />} iconPosition="start" label={ APPEARANCE_STRINGS.PALETTE_TAB } />
+      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faGamepad} />} iconPosition="start" label={ APPEARANCE_STRINGS.GAMEPLAY_TAB } />
     </Tabs>
   );
 }

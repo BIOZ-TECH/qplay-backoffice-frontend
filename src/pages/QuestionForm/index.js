@@ -161,7 +161,7 @@ const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
       statement: statementInput,
       answers: answersInput,
       feedback: newFeedback,
-      permalink: statementImageInput,
+      permalink: statementImageInput || null,
       imageAccessibility: imageAccessibilityInput,
       categoryId,
     });
