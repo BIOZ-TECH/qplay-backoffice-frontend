@@ -1,8 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "@mui/material";
 
 import "./styles.css";
-import { Card } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 const Error404 = () => {
     const navigate = useNavigate();

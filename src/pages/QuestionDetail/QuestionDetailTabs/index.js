@@ -1,10 +1,7 @@
 import React from "react";
-
+import { Tab, Tabs } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMobileScreen, faComments, faQuestionCircle, faQuestion } from '@fortawesome/free-solid-svg-icons'
-
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { faComments, faQuestion } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
 

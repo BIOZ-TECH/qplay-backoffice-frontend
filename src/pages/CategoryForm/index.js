@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import categoryServices from "../../services/category";
-import Category from "../../entities/Category";
-
-import "./styles.css";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, TextField, Tooltip } from "@mui/material";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+
+import "./styles.css";
 import ImageUploader from "../../components/ImageUploader";
+import Category from "../../entities/Category";
 import CategoryValidator from "../../validators/entity/CategoryValidator";
+import categoryServices from "../../services/category";
 
 const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
   const { id: categoryId } = useParams();

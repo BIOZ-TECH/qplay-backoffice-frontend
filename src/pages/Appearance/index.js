@@ -1,24 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
-
-import appearanceService from '../../services/appearence';
-import AppearanceTabs from "./AppearanceTabs";
-import Brand from "./Brand";
-import Palette from "./Palette"
-import AppearancePreview from "./AppearancePreview";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, ButtonGroup } from "@mui/material";
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 
 import './styles.css';
-
-import Card from '@mui/material/Card';
-import Appearance from '../../entities/Appearance';
+import AppearancePreview from "./previews/AppearancePreview";
+import AppearanceTabs from "./AppearanceTabs";
+import Brand from "./sections/Brand";
+import CategoriesScreenPreview from "./previews/CategoriesScreenPreview";
+import Gameplay from "./sections/Gameplay";
+import LoginPreview from "./previews/LoginPreview";
+import Palette from "./sections/Palette";
 import AppearanceValidator from "../../validators/entity/AppearanceValidator";
-import { Navigate, useNavigate } from "react-router-dom";
-import Gameplay from "./Gameplay";
-import CategoriesScreenPreview from "./AppearancePreview/CategoriesScreenPreview";
-import { Button, ButtonGroup } from "@mui/material";
-import LoginPreview from "./AppearancePreview/LoginPreview";
+import appearanceServices from '../../services/appearence';
 import categoryServices from "../../services/category";
+import { getRedirectBasedOnResponseStatus } from "../../helpers";
 
 const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
   const [appearance, setAppearance] = useState(null);
@@ -45,32 +41,24 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
     async function fetchAppearance() {
 
       try {
-        const response = await appearanceService.getApplicationAppearance();
-  
-        switch(response.status) {
-          case 200:
-            setAppearance(new Appearance(response.data));
+        const appearanceResponse = await appearanceServices.getApplicationAppearance();
 
-            const responseCategories = await categoryServices.getCategories(7);
-
-            setCategories(responseCategories.data);
-
-            break;
-          default:
-            navigate('/error-500');
+        if (appearanceResponse?.status !== 200) {   
+          throw { response: appearanceResponse };       
         }
+
+        const categoriesResponse = await categoryServices.getCategories(7);
+
+        if (categoriesResponse?.status !== 200) {   
+          throw { response: categoriesResponse };       
+        }
+
+        setAppearance(appearanceResponse.data);
+        setCategories(categoriesResponse.data);
       } catch (e) {
-        switch(e.response.status) {
-          case 400:
-          case 401:
-            navigate('/error-401');
-            break;
-          case 404:
-            navigate('/error-404');
-            break;
-          default:
-            navigate('/error-500');
-        }
+        navigate(
+          getRedirectBasedOnResponseStatus(e.response),
+        );
       }
     };
 
@@ -100,7 +88,7 @@ const AppearancePage = ({ setBreadcrumb, setAction, setMessage }) => {
     setErrorMessages(newMessages);
   
     if (Object.keys(newMessages).length === 0) {
-    await appearanceService.updateApplicationAppearance(appearance)
+    await appearanceServices.updateApplicationAppearance(appearance)
     .then((res) => {
       switch(res.status) {
         case 200:

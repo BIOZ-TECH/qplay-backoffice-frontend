@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./styles.css";
 import APK_DOWNLOAD_STRINGS from "../../resources/strings/apk-download";
-import CategoriesScreenPreview from "../Appearance/AppearancePreview/CategoriesScreenPreview";
+import CategoriesScreenPreview from "../Appearance/previews/CategoriesScreenPreview";
 import appearanceServices from "../../services/appearence";
 import categoryServices from "../../services/category";
 import { getRedirectBasedOnResponseStatus } from "../../helpers";
-import { Skeleton } from "@mui/material";
 
 const ApkDownload = (props) => {
   const navigate = useNavigate();

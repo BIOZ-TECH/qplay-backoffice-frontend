@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Card } from "@mui/material";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Card } from "@mui/material";
-import QuestionScreen from "./QuestionScreen";
-import Question from "../../entities/Question";
 import FeedbackPreview from "./FeedbackPreview";
-import Feedback from "../../entities/Feedback";
-import InflatedFeedback from "../../entities/InflatedFeedback";
 import QuestionDetailTabs from "./QuestionDetailTabs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import questionServices from "../../services/question";
-
-import categoryService from "../../services/category";
+import QuestionScreen from "./QuestionScreen";
 import Category from "../../entities/Category";
+import Question from "../../entities/Question";
+import categoryServices from "../../services/category";
+import questionServices from "../../services/question";
 
 const QuestionDetail = ({ setBreadcrumb, setAction }) => {
   const { id: questionId, categoryId } = useParams();
@@ -27,7 +23,7 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const categoryResponse = await categoryService.getCategory(categoryId);
+        const categoryResponse = await categoryServices.getCategory(categoryId);
   
         switch(categoryResponse.status) {
           case 200:

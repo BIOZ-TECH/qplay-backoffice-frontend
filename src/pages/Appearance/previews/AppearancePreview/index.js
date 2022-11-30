@@ -2,10 +2,6 @@ import React from "react";
 
 import './styles.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import Card from '@mui/material/Card';
-
 const AppearancePreview = (props) => {
   const { appName, headerAndButtons, backgrounds, letters, selectableAnswers, logo } = props;
   const { primaryColor: headerAndButtonsBackgroundColor, secondaryColor: headerAndButtonsFontColor } = headerAndButtons;

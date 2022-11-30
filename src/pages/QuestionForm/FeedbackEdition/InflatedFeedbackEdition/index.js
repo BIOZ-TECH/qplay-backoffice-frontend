@@ -1,9 +1,8 @@
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import InflatedFeedback from "../../../../entities/InflatedFeedback";
-import FeedbackPreview from "../FeedbackPreview";
 
 import "./styles.css";
+import FeedbackPreview from "../FeedbackPreview";
+import InflatedFeedback from "../../../../entities/InflatedFeedback";
 
 const InflatedFeedbackEdition = ({ inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages, inflatedMessageType = "inflatedFeedback", feedbackResultType }) => {
     const [inflatedFeedbackType, setInflatedFeedbackType] = useState("only-text");

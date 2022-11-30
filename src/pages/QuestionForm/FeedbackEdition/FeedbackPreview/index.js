@@ -1,13 +1,13 @@
-import { faPencil, faPhotoFilm, faCommentDots, faCheck, faClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper } from "@mui/material";
 import React, { createRef, useEffect, useRef, useState } from "react";
+import { Button, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faPhotoFilm, faCommentDots, faCheck, faClose } from "@fortawesome/free-solid-svg-icons";
+
+import "./styles.css";
 import ImageDialog from "../../../../components/multimedia-dialogs/ImageDialog";
 import VideoDialog from "../../../../components/multimedia-dialogs/VideoDialog";
 import YoutubeEmbed from "../../../../components/YoutubeEmbed";
 import InflatedFeedback from "../../../../entities/InflatedFeedback";
-
-import "./styles.css";
 
 const FeedbackPreview = ({ feedbackResultType, inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages }) => {
 

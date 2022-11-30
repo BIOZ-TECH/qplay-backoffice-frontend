@@ -1,11 +1,11 @@
 import React, { createRef, useRef, useState } from "react";
-
-import "./styles.css";
 import { Button, ClickAwayListener, FormControl, FormHelperText, Grow, InputAdornment, MenuItem, MenuList, OutlinedInput, Paper, Popper, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPencil } from "@fortawesome/free-solid-svg-icons";
-import Answer from "../../../entities/Answer";
+
+import "./styles.css";
 import AccessibleImageDialog from "../../../components/multimedia-dialogs/AccessibleImageDialog";
+import Answer from "../../../entities/Answer";
 
 const QuestionScreen = (props) => {
   const { question, inputValues, setInputValues, errorMessages, setErrorMessages } = props;

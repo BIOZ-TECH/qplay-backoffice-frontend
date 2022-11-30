@@ -1,15 +1,11 @@
 import React from "react";
 
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ColorPicker from '../../../../../components/ColorPicker';
-
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import "../styles.css";
+import ColorPicker from '../../../../../../components/ColorPicker';
 
 const LettersPalette  = ({ appearance, setAppearance }) => {
   const { primaryColor: primaryFontColor, secondaryColor: secondaryFontColor } = appearance.letters;

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 import './styles.css';
 import Line from "../../../../../components/Line";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 const CategoriesScreenPreview = (props) => {
   const { headerAndButtons, letters, index, category, gameplaySettings } = props;
   const { progressOn } = gameplaySettings;
-  const { primaryColor: headerAndButtonsBackgroundColor, secondaryColor: headerAndButtonsFontColor } = headerAndButtons;
-  const { primaryColor: primaryLettersColor, secondaryColor: overgroundLettersColor } = letters;
+  const { primaryColor: headerAndButtonsBackgroundColor } = headerAndButtons;
+  const { secondaryColor: overgroundLettersColor } = letters;
   const [rowPosition, setRowPosition] = useState(index % 2);
 
   return (

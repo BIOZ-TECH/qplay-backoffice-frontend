@@ -1,9 +1,6 @@
 import React from "react";
 
 import "./styles.css";
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import InflatedFeedbackEdition from "../InflatedFeedbackEdition";
 
 const OnePerResultFeedback = ({ correctInflatedFeedback, setCorrectInflatedFeedback, inflatedIncorrectFeedback, setInflatedIncorrectFeedback, errorMessages, setErrorMessages }) => {

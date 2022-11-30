@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Card } from "@mui/material";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import categoryServices from "../../services/category";
-import Category from "../../entities/Category";
 
 import "./styles.css";
-import { useParams } from "react-router-dom";
-import { Card } from "@mui/material";
 import Questions from "./Questions";
+import Category from "../../entities/Category";
+import categoryServices from "../../services/category";
 
 const CategoryDetail = ({ setBreadcrumb, setAction }) => {
   const navigate = useNavigate();

@@ -1,14 +1,12 @@
-import { Card } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 import './styles.css';
 
 const LoginPreview = (props) => {
-    const { appName, headerAndButtons, backgrounds, letters, selectableAnswers, logo } = props;
+    const { appName, headerAndButtons, backgrounds, letters, logo } = props;
     const { primaryColor: headerAndButtonsBackgroundColor, secondaryColor: headerAndButtonsFontColor } = headerAndButtons;
-    const { primaryColor: primaryLettersColor, secondaryColor: overgroundLettersColor } = letters;
+    const { primaryColor: primaryLettersColor } = letters;
     const { primaryColor: backgroundColor, secondaryColor: overgroundColor } = backgrounds;
-    const { primaryColor: selectableAnswersBackgroundColor, secondaryColor: selectableAnswersFontColor } = selectableAnswers;
 
   return (
     <div className="mobile-device">

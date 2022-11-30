@@ -6,12 +6,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-flow: column;
 }
 
 .mobile-device {
     position: relative;
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 20%;
+    max-width: 20%;
     height: 65vh;
     display: flex;
     flex-direction: column;
@@ -32,8 +34,14 @@
     height: 100%;
     position: absolute;
     width: 100%;
+    overflow: hidden;
     display: flex;
     flex-flow: column;
+}
+
+.mobile-device > .mobile-body {
+    height: 100%;
+    position: relative;
 }
 
 .mobile-question-card {
@@ -85,44 +93,4 @@
 .mobile-progress-bar > .progress-bar > .remaining-progress {
     height: 100%;
     width: 40%;
-}
-
-.category-row {
-    display: flex;
-}
-
-.category-row > .category-image-container {
-    border-radius: 5rem;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.category-row > .category-image-container > .image {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border-radius: 5rem;
-    min-height: 80%;
-    max-height: 80%;
-    min-width: 80%;
-    max-width: 80%;
-    position: absolute;
-}
-
-.category-row > .category-detail {
-    align-self: center;
-    margin-left: 0.8rem;
-}
-
-.category-row > .category-detail > .title {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.mobile-device > .app-body {
-    overflow-y: hidden;
 }

@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Card from "@mui/material/Card";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Card, TextField } from "@mui/material";
-import QuestionScreen from "./QuestionScreen";
 import FeedbackEdition from "./FeedbackEdition";
-import Question from "../../entities/Question";
-import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QuestionDetailTabs from "../QuestionDetail/QuestionDetailTabs";
-import questionServices from "../../services/question";
+import QuestionScreen from "./QuestionScreen";
+import Category from "../../entities/Category";
 import Feedback from "../../entities/Feedback";
 import InflatedFeedback from "../../entities/InflatedFeedback";
-import categoryServices from "../../services/category";
-import Category from "../../entities/Category";
-import QuestionValidator from "../../validators/entity/QuestionValidator";
-import InflatedFeedbackValidator from "../../validators/entity/InflatedFeedbackValidator";
+import Question from "../../entities/Question";
 import AnswerValidator from "../../validators/entity/AnswerValidator";
+import InflatedFeedbackValidator from "../../validators/entity/InflatedFeedbackValidator";
+import QuestionValidator from "../../validators/entity/QuestionValidator";
+import categoryServices from "../../services/category";
+import questionServices from "../../services/question";
 
 const QuestionForm = ({ setBreadcrumb, setAction, setMessage }) => {
   const { id: questionId, categoryId } = useParams();

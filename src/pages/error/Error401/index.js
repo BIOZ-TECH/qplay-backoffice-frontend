@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "@mui/material";
 
 import "./styles.css";
-import { Card } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { removeUserInformation } from "../../../helpers";
 
 const Error401 = () => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Card from '@mui/material/Card';
 
 import './styles.css';
 import CategoryRow from './CategoryRow';

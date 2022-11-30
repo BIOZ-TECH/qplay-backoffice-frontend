@@ -1,12 +1,9 @@
 import React from "react";
-
+import { Tab, Tabs } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faMobileScreen, faPalette } from '@fortawesome/free-solid-svg-icons'
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-
-import "./styles.css";
+import "../styles.css";
 
 const AppearanceTabs = ({ activeTab, onTabClick }) => {
   return (

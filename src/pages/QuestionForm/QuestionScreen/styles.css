@@ -10,8 +10,8 @@
 
 .mobile-device {
     position: relative;
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 20%;
+    max-width: 20%;
     height: 65vh;
     display: flex;
     flex-direction: column;

@@ -2,16 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import ListItem from '@mui/material/ListItem';
-import Typography from '@mui/material/Typography';
+import { Box, Card, CardContent, CardMedia, ListItem, Typography } from '@mui/material';
 
-import ROUTES from "../../resources/routes";
-import CATEGORIES_STRINGS from "../../resources/strings/categories";
-import Category from "../../entities/Category";
+import ROUTES from "../../../resources/routes";
+import CATEGORIES_STRINGS from "../../../resources/strings/categories";
+import Category from "../../../entities/Category";
 
 const CategoryRow = (props) => {
   const navigate = useNavigate();

@@ -1,8 +1,7 @@
 import React from "react";
+import { TextField, Tooltip } from '@mui/material';
 
-import TextField from '@mui/material/TextField';
-import ImageUploader from "../../components/ImageUploader";
-import { FormControl, InputLabel, MenuItem, Select, Tooltip } from "@mui/material";
+import ImageUploader from "../../../../components/ImageUploader";
 
 const Brand = ({appearance, setAppearance, errorMessages, setErrorMessages}) => {
   const { appName, logo } = appearance;
