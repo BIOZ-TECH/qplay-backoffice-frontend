@@ -1,3 +1,13 @@
+/* App bar */
+const BREADCRUMB = [
+    {
+      name: 'Categorías',
+      route: '/',
+    },
+  ];
+const CATEGORY = 'Categoría';
+const EDIT_CATEGORY = 'Editar categoría';
+
 /* View texts */
 const QUESTIONS = 'Preguntas';
 const ANSWER_OPTIONS = 'opciones de respuesta';
@@ -9,6 +19,9 @@ const MIDDLE_QUESTION = 'middle-question';
 const LAST_QUESTION = 'last-question';
 
 const CATEGORY_DETAIL_STRINGS = {
+    BREADCRUMB,
+    CATEGORY,
+    EDIT_CATEGORY,
     QUESTIONS,
     ANSWER_OPTIONS,
     NEW_QUESTION,

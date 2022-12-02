@@ -11,11 +11,13 @@ import Category from "../../entities/Category";
 import Question from "../../entities/Question";
 import categoryServices from "../../services/category";
 import questionServices from "../../services/question";
+import QUESTION_DETAIL_STRINGS from "../../resources/strings/question-detail";
 
-const QuestionDetail = ({ setBreadcrumb, setAction }) => {
+const QuestionDetail = (props) => {
   const { id: questionId, categoryId } = useParams();
   const navigate = useNavigate();
 
+  const { setAppBarContent } = props;
   const [question, setQuestion] = useState(null);
   const [category, setCategory] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -62,24 +64,20 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
 
   useEffect(() => {
     if (!category) return;
-    setBreadcrumb([
+    const breadcrumb = [
+      QUESTION_DETAIL_STRINGS.BREADCRUMB.CATEGORIES,
       {
-        name: 'Categorías',
-        route: '/',
-      },
-      {
-        name: `Categoría ${category.position}: ${category.name}`,
+        name: `${ QUESTION_DETAIL_STRINGS.CATEGORY } ${category.position}: ${category.name}`,
         route: `/category/${categoryId}`,
       },
-      {
-        name: 'Pregunta',
-      },
-    ]);
-    setAction({
-      name: 'Editar pregunta',
+      QUESTION_DETAIL_STRINGS.BREADCRUMB.QUESTION,
+    ];
+    const action = {
+      name: QUESTION_DETAIL_STRINGS.EDIT_QUESTION,
       icon: faPencil,
       onActionClick: onEditQuestionClick,
-    });
+    };
+    setAppBarContent(breadcrumb, action);
   }, [category]);
 
   const onTabClick = (event, newValue) => {
@@ -116,7 +114,7 @@ const QuestionDetail = ({ setBreadcrumb, setAction }) => {
           {
             (!question.feedback || question.feedback?.type === 'no-feedback')
             && <Card className='feedback-detail-card'>
-              <h1>No posee feedbacks</h1>
+              <h1>{ QUESTION_DETAIL_STRINGS.HAS_NO_FEEDBACKS }</h1>
             </Card>
           }
           {
