@@ -53,7 +53,7 @@ const QuestionScreen = (props) => {
   const onCorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
     newAnswers[0] = e.target.value ? new Answer({
-      id: newAnswers[0]?.id || null,
+      id: (newAnswers[0]?.id !== null &&  newAnswers[0]?.id !== undefined ? newAnswers[0]?.id : null),
       description: e.target.value,
       isCorrect: true,
     }) : null;
@@ -73,7 +73,7 @@ const QuestionScreen = (props) => {
   const onFirstIncorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
     newAnswers[1] = e.target.value ? new Answer({
-      id: newAnswers[1]?.id || null,
+      id: (newAnswers[1]?.id !== null &&  newAnswers[1]?.id !== undefined ? newAnswers[1]?.id : null),
       description: e.target.value,
       isCorrect: false,
     }) : null;
@@ -93,7 +93,7 @@ const QuestionScreen = (props) => {
   const onSecondIncorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
     newAnswers[2] = e.target.value ? new Answer({
-      id: newAnswers[2]?.id || null,
+      id: (newAnswers[2]?.id !== null &&  newAnswers[2]?.id !== undefined ? newAnswers[2]?.id : null),
       description: e.target.value,
       isCorrect: false,
     }) : null;
@@ -113,7 +113,7 @@ const QuestionScreen = (props) => {
   const onThirdIncorrectAnswerChange = (e) => {
     const newAnswers = [...inputValues.answersInput];
     newAnswers[3] = e.target.value? new Answer({
-      id: newAnswers[3]?.id || null,
+      id: (newAnswers[3]?.id !== null &&  newAnswers[3]?.id !== undefined ? newAnswers[3]?.id : null),
       description: e.target.value,
       isCorrect: false,
     }) : null;
