@@ -23,23 +23,28 @@ const Router = () => {
     return localStorage.getItem('ACCESS_TOKEN') ? '/categories' : '/login';
   }
 
+  const setAppBarContent = (newBreadcrumb, newAction) => {
+    setBreadcrumb(newBreadcrumb);
+    setAction(newAction);
+  }
+
   return (
     <BrowserRouter>
     <AppLayout breadcrumb={breadcrumb} action={action} message={message}>
     <Routes>
-        <Route exact path="/appearance" element={<Appearance setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage} />}/>
+        <Route exact path="/appearance" element={<Appearance setAppBarContent={setAppBarContent} setMessage={setMessage} />}/>
         <Route exact path="/category/new" element={<CategoryForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage} />}/>
-        <Route exact path="/category/edit/:id" element={<CategoryForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
-        <Route exact path="/category/:id" element={<CategoryDetail setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/category/edit/:id" element={<CategoryForm setAppBarContent={setAppBarContent} setMessage={setMessage}/>}/>
+        <Route exact path="/category/:id" element={<CategoryDetail setAppBarContent={setAppBarContent} />}/>
         <Route exact path="/category/:categoryId/question/new" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
         <Route exact path="/category/:categoryId/question/edit/:id" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
-        <Route exact path="/category/:categoryId/question/:id" element={<QuestionDetail setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
+        <Route exact path="/category/:categoryId/question/:id" element={<QuestionDetail setAppBarContent={setAppBarContent} />}/>
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/error-401" element={<Error401 />} />
         <Route exact path="/error-404" element={<Error404 />} />
         <Route exact path="/error-500" element={<Error500 />} />
-        <Route exact path="/categories" element={<Categories setBreadcrumb={setBreadcrumb} setAction={setAction} />}/>
-        <Route exact path="/download-app" element={<ApkDownload />}/>
+        <Route exact path="/categories" element={<Categories setAppBarContent={setAppBarContent} />}/>
+        <Route exact path="/download-app" element={<ApkDownload setAppBarContent={setAppBarContent} />}/>
         <Route path='*' element={ <Navigate to={getRedirection()} /> }/>
       </Routes>
     </AppLayout>

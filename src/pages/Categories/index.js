@@ -1,142 +1,105 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AutoSizer from "react-virtualized-auto-sizer";
+import { FixedSizeList } from 'react-window';
+import { Skeleton } from "@mui/material";
+import { faAdd } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
-
-import ListItem from '@mui/material/ListItem';
-import { FixedSizeList } from 'react-window';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faChevronRight, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import ROUTES from "../../resources/routes";
+import CATEGORIES_STRINGS from "../../resources/strings/categories";
+import CategoryRow from "./CategoryRow";
 import categoryServices from "../../services/category";
-import Category from "../../entities/Category";
-import { useNavigate } from "react-router-dom";
+import { getRedirectBasedOnResponseStatus } from '../../helpers';
 
-const Categories = ({ setBreadcrumb, setAction }) => {
+const Categories = (props) => {
   const navigate = useNavigate();
 
+  const { setAppBarContent } = props;
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    setBreadcrumb([
-      {
-        name: 'Categorías',
-      }
-    ]);
-    setAction({
-      name: 'Nueva categoría',
-      icon: faAdd,
-      onActionClick: onNewCategoryClick,
-    });
+    defineAppBar();
+
     async function fetchCategories() {
       try {
         const response = await categoryServices.getCategories();
-  
-        switch(response.status) {
-          case 200:
-            setCategories(response.data);
-            break;
-          default:
-            navigate('/error-500');
+
+        if (response?.status !== 200) {   
+          throw { response };       
         }
+
+        setCategories(response.data);
       } catch (e) {
-        switch(e.response.status) {
-          case 400:
-          case 401:
-            navigate('/error-401');
-            break;
-          case 404:
-            navigate('/error-404');
-            break;
-          default:
-            navigate('/error-500');
-        }
+        navigate(
+          getRedirectBasedOnResponseStatus(e.response),
+        );
       }
-      
     };
   
     fetchCategories();
   }, []);
 
-const getItemClass = (index) => {
-  switch(index) {
-    case 0:
-      return 'first-category';
-    case categories.length:
-      return 'last-category';
-    default:
-      return 'middle-category';
+  const defineAppBar = () => {
+    const breadcrumb = CATEGORIES_STRINGS.BREADCRUMB;
+    const action = {
+      name: CATEGORIES_STRINGS.NEW_CATEGORY,
+      icon: faAdd,
+      onActionClick: handleNewCategoryClick,
+    };
+
+    setAppBarContent(breadcrumb, action);
   }
-}
 
-const renderRow = (props) => {
-  const { index, style } = props;
-  const category = new Category(categories[index]);
-
-  return (
-    <ListItem style={style} className={`category ${getItemClass(index)}`} key={index} component="div" disablePadding>
-    <Card className="category-item cursor-pointer" onClick={() => navigate(`/category/${category.id}`)}>
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto', padding: '0 !important' }}>
-          <div className="detail">
-          <div className="category-img" style={{ backgroundImage: `url(${category.permalink})` }}></div>
-          <div className="main-detail">
-          <Typography variant="h5" className='category-item-title' component="div">
-      Categoría {category.position}: {category.name}
-      </Typography>
-      <Typography color="text.secondary">
-        {category.questions.length} preguntas
-      </Typography>
-          </div>
-
-          </div>
-
-          </CardContent>
-          </Box>
-
-    <CardMedia className='category-icon ml-auto'>
-    <FontAwesomeIcon className="icon" icon={faChevronRight} />
-    </CardMedia>
-  </Card>
-    </ListItem>
+  const renderRow = (props) => (
+    <CategoryRow
+      {...props}
+      categories={categories}
+    />
   );
-}
 
-const onNewCategoryClick = () => {
-  navigate('/category/new');
-}
+  const handleNewCategoryClick = () => {
+    navigate(ROUTES.NEW_CATEGORY);
+  }
 
   return (
-    <>
-
     <div className="categories">
-      {
-        categories && categories.length > 0
-        && (
+      { categories?.length > 0 ? (
           <AutoSizer>
-          {({ height, width }) => (
-      
-                    <FixedSizeList
-                    height={height}
-                    width={width}
-                    itemSize={height/5}
-                    itemCount={categories.length}
-                    overscanCount={5}
-                  >
-                    {renderRow}
-                  </FixedSizeList>
-                  
-                  )}
-                  </AutoSizer>
+            {({ height, width }) => (
+              <FixedSizeList
+                className="categories-list"
+                height={height}
+                width={width}
+                itemSize={height/5}
+                itemCount={categories.length}
+                overscanCount={5}
+              >
+                { renderRow }
+              </FixedSizeList>
+            )}
+          </AutoSizer>
+        ) : (
+          <>
+            <Skeleton className="category-row-skeleton first" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton middle" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton middle" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton middle" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+            <Skeleton className="category-row-skeleton last" variant="rectangular">
+              <CategoryRow/>
+            </Skeleton>
+          </>
         )
       }
-            </div>
-            </>
+    </div>
   );
 }
 

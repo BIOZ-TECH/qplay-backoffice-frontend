@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-import "./styles.css";
-import Question from "../../../entities/Question";
+import AutoSizer from "react-virtualized-auto-sizer";
+import { FixedSizeList } from "react-window";
 import { Box, Card, CardContent, CardMedia, ListItem, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { FixedSizeList } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
+
+import "./styles.css";
+import CATEGORY_DETAIL_STRINGS from "../../../resources/strings/category-detail";
+import Question from "../../../entities/Question";
+
 
 const Questions = ({ questions, categoryId }) => {
     const navigate = useNavigate();
@@ -15,11 +17,11 @@ const Questions = ({ questions, categoryId }) => {
   const getItemClass = (index) => {
     switch(index) {
       case 0:
-        return 'first-question';
+        return CATEGORY_DETAIL_STRINGS.FIRST_QUESTION;
       case questions.length:
-        return 'last-question';
+        return CATEGORY_DETAIL_STRINGS.LAST_QUESTION;
       default:
-        return 'middle-question';
+        return CATEGORY_DETAIL_STRINGS.MIDDLE_QUESTION;
     }
   }
   
@@ -36,7 +38,7 @@ const Questions = ({ questions, categoryId }) => {
         {question.statement}
         </Typography>
         <Typography color="text.secondary">
-          {question.answers.length} opciones de respuesta
+          {`${question.answers.length} ${CATEGORY_DETAIL_STRINGS.ANSWER_OPTIONS}`}
         </Typography>
             </CardContent>
             </Box>
@@ -56,10 +58,10 @@ const Questions = ({ questions, categoryId }) => {
   return (
     <div className="questions" style={{ display: 'flex', flexFlow: 'column'}}>
       <div className="questions-header">
-      <h3>Preguntas</h3>
+      <h3>{ CATEGORY_DETAIL_STRINGS.QUESTION }</h3>
       <button className="new-question" type="button" onClick={onAddNewQuestion}>
       <FontAwesomeIcon className="mr-2" icon={faAdd} />
-        Nueva pregunta
+        { CATEGORY_DETAIL_STRINGS.NEW_QUESTION }
       </button>
       </div>
 

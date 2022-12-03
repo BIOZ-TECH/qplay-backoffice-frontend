@@ -1,12 +1,10 @@
 import React from "react";
-
+import { Tab, Tabs } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMobileScreen, faComments, faQuestionCircle, faQuestion } from '@fortawesome/free-solid-svg-icons'
-
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { faComments, faQuestion } from '@fortawesome/free-solid-svg-icons'
 
 import "./styles.css";
+import QUESTION_DETAIL_STRINGS from "../../../resources/strings/question-detail";
 
 const QuestionDetailTabs = ({ activeTab, onTabClick }) => {
   return (
@@ -15,8 +13,8 @@ const QuestionDetailTabs = ({ activeTab, onTabClick }) => {
       onChange={onTabClick}
       className="question-detail-tabs"
     >
-      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faQuestion} />} iconPosition="start" label="enunciado" />
-      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faComments} />} iconPosition="start" label="feedbacks" />
+      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faQuestion} />} iconPosition="start" label={ QUESTION_DETAIL_STRINGS.STATEMENT_TAB } />
+      <Tab className="tab" icon={<FontAwesomeIcon className="icon" icon={faComments} />} iconPosition="start" label={ QUESTION_DETAIL_STRINGS.FEEDBACKS_TAB } />
     </Tabs>
   );
 }

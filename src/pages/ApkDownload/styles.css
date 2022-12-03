@@ -1,6 +1,8 @@
+@import "../../theme.css";
+
 .apk-download-screen {
     margin: -4vh -2.5vw;
-    background: linear-gradient(110deg, #7164e3 60%, #4f469e 60%);
+    background: linear-gradient(110deg, var(--primary-color) 60%, var(--secondary-color) 60%);
     height: fill-available;
 }
 
@@ -11,74 +13,81 @@
     align-items: center;
 }
 
-.apk-download-screen > .content > .phone-container {
+.apk-download-screen > .content > .phone-container, .apk-download-screen > .content > .MuiSkeleton-root > .phone-container {
     display: flex;
     width: 22rem;
 }
 
-.apk-download-screen > .content > .phone-container > .mobile-device {
+.apk-download-screen > .content > .phone-container > .mobile-device, .apk-download-screen > .content > .MuiSkeleton-root > .phone-container > .mobile-device {
     padding: 0.8rem;
     height: 75vh;
 }
 
-.apk-download-screen > .content > .phone-container > .phone {
+.apk-download-screen > .content > .phone-container > .phone, .apk-download-screen > .content > .MuiSkeleton-root > .phone-container > .phone {
     z-index: 10;
     width: 22rem;
     height: 75vh;
     position: absolute;
 }
 
-.apk-download-screen > .content > .text {
+.apk-download-screen > .content > .download-text, .apk-download-screen > .content > .MuiSkeleton-root {
     margin-left: 3rem;
 }
 
-.apk-download-screen > .content > .text > h1 {
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > h1, .apk-download-screen > .content > .download-text > h1 {
     font-weight: bold;
     font-size: 3rem;
 }
 
-.apk-download-screen > .content > .text > p {
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > p, .apk-download-screen > .content > .download-text > p {
     font-size: 1.5rem;
 }
 
-.apk-download-screen > .content > .text > .download-btn {
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn, .apk-download-screen > .content > .download-text > .download-btn {
     padding-left: 1rem;
-padding-right: 1rem;
-padding-top: 0.5rem;
-padding-bottom: 0.5rem;
-width: -moz-fit-content;
-width: fit-content;
-background-color: #121212;
-border: 2px solid #121212;
-color: white;
-border-radius: 0.3rem;
-box-shadow: 1px 1px 5px black;
-float: right;
-align-self: center;
-margin-left: auto;
-display: flex;
-align-items: center;
-float: left;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: var(--semi-black);
+    border: 2px solid var(--semi-black);
+    color: white;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 5px black;
+    float: right;
+    align-self: center;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    float: left;
     margin-top: 2rem;
 }
 
-.apk-download-screen > .content > .text > .download-btn:focus, .apk-download-screen > .content > .text > .download-btn:hover {
+.apk-download-screen > .content > .download-text > .download-btn:focus,
+.apk-download-screen > .content > .download-text > .download-btn:hover,
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn:focus,
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn:hover {
     outline: none;
 }
 
-.apk-download-screen > .content > .text > .download-btn > svg {
+.apk-download-screen > .content > .download-text > .download-btn > svg,
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn > svg {
     margin-right: 1rem;
     font-size: xxx-large;
 }
 
-.apk-download-screen > .content > .text > .download-btn > .download-detail {
+.apk-download-screen > .content > .download-text > .download-btn > .download-detail,
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn > .download-detail {
     text-align: center;
 }
 
-.apk-download-screen > .content > .text > .download-btn > .download-detail > .download {
+.apk-download-screen > .content > .download-text > .download-btn > .download-detail > .download,
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn > .download-detail > .download {
     font-weight: 200;
 }
 
-.apk-download-screen > .content > .text > .download-btn > .download-detail > .android-apk {
+.apk-download-screen > .content > .download-text > .download-btn > .download-detail > .android-apk,
+.apk-download-screen > .content > .MuiSkeleton-root > .download-text > .download-btn > .download-detail > .android-apk {
     font-size: 1.3rem;
 }

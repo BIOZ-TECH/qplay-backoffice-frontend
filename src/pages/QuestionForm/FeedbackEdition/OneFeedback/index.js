@@ -1,7 +1,7 @@
 import React from "react";
-import InflatedFeedbackEdition from "../InflatedFeedbackEdition";
 
 import "./styles.css";
+import InflatedFeedbackEdition from "../InflatedFeedbackEdition";
 
 const OneFeedback = ({ inflatedFeedback, setInflatedFeedback, errorMessages, setErrorMessages }) => {
   return (

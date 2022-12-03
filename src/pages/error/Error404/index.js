@@ -1,8 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "@mui/material";
 
 import "./styles.css";
-import { Card } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import ERROR_404_STRINGS from "../../../resources/strings/error-404";
 
 const Error404 = () => {
     const navigate = useNavigate();
@@ -15,12 +16,12 @@ const Error404 = () => {
     <Card className="error-404-card">
         <div className="info-container">
             <div className="info">
-            <h1>PÁGINA NO ENCONTRADA</h1>
-            <p>No se ha encontrado la página que solicitó</p>
+            <h1>{ ERROR_404_STRINGS.TITLE }</h1>
+            <p>{ ERROR_404_STRINGS.DESCRIPTION }</p>
             <button
             className="go-back-btn"
             onClick={onGoBackClick}>
-                Volver
+                { ERROR_404_STRINGS.GO_BACK }
             </button>
             </div>
         </div>

@@ -1,8 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "@mui/material";
 
 import "./styles.css";
-import { Card } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import ERROR_500_STRINGS from "../../../resources/strings/error-500";
 
 const Error500 = () => {
     const navigate = useNavigate();
@@ -15,12 +16,12 @@ const Error500 = () => {
     <Card className="error-500-card">
         <div className="info-container">
             <div className="info">
-            <h1>ERROR DE SERVIDOR</h1>
-            <p>No te preocupes, siempre existe una forma de volver atrás</p>
+            <h1>{ ERROR_500_STRINGS.TITLE }</h1>
+            <p>{ ERROR_500_STRINGS.DESCRIPTION }</p>
             <button
             className="go-back-btn"
             onClick={onGoBackClick}>
-                Volver
+                { ERROR_500_STRINGS.GO_BACK }
             </button>
             </div>
         </div>

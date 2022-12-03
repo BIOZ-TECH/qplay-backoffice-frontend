@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Card, FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 
 import "./styles.css";
-import Feedback from "../../../entities/Feedback";
-import { Accordion, AccordionDetails, AccordionSummary, Card, FormControl, FormHelperText, InputLabel, MenuItem, Select, Typography } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import OneFeedback from "./OneFeedback";
 import OnePerResultFeedback from "./OnePerResultFeedback";
-import FeedbackPreview from "./FeedbackPreview";
+import Feedback from "../../../entities/Feedback";
 import InflatedFeedback from "../../../entities/InflatedFeedback";
 
 const FeedbackEdition = ({ inputValues, setInputValues, errorMessages, setErrorMessages }) => {

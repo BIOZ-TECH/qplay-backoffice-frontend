@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import categoryServices from "../../services/category";
-import Category from "../../entities/Category";
-
-import "./styles.css";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, TextField, Tooltip } from "@mui/material";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
-import ImageUploader from "../../components/ImageUploader";
-import CategoryValidator from "../../validators/entity/CategoryValidator";
 
-const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
+import "./styles.css";
+import CATEGORY_FORM_STRINGS from "../../resources/strings/category-form";
+import ImageUploader from "../../components/ImageUploader";
+import Category from "../../entities/Category";
+import CategoryValidator from "../../validators/entity/CategoryValidator";
+import categoryServices from "../../services/category";
+
+const CategoryForm = (props) => {
   const { id: categoryId } = useParams();
+  const { setAppBarContent, setMessage } = props;
   const [category, setCategory] = useState(null);
   const [oldCategory, setOldCategory] = useState(null);
   const [errorMessages, setErrorMessages] = useState({});
@@ -69,38 +71,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
   }, []);
 
   useEffect(() => {
-    const breadcrumb = [
-      {
-        name: 'Categorías',
-        route: '/',
-      },
-    ];
-
-    if (categoryId && oldCategory) {
-      breadcrumb.push({
-        name: `Categoría ${oldCategory.position}: ${oldCategory.name}`,
-        route: `/category/${categoryId}`,
-      });
-      breadcrumb.push(      {
-        name: ( categoryId ? 'Editar categoría' : 'Nueva categoría' ),
-      });
-      setBreadcrumb(breadcrumb);
-      setAction({
-        name: `Guardar ${ categoryId? ' cambios' : '' }`,
-        icon: faFloppyDisk,
-        onActionClick: onSaveCategoryClick,
-      });
-    } else if (!categoryId) {
-      breadcrumb.push(      {
-        name: ( categoryId ? 'Editar categoría' : 'Nueva categoría' ),
-      });
-      setBreadcrumb(breadcrumb);
-      setAction({
-        name: `Guardar ${ categoryId? ' cambios' : '' }`,
-        icon: faFloppyDisk,
-        onActionClick: onSaveCategoryClick,
-      });
-    }
+    updateAction();
   }, [category]);
 
   useEffect(() => {
@@ -142,11 +113,27 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
   }
 
   const updateAction = () => {
-    setAction({
-      name: `Guardar ${ categoryId? ' cambios' : '' }`,
+    const action = {
+      name: categoryId !== undefined ? CATEGORY_FORM_STRINGS.SAVE_CHANGES : CATEGORY_FORM_STRINGS.SAVE,
       icon: faFloppyDisk,
       onActionClick: onSaveCategoryClick,
-    });
+    };
+    const breadcrumb = [
+      CATEGORY_FORM_STRINGS.BREADCRUMB.CATEGORIES,
+    ];
+
+    if (categoryId && oldCategory) {
+      breadcrumb.push({
+        name: `${ CATEGORY_FORM_STRINGS.CATEGORY } ${ oldCategory.position }: ${ oldCategory.name }`,
+        route: `/category/${categoryId}`,
+      });
+    }
+
+    breadcrumb.push(
+      categoryId ? CATEGORY_FORM_STRINGS.BREADCRUMB.EDIT_CATEGORY : CATEGORY_FORM_STRINGS.BREADCRUMB.NEW_CATEGORY
+    );
+
+    setAppBarContent(breadcrumb, action);
   }
 
   const onSaveCategoryClick = async() => {
@@ -169,10 +156,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
         .then((res) => {
           switch(res.status) {
             case 200:
-              setMessage({
-                severity: 'success',
-                text: 'La categoría ha sido actualizado correctamente'
-              });
+              setMessage(CATEGORY_FORM_STRINGS.UPDATE_SUCCESS);
               navigate('/categories');    
               break;
             default:
@@ -197,10 +181,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
         .then((res) => {
           switch(res.status) {
             case 200:
-              setMessage({
-                severity: 'success',
-                text: 'La categoría ha sido creada correctamente'
-              });
+              setMessage(CATEGORY_FORM_STRINGS.CREATE_SUCCESS);
               navigate('/categories');
     
               break;
@@ -246,7 +227,8 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
                 arrow
               >
 
-                <ImageUploader  selectedFile={category?.permalink} setSelectedFile={onCategoryImageChange} dialogType='de la categoría'/>
+                <ImageUploader  selectedFile={category?.permalink} setSelectedFile={onCategoryImageChange}
+                dialogType={ CATEGORY_FORM_STRINGS.OF_CATEGORY }/>
 
               </Tooltip>
                 </div>
@@ -254,7 +236,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
 
       <div className="category-data-container">
       <div className="category-input">
-        <TextField id="category-name-input" label="Nombre de la categoría" variant="outlined" fullWidth
+        <TextField id="category-name-input" label={ CATEGORY_FORM_STRINGS.FORM.CATEGORY_NAME } variant="outlined" fullWidth
           error={!!errorMessages.name}
           onChange={onNameCategoryChange}
           value={nameInput}
@@ -263,7 +245,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
       </div>
 
       <div className="category-input">
-      <TextField id="category-order-input" label="Orden en la lista de categoría" variant="outlined" fullWidth
+      <TextField id="category-order-input" label={ CATEGORY_FORM_STRINGS.FORM.CATEGORY_POSITION } variant="outlined" fullWidth
             type='number'
           onChange={onOrderCategoryChange}
           value={orderInput}
@@ -272,7 +254,7 @@ const CategoryForm = ({ setBreadcrumb, setAction, setMessage}) => {
           />
       </div>
       <div className="category-input">
-      <TextField id="category-description-input" label="Descripción (opcional)" variant="outlined" fullWidth
+      <TextField id="category-description-input" label={ CATEGORY_FORM_STRINGS.FORM.OPTIONAL_DESCRIPTION } variant="outlined" fullWidth
           onChange={onDescriptionCategoryChange}
           multiline
           value={descriptionInput}
