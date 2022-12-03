@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { Box, Card, CardContent, CardMedia, ListItem, Typography } from '@mui/material';
 
+import "../styles.css";
 import ROUTES from "../../../resources/routes";
 import CATEGORIES_STRINGS from "../../../resources/strings/categories";
 import Category from "../../../entities/Category";
