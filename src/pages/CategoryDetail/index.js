@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Card } from "@mui/material";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import categoryServices from "../../services/category";
-import Category from "../../entities/Category";
 
 import "./styles.css";
-import { useParams } from "react-router-dom";
-import { Card } from "@mui/material";
+import CATEGORY_DETAIL_STRINGS from "../../resources/strings/category-detail";
 import Questions from "./Questions";
+import Category from "../../entities/Category";
+import categoryServices from "../../services/category";
 
-const CategoryDetail = ({ setBreadcrumb, setAction }) => {
+const CategoryDetail = (props) => {
   const navigate = useNavigate();
+
+  const { setAppBarContent } = props;
   const { id: categoryId } = useParams();
   const [category, setCategory] = useState(null);
 
@@ -47,20 +48,18 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
 
   useEffect(() => {
     if (category) {
-      setAction({
-        name: 'Editar categoría',
+      const action = {
+        name: CATEGORY_DETAIL_STRINGS.EDIT_CATEGORY,
         icon: faPencil,
         onActionClick: onEditCategoryClick,
-      });
-      setBreadcrumb([
+      };
+      const breacrumb = [
+        ...CATEGORY_DETAIL_STRINGS.BREADCRUMB,
         {
-          name: 'Categorías',
-          route: '/',
-        },
-        {
-          name: `Categoría ${category.position}: ${category.name}`,
+          name: `${ CATEGORY_DETAIL_STRINGS.CATEGORY } ${ category.position }: ${ category.name }`,
         }
-      ]);
+      ];
+      setAppBarContent(breacrumb, action);
     }
   }, [category]);
 
@@ -75,7 +74,7 @@ const CategoryDetail = ({ setBreadcrumb, setAction }) => {
         <>
               <div className="primary-info">
       <div className="category-img" style={{ backgroundImage: `url(${category.permalink})` }}></div>
-      <h1 className="category-name">{`Categoría ${category.position}: ${category.name}`}</h1>
+      <h1 className="category-name">{`${ CATEGORY_DETAIL_STRINGS.CATEGORY } ${category.position}: ${category.name}`}</h1>
 
       </div>
       {category.description && <p className="category-description">{category.description}</p>}

@@ -1,9 +1,9 @@
-import { faCheck, faClose, faCommentDots } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import YoutubeEmbed from "../../../components/YoutubeEmbed";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faClose, faCommentDots } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
+import YoutubeEmbed from "../../../components/YoutubeEmbed";
 
 const FeedbackPreview = ({ feedbackResultType, inflatedFeedback }) => {
     const [feedbackStyle, setFeedbackStyle] = useState({});

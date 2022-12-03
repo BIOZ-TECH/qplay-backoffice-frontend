@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import NavigationLayout from "../NavigationLayout";
 import BodyWrapper from "./BodyWrapper";
 import PageWrapper from "../PageWrapper";
 import AppSnackBar from "./AppSnackbar";
-import { useLocation, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
 
 import "./styles.css";
 
