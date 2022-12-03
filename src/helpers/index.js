@@ -15,7 +15,7 @@ export const getRedirectBasedOnResponseStatus = (response) => {
 export const setUserInformation = (user) => {
   const { token, holderId } = user; 
   localStorage.setItem('ACCESS_TOKEN', token);
-  localStorage.setItem('HOLDER', holderId);
+  localStorage.setItem('HOLDER', "5");
 }
 
 export const removeUserInformation = (user) => {

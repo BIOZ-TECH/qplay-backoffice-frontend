@@ -33,7 +33,7 @@ const Router = () => {
     <AppLayout breadcrumb={breadcrumb} action={action} message={message}>
     <Routes>
         <Route exact path="/appearance" element={<Appearance setAppBarContent={setAppBarContent} setMessage={setMessage} />}/>
-        <Route exact path="/category/new" element={<CategoryForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage} />}/>
+        <Route exact path="/category/new" element={<CategoryForm setAppBarContent={setAppBarContent} setMessage={setMessage} />}/>
         <Route exact path="/category/edit/:id" element={<CategoryForm setAppBarContent={setAppBarContent} setMessage={setMessage}/>}/>
         <Route exact path="/category/:id" element={<CategoryDetail setAppBarContent={setAppBarContent} />}/>
         <Route exact path="/category/:categoryId/question/new" element={<QuestionForm setBreadcrumb={setBreadcrumb} setAction={setAction} setMessage={setMessage}/>}/>
