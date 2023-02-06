@@ -52,5 +52,3 @@ npm run start
 **Brian Bayarri** - *Software Developer* - [brianbayarri](https://github.com/brianbayarri)
 
 **Aylen Hoz** - *Software Developer* - [aylenhoz](https://github.com/Aylen-Hoz)
-
-[try](https://www.mercadolibre.com.ar/sentry/update-browser?returnUrl=https://www.mercadolibre.com.ar)
